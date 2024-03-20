@@ -848,7 +848,7 @@ for data_load_type in data_load_types:
                             best_val_loss = float('inf')
                             patience_counter = 0
 
-                            num_epochs = 1
+                            num_epochs = 50
 
                             # Start the timer
                             start_time = time.time()
