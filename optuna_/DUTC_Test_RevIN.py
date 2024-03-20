@@ -823,7 +823,7 @@ for data_load_type in data_load_types:
                                 train_loader = DataLoader(train_dataset, batch_size=batch_size, shuffle=True, drop_last = True)
                                 val_loader = DataLoader(val_dataset, batch_size=batch_size, shuffle=False, drop_last = True)
                                 test_loader = DataLoader(test_dataset, batch_size=batch_size, shuffle=False, drop_last = False)
-                            print(f"Running experiment with Data_load_type = {data_load_type}, TCN_type={TCN_type}, attention_type={attention_type}, dropout_enabled={dropout_enabled}, skip_enabled={skip_enabled}, general_skip={general_skip_type}, Revin={revin_type},  Pos_Encoder_Type = {pos_encoder_type}")
+                            print(f"Running experiment with Data_load_type = {data_load_type}, TCN_type={TCN_type}, attention_type={attention_type}, dropout_enabled={dropout_enabled}, general_skip={general_skip_type}, Revin={revin_type},  Pos_Encoder_Type = {pos_encoder_type}")
                             dropout_rate = 0.10146011891748014 if dropout_enabled else 0.0
                             # Adjust the model instantiation to include all hyperparameters
                             model = DWT_MLP_Model(input_channels=321+4, seq_length=seq_, pred_length = pred_,mlp_hidden_size=128, 
@@ -853,7 +853,7 @@ for data_load_type in data_load_types:
                             # Start the timer
                             start_time = time.time()
                             
-                            best_model_path = f"best_model_{data_load_type}_{TCN_type}_{attention_type}_{dropout_enabled}_{skip_enabled}_{general_skip_type}_{revin_type}_{pos_encoder_type}.pt"
+                            best_model_path = f"best_model_{data_load_type}_{TCN_type}_{attention_type}_{dropout_enabled}_{general_skip_type}_{revin_type}_{pos_encoder_type}.pt"
 
                             
                             for epoch in range(num_epochs):
@@ -909,7 +909,7 @@ for data_load_type in data_load_types:
 
                             end_time = time.time()
                             total_time = end_time - start_time
-                            print(f'Total Model Running Time: {total_time:.2f} seconds for configuration: Data_load_type = {data_load_type}, TCN_type={TCN_type}, attention_type={attention_type}, dropout_enabled={dropout_enabled}, skip_enabled={skip_enabled}, general_skip={general_skip_type}, Revin={revin_type} , Pos_Encoder_Type = {pos_encoder_type}')
+                            print(f'Total Model Running Time: {total_time:.2f} seconds for configuration: Data_load_type = {data_load_type}, TCN_type={TCN_type}, attention_type={attention_type}, dropout_enabled={dropout_enabled},  general_skip={general_skip_type}, Revin={revin_type} , Pos_Encoder_Type = {pos_encoder_type}')
                             best_model = DWT_MLP_Model(input_channels=321+4, seq_length=seq_, pred_length = pred_, mlp_hidden_size=128, 
                             output_channels=321+4, decompose_layers=3, dropout=dropout_rate, dilation=2, 
                             mode='symmetric', wave='haar', kernel_size=5, 
@@ -931,7 +931,7 @@ for data_load_type in data_load_types:
 
                             test_loss /= len(test_loader.dataset)
                            
-                            print(f'Test Loss for configuration: TCN_type={TCN_type}, attention_type={attention_type}, dropout_enabled={dropout_enabled}, skip_enabled={skip_enabled}, general_skip={general_skip_type}, Revin={revin_type}, Data Load Type={data_load_type}, Pos_Encoder_Type = {pos_encoder_type}: {test_loss:.4f}')
+                            print(f'Test Loss for configuration: TCN_type={TCN_type}, attention_type={attention_type}, dropout_enabled={dropout_enabled}, general_skip={general_skip_type}, Revin={revin_type}, Data Load Type={data_load_type}, Pos_Encoder_Type = {pos_encoder_type}: {test_loss:.4f}')
 
 
 
