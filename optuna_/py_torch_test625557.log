@@ -1,0 +1,676 @@
+Running experiment with Data_load_type = multivariate, TCN_type=dilated2, attention_type=original, dropout_enabled=True, skip_enabled=True, general_skip=skip
+Model is Running
+New best model saved at best_model_multivariate_dilated2_original_True_True_skip_MultiHeadAttention.pt
+Model is Running
+New best model saved at best_model_multivariate_dilated2_original_True_True_skip_MultiHeadAttention.pt
+Model is Running
+Model is Running
+Model is Running
+New best model saved at best_model_multivariate_dilated2_original_True_True_skip_MultiHeadAttention.pt
+Model is Running
+Model is Running
+New best model saved at best_model_multivariate_dilated2_original_True_True_skip_MultiHeadAttention.pt
+Model is Running
+New best model saved at best_model_multivariate_dilated2_original_True_True_skip_MultiHeadAttention.pt
+Model is Running
+New best model saved at best_model_multivariate_dilated2_original_True_True_skip_MultiHeadAttention.pt
+Model is Running
+Epoch [10/50], Train Loss: 0.3059, Val Loss: 0.2907
+New best model saved at best_model_multivariate_dilated2_original_True_True_skip_MultiHeadAttention.pt
+Model is Running
+New best model saved at best_model_multivariate_dilated2_original_True_True_skip_MultiHeadAttention.pt
+Model is Running
+New best model saved at best_model_multivariate_dilated2_original_True_True_skip_MultiHeadAttention.pt
+Model is Running
+New best model saved at best_model_multivariate_dilated2_original_True_True_skip_MultiHeadAttention.pt
+Model is Running
+Model is Running
+Model is Running
+Model is Running
+Model is Running
+Model is Running
+Model is Running
+Epoch [20/50], Train Loss: 0.2978, Val Loss: 0.2850
+Model is Running
+Model is Running
+Model is Running
+Model is Running
+Model is Running
+Model is Running
+Model is Running
+Model is Running
+Early stopping triggered
+Total Model Running Time: 622.41 seconds for configuration: Data_load_type = multivariate, TCN_type=dilated2, attention_type=original, dropout_enabled=True, skip_enabled=True, general_skip=skip
+Test Loss for configuration: TCN_type=dilated2, attention_type=original, dropout_enabled=True, skip_enabled=True, general_skip=skip, Data Load Type=multivariate: 0.2863
+Running experiment with Data_load_type = multivariate, TCN_type=dilated2, attention_type=original, dropout_enabled=True, skip_enabled=True, general_skip=skip
+Model is Running
+New best model saved at best_model_multivariate_dilated2_original_True_True_skip_MultiHeadAttention.pt
+Model is Running
+New best model saved at best_model_multivariate_dilated2_original_True_True_skip_MultiHeadAttention.pt
+Model is Running
+New best model saved at best_model_multivariate_dilated2_original_True_True_skip_MultiHeadAttention.pt
+Model is Running
+Model is Running
+Model is Running
+Model is Running
+New best model saved at best_model_multivariate_dilated2_original_True_True_skip_MultiHeadAttention.pt
+Model is Running
+Model is Running
+Model is Running
+Epoch [10/50], Train Loss: 0.3676, Val Loss: 0.3491
+Model is Running
+Model is Running
+Model is Running
+Model is Running
+Model is Running
+Model is Running
+Model is Running
+Model is Running
+Model is Running
+Model is Running
+Epoch [20/50], Train Loss: 0.3678, Val Loss: 0.3494
+Model is Running
+Model is Running
+Early stopping triggered
+Total Model Running Time: 2169.43 seconds for configuration: Data_load_type = multivariate, TCN_type=dilated2, attention_type=original, dropout_enabled=True, skip_enabled=True, general_skip=skip
+Test Loss for configuration: TCN_type=dilated2, attention_type=original, dropout_enabled=True, skip_enabled=True, general_skip=skip, Data Load Type=multivariate: 0.3597
+Running experiment with Data_load_type = multivariate, TCN_type=dilated2, attention_type=original, dropout_enabled=True, skip_enabled=True, general_skip=skip
+Model is Running
+New best model saved at best_model_multivariate_dilated2_original_True_True_skip_MultiHeadAttention.pt
+Model is Running
+New best model saved at best_model_multivariate_dilated2_original_True_True_skip_MultiHeadAttention.pt
+Model is Running
+New best model saved at best_model_multivariate_dilated2_original_True_True_skip_MultiHeadAttention.pt
+Model is Running
+New best model saved at best_model_multivariate_dilated2_original_True_True_skip_MultiHeadAttention.pt
+Model is Running
+Model is Running
+New best model saved at best_model_multivariate_dilated2_original_True_True_skip_MultiHeadAttention.pt
+Model is Running
+Model is Running
+Model is Running
+Model is Running
+Epoch [10/50], Train Loss: 0.3674, Val Loss: 0.3495
+Model is Running
+Model is Running
+Model is Running
+Model is Running
+Model is Running
+Model is Running
+Model is Running
+Model is Running
+Model is Running
+Model is Running
+Epoch [20/50], Train Loss: 0.3678, Val Loss: 0.3496
+Model is Running
+Early stopping triggered
+Total Model Running Time: 4496.57 seconds for configuration: Data_load_type = multivariate, TCN_type=dilated2, attention_type=original, dropout_enabled=True, skip_enabled=True, general_skip=skip
+Test Loss for configuration: TCN_type=dilated2, attention_type=original, dropout_enabled=True, skip_enabled=True, general_skip=skip, Data Load Type=multivariate: 0.3671
+Running experiment with Data_load_type = multivariate, TCN_type=dilated2, attention_type=original, dropout_enabled=True, skip_enabled=True, general_skip=skip
+Model is Running
+New best model saved at best_model_multivariate_dilated2_original_True_True_skip_MultiHeadAttention.pt
+Model is Running
+New best model saved at best_model_multivariate_dilated2_original_True_True_skip_MultiHeadAttention.pt
+Model is Running
+New best model saved at best_model_multivariate_dilated2_original_True_True_skip_MultiHeadAttention.pt
+Model is Running
+Model is Running
+Model is Running
+Model is Running
+Model is Running
+Model is Running
+New best model saved at best_model_multivariate_dilated2_original_True_True_skip_MultiHeadAttention.pt
+Model is Running
+Epoch [10/50], Train Loss: 0.3765, Val Loss: 0.3499
+Model is Running
+Model is Running
+Model is Running
+Model is Running
+New best model saved at best_model_multivariate_dilated2_original_True_True_skip_MultiHeadAttention.pt
+Model is Running
+Model is Running
+Model is Running
+Model is Running
+Model is Running
+Model is Running
+Epoch [20/50], Train Loss: 0.3680, Val Loss: 0.3499
+Model is Running
+Model is Running
+Model is Running
+Model is Running
+Model is Running
+Model is Running
+Model is Running
+Model is Running
+New best model saved at best_model_multivariate_dilated2_original_True_True_skip_MultiHeadAttention.pt
+Model is Running
+Model is Running
+Epoch [30/50], Train Loss: 0.3679, Val Loss: 0.3496
+Model is Running
+New best model saved at best_model_multivariate_dilated2_original_True_True_skip_MultiHeadAttention.pt
+Model is Running
+Model is Running
+Model is Running
+Model is Running
+Model is Running
+Model is Running
+Model is Running
+Model is Running
+Model is Running
+Epoch [40/50], Train Loss: 0.3654, Val Loss: 0.3402
+New best model saved at best_model_multivariate_dilated2_original_True_True_skip_MultiHeadAttention.pt
+Model is Running
+Model is Running
+Model is Running
+Model is Running
+Model is Running
+Model is Running
+Model is Running
+Model is Running
+New best model saved at best_model_multivariate_dilated2_original_True_True_skip_MultiHeadAttention.pt
+Model is Running
+Model is Running
+Epoch [50/50], Train Loss: 0.3635, Val Loss: 0.3469
+Total Model Running Time: 15676.51 seconds for configuration: Data_load_type = multivariate, TCN_type=dilated2, attention_type=original, dropout_enabled=True, skip_enabled=True, general_skip=skip
+Test Loss for configuration: TCN_type=dilated2, attention_type=original, dropout_enabled=True, skip_enabled=True, general_skip=skip, Data Load Type=multivariate: 0.3536
+Running experiment with Data_load_type = multivariate, TCN_type=dilated2, attention_type=log, dropout_enabled=True, skip_enabled=True, general_skip=skip
+Model is Running
+New best model saved at best_model_multivariate_dilated2_log_True_True_skip_MultiHeadAttention.pt
+Model is Running
+New best model saved at best_model_multivariate_dilated2_log_True_True_skip_MultiHeadAttention.pt
+Model is Running
+New best model saved at best_model_multivariate_dilated2_log_True_True_skip_MultiHeadAttention.pt
+Model is Running
+New best model saved at best_model_multivariate_dilated2_log_True_True_skip_MultiHeadAttention.pt
+Model is Running
+Model is Running
+Model is Running
+Model is Running
+New best model saved at best_model_multivariate_dilated2_log_True_True_skip_MultiHeadAttention.pt
+Model is Running
+New best model saved at best_model_multivariate_dilated2_log_True_True_skip_MultiHeadAttention.pt
+Model is Running
+Epoch [10/50], Train Loss: 0.3076, Val Loss: 0.2921
+New best model saved at best_model_multivariate_dilated2_log_True_True_skip_MultiHeadAttention.pt
+Model is Running
+New best model saved at best_model_multivariate_dilated2_log_True_True_skip_MultiHeadAttention.pt
+Model is Running
+New best model saved at best_model_multivariate_dilated2_log_True_True_skip_MultiHeadAttention.pt
+Model is Running
+New best model saved at best_model_multivariate_dilated2_log_True_True_skip_MultiHeadAttention.pt
+Model is Running
+New best model saved at best_model_multivariate_dilated2_log_True_True_skip_MultiHeadAttention.pt
+Model is Running
+Model is Running
+New best model saved at best_model_multivariate_dilated2_log_True_True_skip_MultiHeadAttention.pt
+Model is Running
+Model is Running
+Model is Running
+Model is Running
+Epoch [20/50], Train Loss: 0.2846, Val Loss: 0.2764
+Model is Running
+Model is Running
+Model is Running
+Model is Running
+Model is Running
+Model is Running
+Model is Running
+Model is Running
+Model is Running
+Model is Running
+Epoch [30/50], Train Loss: 0.2836, Val Loss: 0.2797
+Model is Running
+Early stopping triggered
+Total Model Running Time: 707.64 seconds for configuration: Data_load_type = multivariate, TCN_type=dilated2, attention_type=log, dropout_enabled=True, skip_enabled=True, general_skip=skip
+Test Loss for configuration: TCN_type=dilated2, attention_type=log, dropout_enabled=True, skip_enabled=True, general_skip=skip, Data Load Type=multivariate: 0.2785
+Running experiment with Data_load_type = multivariate, TCN_type=dilated2, attention_type=log, dropout_enabled=True, skip_enabled=True, general_skip=skip
+Model is Running
+New best model saved at best_model_multivariate_dilated2_log_True_True_skip_MultiHeadAttention.pt
+Model is Running
+New best model saved at best_model_multivariate_dilated2_log_True_True_skip_MultiHeadAttention.pt
+Model is Running
+Model is Running
+New best model saved at best_model_multivariate_dilated2_log_True_True_skip_MultiHeadAttention.pt
+Model is Running
+Model is Running
+Model is Running
+Model is Running
+Model is Running
+New best model saved at best_model_multivariate_dilated2_log_True_True_skip_MultiHeadAttention.pt
+Model is Running
+Epoch [10/50], Train Loss: 0.3625, Val Loss: 0.3493
+Model is Running
+Model is Running
+New best model saved at best_model_multivariate_dilated2_log_True_True_skip_MultiHeadAttention.pt
+Model is Running
+New best model saved at best_model_multivariate_dilated2_log_True_True_skip_MultiHeadAttention.pt
+Model is Running
+Model is Running
+New best model saved at best_model_multivariate_dilated2_log_True_True_skip_MultiHeadAttention.pt
+Model is Running
+Model is Running
+New best model saved at best_model_multivariate_dilated2_log_True_True_skip_MultiHeadAttention.pt
+Model is Running
+Model is Running
+Model is Running
+Epoch [20/50], Train Loss: 0.3677, Val Loss: 0.3498
+Model is Running
+Model is Running
+Model is Running
+Model is Running
+Model is Running
+Model is Running
+Model is Running
+Model is Running
+Model is Running
+Model is Running
+Epoch [30/50], Train Loss: 0.3675, Val Loss: 0.3516
+Model is Running
+Model is Running
+Early stopping triggered
+Total Model Running Time: 3166.89 seconds for configuration: Data_load_type = multivariate, TCN_type=dilated2, attention_type=log, dropout_enabled=True, skip_enabled=True, general_skip=skip
+Test Loss for configuration: TCN_type=dilated2, attention_type=log, dropout_enabled=True, skip_enabled=True, general_skip=skip, Data Load Type=multivariate: 0.3445
+Running experiment with Data_load_type = multivariate, TCN_type=dilated2, attention_type=log, dropout_enabled=True, skip_enabled=True, general_skip=skip
+Model is Running
+New best model saved at best_model_multivariate_dilated2_log_True_True_skip_MultiHeadAttention.pt
+Model is Running
+New best model saved at best_model_multivariate_dilated2_log_True_True_skip_MultiHeadAttention.pt
+Model is Running
+New best model saved at best_model_multivariate_dilated2_log_True_True_skip_MultiHeadAttention.pt
+Model is Running
+Model is Running
+Model is Running
+Model is Running
+Model is Running
+Model is Running
+Model is Running
+Epoch [10/50], Train Loss: 0.3677, Val Loss: 0.3507
+Model is Running
+Model is Running
+Model is Running
+Model is Running
+Model is Running
+New best model saved at best_model_multivariate_dilated2_log_True_True_skip_MultiHeadAttention.pt
+Model is Running
+Model is Running
+Model is Running
+Model is Running
+Model is Running
+Epoch [20/50], Train Loss: 0.3671, Val Loss: 0.3493
+Model is Running
+Model is Running
+Model is Running
+Model is Running
+Model is Running
+Model is Running
+Model is Running
+Model is Running
+Model is Running
+Model is Running
+Epoch [30/50], Train Loss: 0.3675, Val Loss: 0.3496
+Early stopping triggered
+Total Model Running Time: 6348.94 seconds for configuration: Data_load_type = multivariate, TCN_type=dilated2, attention_type=log, dropout_enabled=True, skip_enabled=True, general_skip=skip
+Test Loss for configuration: TCN_type=dilated2, attention_type=log, dropout_enabled=True, skip_enabled=True, general_skip=skip, Data Load Type=multivariate: 0.3634
+Running experiment with Data_load_type = multivariate, TCN_type=dilated2, attention_type=log, dropout_enabled=True, skip_enabled=True, general_skip=skip
+Model is Running
+New best model saved at best_model_multivariate_dilated2_log_True_True_skip_MultiHeadAttention.pt
+Model is Running
+New best model saved at best_model_multivariate_dilated2_log_True_True_skip_MultiHeadAttention.pt
+Model is Running
+New best model saved at best_model_multivariate_dilated2_log_True_True_skip_MultiHeadAttention.pt
+Model is Running
+Model is Running
+New best model saved at best_model_multivariate_dilated2_log_True_True_skip_MultiHeadAttention.pt
+Model is Running
+Model is Running
+Model is Running
+Model is Running
+Model is Running
+Epoch [10/50], Train Loss: 0.3669, Val Loss: 0.3493
+Model is Running
+New best model saved at best_model_multivariate_dilated2_log_True_True_skip_MultiHeadAttention.pt
+Model is Running
+Model is Running
+New best model saved at best_model_multivariate_dilated2_log_True_True_skip_MultiHeadAttention.pt
+Model is Running
+Model is Running
+Model is Running
+Model is Running
+Model is Running
+Model is Running
+Model is Running
+Epoch [20/50], Train Loss: 0.3662, Val Loss: 0.3453
+Model is Running
+New best model saved at best_model_multivariate_dilated2_log_True_True_skip_MultiHeadAttention.pt
+Model is Running
+Model is Running
+Model is Running
+Model is Running
+New best model saved at best_model_multivariate_dilated2_log_True_True_skip_MultiHeadAttention.pt
+Model is Running
+New best model saved at best_model_multivariate_dilated2_log_True_True_skip_MultiHeadAttention.pt
+Model is Running
+New best model saved at best_model_multivariate_dilated2_log_True_True_skip_MultiHeadAttention.pt
+Model is Running
+Model is Running
+Model is Running
+Epoch [30/50], Train Loss: 0.3677, Val Loss: 0.3486
+Model is Running
+Model is Running
+Model is Running
+Model is Running
+Model is Running
+Model is Running
+Model is Running
+Model is Running
+Model is Running
+Model is Running
+Epoch [40/50], Train Loss: 0.3679, Val Loss: 0.3497
+Model is Running
+Model is Running
+Early stopping triggered
+Total Model Running Time: 13334.25 seconds for configuration: Data_load_type = multivariate, TCN_type=dilated2, attention_type=log, dropout_enabled=True, skip_enabled=True, general_skip=skip
+Test Loss for configuration: TCN_type=dilated2, attention_type=log, dropout_enabled=True, skip_enabled=True, general_skip=skip, Data Load Type=multivariate: 0.3484
+Running experiment with Data_load_type = multivariate, TCN_type=dilated, attention_type=original, dropout_enabled=True, skip_enabled=True, general_skip=skip
+Model is Running
+New best model saved at best_model_multivariate_dilated_original_True_True_skip_MultiHeadAttention.pt
+Model is Running
+New best model saved at best_model_multivariate_dilated_original_True_True_skip_MultiHeadAttention.pt
+Model is Running
+Model is Running
+Model is Running
+Model is Running
+Model is Running
+Model is Running
+Model is Running
+Model is Running
+Epoch [10/50], Train Loss: 0.3665, Val Loss: 0.3484
+Model is Running
+Model is Running
+Model is Running
+Model is Running
+Model is Running
+Model is Running
+Model is Running
+Early stopping triggered
+Total Model Running Time: 344.05 seconds for configuration: Data_load_type = multivariate, TCN_type=dilated, attention_type=original, dropout_enabled=True, skip_enabled=True, general_skip=skip
+Test Loss for configuration: TCN_type=dilated, attention_type=original, dropout_enabled=True, skip_enabled=True, general_skip=skip, Data Load Type=multivariate: 0.3622
+Running experiment with Data_load_type = multivariate, TCN_type=dilated, attention_type=original, dropout_enabled=True, skip_enabled=True, general_skip=skip
+Model is Running
+New best model saved at best_model_multivariate_dilated_original_True_True_skip_MultiHeadAttention.pt
+Model is Running
+New best model saved at best_model_multivariate_dilated_original_True_True_skip_MultiHeadAttention.pt
+Model is Running
+Model is Running
+Model is Running
+Model is Running
+Model is Running
+Model is Running
+Model is Running
+New best model saved at best_model_multivariate_dilated_original_True_True_skip_MultiHeadAttention.pt
+Model is Running
+Epoch [10/50], Train Loss: 0.3663, Val Loss: 0.3496
+Model is Running
+Model is Running
+Model is Running
+Model is Running
+Model is Running
+Model is Running
+Model is Running
+Model is Running
+Model is Running
+Model is Running
+Epoch [20/50], Train Loss: 0.3678, Val Loss: 0.3496
+Model is Running
+Model is Running
+Model is Running
+Model is Running
+Early stopping triggered
+Total Model Running Time: 2303.87 seconds for configuration: Data_load_type = multivariate, TCN_type=dilated, attention_type=original, dropout_enabled=True, skip_enabled=True, general_skip=skip
+Test Loss for configuration: TCN_type=dilated, attention_type=original, dropout_enabled=True, skip_enabled=True, general_skip=skip, Data Load Type=multivariate: 0.3640
+Running experiment with Data_load_type = multivariate, TCN_type=dilated, attention_type=original, dropout_enabled=True, skip_enabled=True, general_skip=skip
+Model is Running
+New best model saved at best_model_multivariate_dilated_original_True_True_skip_MultiHeadAttention.pt
+Model is Running
+New best model saved at best_model_multivariate_dilated_original_True_True_skip_MultiHeadAttention.pt
+Model is Running
+New best model saved at best_model_multivariate_dilated_original_True_True_skip_MultiHeadAttention.pt
+Model is Running
+Model is Running
+Model is Running
+Model is Running
+Model is Running
+Model is Running
+Model is Running
+Epoch [10/50], Train Loss: 0.3678, Val Loss: 0.3501
+Model is Running
+Model is Running
+Model is Running
+Model is Running
+Model is Running
+Model is Running
+Model is Running
+Model is Running
+Early stopping triggered
+Total Model Running Time: 3774.49 seconds for configuration: Data_load_type = multivariate, TCN_type=dilated, attention_type=original, dropout_enabled=True, skip_enabled=True, general_skip=skip
+Test Loss for configuration: TCN_type=dilated, attention_type=original, dropout_enabled=True, skip_enabled=True, general_skip=skip, Data Load Type=multivariate: 0.3656
+Running experiment with Data_load_type = multivariate, TCN_type=dilated, attention_type=original, dropout_enabled=True, skip_enabled=True, general_skip=skip
+Model is Running
+New best model saved at best_model_multivariate_dilated_original_True_True_skip_MultiHeadAttention.pt
+Model is Running
+New best model saved at best_model_multivariate_dilated_original_True_True_skip_MultiHeadAttention.pt
+Model is Running
+New best model saved at best_model_multivariate_dilated_original_True_True_skip_MultiHeadAttention.pt
+Model is Running
+Model is Running
+Model is Running
+Model is Running
+Model is Running
+Model is Running
+Model is Running
+Epoch [10/50], Train Loss: 0.3744, Val Loss: 0.3611
+Model is Running
+Model is Running
+Model is Running
+Model is Running
+Model is Running
+Model is Running
+Model is Running
+Model is Running
+Early stopping triggered
+Total Model Running Time: 5638.14 seconds for configuration: Data_load_type = multivariate, TCN_type=dilated, attention_type=original, dropout_enabled=True, skip_enabled=True, general_skip=skip
+Test Loss for configuration: TCN_type=dilated, attention_type=original, dropout_enabled=True, skip_enabled=True, general_skip=skip, Data Load Type=multivariate: 0.3666
+Running experiment with Data_load_type = multivariate, TCN_type=dilated, attention_type=log, dropout_enabled=True, skip_enabled=True, general_skip=skip
+Model is Running
+New best model saved at best_model_multivariate_dilated_log_True_True_skip_MultiHeadAttention.pt
+Model is Running
+New best model saved at best_model_multivariate_dilated_log_True_True_skip_MultiHeadAttention.pt
+Model is Running
+Model is Running
+Model is Running
+New best model saved at best_model_multivariate_dilated_log_True_True_skip_MultiHeadAttention.pt
+Model is Running
+New best model saved at best_model_multivariate_dilated_log_True_True_skip_MultiHeadAttention.pt
+Model is Running
+New best model saved at best_model_multivariate_dilated_log_True_True_skip_MultiHeadAttention.pt
+Model is Running
+New best model saved at best_model_multivariate_dilated_log_True_True_skip_MultiHeadAttention.pt
+Model is Running
+New best model saved at best_model_multivariate_dilated_log_True_True_skip_MultiHeadAttention.pt
+Model is Running
+Epoch [10/50], Train Loss: 0.2917, Val Loss: 0.2770
+New best model saved at best_model_multivariate_dilated_log_True_True_skip_MultiHeadAttention.pt
+Model is Running
+Model is Running
+New best model saved at best_model_multivariate_dilated_log_True_True_skip_MultiHeadAttention.pt
+Model is Running
+Model is Running
+Model is Running
+Model is Running
+Model is Running
+Model is Running
+Model is Running
+Model is Running
+Epoch [20/50], Train Loss: 0.3091, Val Loss: 0.2970
+Model is Running
+Model is Running
+Model is Running
+Model is Running
+Model is Running
+Model is Running
+Model is Running
+Early stopping triggered
+Total Model Running Time: 569.83 seconds for configuration: Data_load_type = multivariate, TCN_type=dilated, attention_type=log, dropout_enabled=True, skip_enabled=True, general_skip=skip
+Test Loss for configuration: TCN_type=dilated, attention_type=log, dropout_enabled=True, skip_enabled=True, general_skip=skip, Data Load Type=multivariate: 0.2782
+Running experiment with Data_load_type = multivariate, TCN_type=dilated, attention_type=log, dropout_enabled=True, skip_enabled=True, general_skip=skip
+Model is Running
+New best model saved at best_model_multivariate_dilated_log_True_True_skip_MultiHeadAttention.pt
+Model is Running
+New best model saved at best_model_multivariate_dilated_log_True_True_skip_MultiHeadAttention.pt
+Model is Running
+New best model saved at best_model_multivariate_dilated_log_True_True_skip_MultiHeadAttention.pt
+Model is Running
+Model is Running
+Model is Running
+New best model saved at best_model_multivariate_dilated_log_True_True_skip_MultiHeadAttention.pt
+Model is Running
+Model is Running
+New best model saved at best_model_multivariate_dilated_log_True_True_skip_MultiHeadAttention.pt
+Model is Running
+Model is Running
+Epoch [10/50], Train Loss: 0.3670, Val Loss: 0.3508
+Model is Running
+Model is Running
+New best model saved at best_model_multivariate_dilated_log_True_True_skip_MultiHeadAttention.pt
+Model is Running
+Model is Running
+Model is Running
+Model is Running
+Model is Running
+New best model saved at best_model_multivariate_dilated_log_True_True_skip_MultiHeadAttention.pt
+Model is Running
+New best model saved at best_model_multivariate_dilated_log_True_True_skip_MultiHeadAttention.pt
+Model is Running
+New best model saved at best_model_multivariate_dilated_log_True_True_skip_MultiHeadAttention.pt
+Model is Running
+Epoch [20/50], Train Loss: 0.3407, Val Loss: 0.3271
+Model is Running
+Model is Running
+New best model saved at best_model_multivariate_dilated_log_True_True_skip_MultiHeadAttention.pt
+Model is Running
+Model is Running
+Model is Running
+Model is Running
+Model is Running
+Model is Running
+Model is Running
+Model is Running
+Epoch [30/50], Train Loss: 0.3481, Val Loss: 0.3284
+Model is Running
+Model is Running
+Model is Running
+New best model saved at best_model_multivariate_dilated_log_True_True_skip_MultiHeadAttention.pt
+Model is Running
+New best model saved at best_model_multivariate_dilated_log_True_True_skip_MultiHeadAttention.pt
+Model is Running
+Model is Running
+Model is Running
+Model is Running
+Model is Running
+Model is Running
+Epoch [40/50], Train Loss: 0.3289, Val Loss: 0.3100
+New best model saved at best_model_multivariate_dilated_log_True_True_skip_MultiHeadAttention.pt
+Model is Running
+New best model saved at best_model_multivariate_dilated_log_True_True_skip_MultiHeadAttention.pt
+Model is Running
+New best model saved at best_model_multivariate_dilated_log_True_True_skip_MultiHeadAttention.pt
+Model is Running
+Model is Running
+New best model saved at best_model_multivariate_dilated_log_True_True_skip_MultiHeadAttention.pt
+Model is Running
+New best model saved at best_model_multivariate_dilated_log_True_True_skip_MultiHeadAttention.pt
+Model is Running
+Model is Running
+Model is Running
+Model is Running
+Model is Running
+Epoch [50/50], Train Loss: 0.3184, Val Loss: 0.3141
+Total Model Running Time: 4876.79 seconds for configuration: Data_load_type = multivariate, TCN_type=dilated, attention_type=log, dropout_enabled=True, skip_enabled=True, general_skip=skip
+Test Loss for configuration: TCN_type=dilated, attention_type=log, dropout_enabled=True, skip_enabled=True, general_skip=skip, Data Load Type=multivariate: 0.3173
+Running experiment with Data_load_type = multivariate, TCN_type=dilated, attention_type=log, dropout_enabled=True, skip_enabled=True, general_skip=skip
+Model is Running
+New best model saved at best_model_multivariate_dilated_log_True_True_skip_MultiHeadAttention.pt
+Model is Running
+New best model saved at best_model_multivariate_dilated_log_True_True_skip_MultiHeadAttention.pt
+Model is Running
+New best model saved at best_model_multivariate_dilated_log_True_True_skip_MultiHeadAttention.pt
+Model is Running
+Model is Running
+Model is Running
+Model is Running
+Model is Running
+Model is Running
+New best model saved at best_model_multivariate_dilated_log_True_True_skip_MultiHeadAttention.pt
+Model is Running
+Epoch [10/50], Train Loss: 0.3615, Val Loss: 0.3494
+Model is Running
+Model is Running
+Model is Running
+Model is Running
+Model is Running
+Model is Running
+New best model saved at best_model_multivariate_dilated_log_True_True_skip_MultiHeadAttention.pt
+Model is Running
+New best model saved at best_model_multivariate_dilated_log_True_True_skip_MultiHeadAttention.pt
+Model is Running
+Model is Running
+Model is Running
+Epoch [20/50], Train Loss: 0.3670, Val Loss: 0.3486
+Model is Running
+Model is Running
+Model is Running
+Model is Running
+Model is Running
+Model is Running
+Model is Running
+Model is Running
+Model is Running
+Model is Running
+Epoch [30/50], Train Loss: 0.3580, Val Loss: 0.3383
+Model is Running
+Model is Running
+Early stopping triggered
+Total Model Running Time: 6732.94 seconds for configuration: Data_load_type = multivariate, TCN_type=dilated, attention_type=log, dropout_enabled=True, skip_enabled=True, general_skip=skip
+Test Loss for configuration: TCN_type=dilated, attention_type=log, dropout_enabled=True, skip_enabled=True, general_skip=skip, Data Load Type=multivariate: 0.3440
+Running experiment with Data_load_type = multivariate, TCN_type=dilated, attention_type=log, dropout_enabled=True, skip_enabled=True, general_skip=skip
+Model is Running
+New best model saved at best_model_multivariate_dilated_log_True_True_skip_MultiHeadAttention.pt
+Model is Running
+New best model saved at best_model_multivariate_dilated_log_True_True_skip_MultiHeadAttention.pt
+Model is Running
+New best model saved at best_model_multivariate_dilated_log_True_True_skip_MultiHeadAttention.pt
+Model is Running
+Model is Running
+Model is Running
+Model is Running
+New best model saved at best_model_multivariate_dilated_log_True_True_skip_MultiHeadAttention.pt
+Model is Running
+Model is Running
+Model is Running
+Epoch [10/50], Train Loss: 0.3690, Val Loss: 0.3496
+Model is Running
+Model is Running
+Model is Running
+Model is Running
+Model is Running
+Model is Running
+Model is Running
+Model is Running
+Model is Running
+Model is Running
+Epoch [20/50], Train Loss: 0.3678, Val Loss: 0.3496
+Model is Running
+Model is Running
+Early stopping triggered
+Total Model Running Time: 6904.07 seconds for configuration: Data_load_type = multivariate, TCN_type=dilated, attention_type=log, dropout_enabled=True, skip_enabled=True, general_skip=skip
+Test Loss for configuration: TCN_type=dilated, attention_type=log, dropout_enabled=True, skip_enabled=True, general_skip=skip, Data Load Type=multivariate: 0.3651
