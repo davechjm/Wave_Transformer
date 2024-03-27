@@ -447,7 +447,9 @@ class ProjectedPositionalEncoding(nn.Module):
     
     
 class DWT_MLP_Model(nn.Module):
-    def __init__(self, input_channels, seq_length, pred_length ,mlp_hidden_size, output_channels, decompose_layers=3, wave='haar', mode='symmetric', nhead=8, d_model=None, num_encoder_layers=3, dropout=0.1, dilation = 2, kernel_size = 3, attention_type = 'original', TCN_type = 'dilated', dropout_ = True, skip_ = True, general_skip_= 'skip', Revin_ = True):
+    def __init__(self, input_channels, seq_length, pred_length ,mlp_hidden_size, output_channels, decompose_layers=3, wave='haar', mode='symmetric', nhead=8, d_model=None,
+                 num_encoder_layers=3, dropout=0.1, dilation = 2, kernel_size = 3, attention_type = 'original', TCN_type = 'dilated',
+                 dropout_ = True, skip_ = True, general_skip_= 'skip', Revin_ = True):
         super(DWT_MLP_Model, self).__init__()
         self.dwt_forward = DWT1DForward(J=decompose_layers, wave=wave, mode=mode)  # Assuming DWT1DForward is defined elsewhere
         self.dwt_inverse = DWT1DInverse(wave=wave, mode=mode)  # Assuming DWT1DInverse is defined elsewhere
@@ -488,22 +490,26 @@ class DWT_MLP_Model(nn.Module):
         
         if self.attention_type == 'original':
             #self.multi_head_attention = MultiHeadAttention(d_model, self.nhead, dropout)
-            self.encoder_layers_low = nn.ModuleList([EncoderLayer(d_model, nheads=self.nhead, d_ff=mlp_hidden_size, dropout=self.dropout, activation="relu") for _ in range(num_encoder_layers)])
+            self.encoder_layers_low = nn.ModuleList([EncoderLayer(d_model, nheads=self.nhead, d_ff=mlp_hidden_size,
+                                                                  dropout=self.dropout, activation="relu") for _ in range(num_encoder_layers)])
             self.transformer_low = Encoder(self.encoder_layers_low, norm_layer=nn.LayerNorm(d_model))
 
             # Transformer Encoders for high-frequency components, using custom Encoder
             self.transformer_high_list = nn.ModuleList(
-                [Encoder(nn.ModuleList([EncoderLayer(d_model, nheads=self.nhead, d_ff=mlp_hidden_size, dropout=self.dropout, activation="relu") for _ in range(num_encoder_layers)]), norm_layer=nn.LayerNorm(d_model)) 
+                [Encoder(nn.ModuleList([EncoderLayer(d_model, nheads=self.nhead, d_ff=mlp_hidden_size, dropout=self.dropout, activation="relu") for _ in range(num_encoder_layers)]),
+                         norm_layer=nn.LayerNorm(d_model)) 
                 for _ in range(decompose_layers)]
                 )
         else:
             #self.multi_head_attention = MultiHeadAttention(d_model, self.nhead, dropout)
-            self.encoder_layers_low = nn.ModuleList([log_EncoderLayer(d_model, nheads=self.nhead, k = int(self.seq_len//2) ,d_ff=mlp_hidden_size,dropout=self.dropout,activation="relu") for _ in range(num_encoder_layers)])
+            self.encoder_layers_low = nn.ModuleList([log_EncoderLayer(d_model, nheads=self.nhead, k = int(self.seq_len//2) ,d_ff=mlp_hidden_size,
+                                                                      dropout=self.dropout,activation="relu") for _ in range(num_encoder_layers)])
             self.transformer_low = Encoder(self.encoder_layers_low, norm_layer=nn.LayerNorm(d_model))
 
             # Transformer Encoders for high-frequency components, using custom Encoder
             self.transformer_high_list = nn.ModuleList(
-                [Encoder(nn.ModuleList([log_EncoderLayer(d_model, nheads=self.nhead, k = int(self.seq_len//2) ,d_ff=mlp_hidden_size, dropout=self.dropout,  activation="relu") for _ in range(num_encoder_layers)]), norm_layer=nn.LayerNorm(d_model)) 
+                [Encoder(nn.ModuleList([log_EncoderLayer(d_model, nheads=self.nhead, k = int(self.seq_len//2) ,d_ff=mlp_hidden_size, 
+                                                         dropout=self.dropout,  activation="relu") for _ in range(num_encoder_layers)]), norm_layer=nn.LayerNorm(d_model)) 
                 for _ in range(decompose_layers)]
                 )
             
