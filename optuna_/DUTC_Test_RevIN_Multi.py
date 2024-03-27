@@ -653,8 +653,8 @@ skip_types = [True]
 general_skip_types = ['skip']
 nhead_types = [1,4,6,8]
 data_load_types = ['multivariate']
-step_sizes = [1, 4, 8, 16, 32, 64]
-kernel_sizes = [1,3,5,7]
+step_sizes = [1,  8, 16, 32, 64]
+kernel_sizes = [3,5,7]
 
 
 
