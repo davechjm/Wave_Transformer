@@ -227,7 +227,67 @@ class ConvBlock(nn.Module):
 
     def forward(self, x):
         return self.relu(self.norm(self.conv(x)))
+class LogSparseMultiHeadAttention(nn.Module):
+    def __init__(self, d_model, n_heads, k_neighbors, attn_dropout=0., proj_dropout=0., qkv_bias=True):
+        super().__init__()
+        self.d_model = d_model
+        self.n_heads = n_heads
+        self.k_neighbors = k_neighbors
+        self.d_k = self.d_v = d_model // n_heads
 
+        self.W_Q = nn.Linear(d_model, self.d_k * n_heads, bias=qkv_bias)
+        self.W_K = nn.Linear(d_model, self.d_k * n_heads, bias=qkv_bias)
+        self.W_V = nn.Linear(d_model, self.d_v * n_heads, bias=qkv_bias)
+
+        self.attn_dropout = nn.Dropout(attn_dropout)
+        self.proj_dropout = nn.Dropout(proj_dropout)
+
+        self.to_out = nn.Sequential(nn.Linear(n_heads * self.d_v, d_model), nn.Dropout(proj_dropout))
+
+    def forward(self, Q, K=None, V=None, key_padding_mask=None, attn_mask=None):
+        bs = Q.size(0)
+        if K is None: K = Q
+        if V is None: V = Q
+
+        # Project Q, K, V
+        Q_s = self.W_Q(Q).view(bs, -1, self.n_heads, self.d_k).transpose(1, 2)
+        K_s = self.W_K(K).view(bs, -1, self.n_heads, self.d_k).transpose(1, 2)
+        V_s = self.W_V(V).view(bs, -1, self.n_heads, self.d_v).transpose(1, 2)
+
+        output, attn_weights = self.sparse_attention(Q_s, K_s, V_s, key_padding_mask, attn_mask)
+
+        # Concatenate heads and project
+        output = output.transpose(1, 2).contiguous().view(bs, -1, self.n_heads * self.d_v)
+        output = self.to_out(output)
+
+        return output, attn_weights
+
+    def sparse_attention(self, q, k, v, key_padding_mask=None, attn_mask=None):
+        bs, n_heads, seq_len, d_k = q.size()
+        attn_scores = torch.matmul(q, k.transpose(-2, -1)) / np.sqrt(d_k)
+
+        # Correct handling of top-k + log-space indices
+        topk_scores, topk_indices = attn_scores.topk(self.k_neighbors, dim=-1)
+
+        # Ensure proper dimensionality for combined indices
+        log_space_indices = torch.logspace(0, np.log10(seq_len-1), steps=self.k_neighbors, base=10).long()
+        log_space_indices = log_space_indices[None, None, :].expand(bs, n_heads, -1)  # Expand dims to match
+        combined_indices = torch.cat((topk_indices, log_space_indices), dim=-1)
+        combined_indices = combined_indices.unique(sorted=True)
+
+        # Filtering needs to adjust to correct tensor shapes
+        attn_scores_filtered = torch.full_like(attn_scores, float('-inf'))
+        attn_scores_filtered.scatter_(-1, combined_indices.unsqueeze(-1).expand(-1, -1, -1, seq_len), attn_scores.gather(-1, combined_indices.unsqueeze(-1).expand(-1, -1, -1, seq_len)))
+
+        if attn_mask is not None:
+            attn_scores_filtered = attn_scores_filtered.masked_fill(attn_mask == 0, float('-inf'))
+        
+        attn_weights = F.softmax(attn_scores_filtered, dim=-1)
+        attn_weights = self.attn_dropout(attn_weights)
+
+        output = torch.matmul(attn_weights, v)
+
+        return output, attn_weights
 class DilatedTCNBlock_original(nn.Module):
     def __init__(self, in_channels, out_channels, kernel_size=3, dilation=2,dropout_rate = 0.2):
         super(DilatedTCNBlock_original, self).__init__()
@@ -754,14 +814,18 @@ class DWT_MLP_Model(nn.Module):
 seq_ = 24*4*4
 pred_ = 24*4
 # Define hyperparameter combinations
-TCN_types = ['dilated2', 'dilated']
-attention_types = ['original', 'log']
+TCN_types = ['dilated2']
+attention_types = ['original']
 dropout_types = [True]
-pos_encoder_types = ['Projected', 'Original']
+pos_encoder_types = [ 'Original', 'Projected']
 general_skip_types = ['skip']
 revin_types = [True]
 data_load_types = ['multivariate']
-
+step_sizes = [1,8,16]
+skip_enabled = True
+kernel_sizes = [3,5]
+decompose_layers = [1,3]
+batch_sizes = [32,64]
 
 
 
@@ -773,165 +837,170 @@ for data_load_type in data_load_types:
                 for pos_encoder_type in pos_encoder_types:
                     for general_skip_type in general_skip_types:
                         for revin_type in revin_types:
-                            if data_load_type == 'univariate':
-                            
-                                # Define the root path where your dataset is located and the name of your dataset file
-                                root_path = '/home/choi/Wave_Transformer/optuna_/electricity/'
-                                data_path = 'electricity.csv'
+                            for k_size in kernel_sizes:
+                                for s_size in step_sizes:
+                                    for decompose_layer in decompose_layers:
+                                        for bs in batch_sizes:
+                                            
+                                            if data_load_type == 'univariate':
+                                            
+                                                # Define the root path where your dataset is located and the name of your dataset file
+                                                root_path = '/home/choi/Wave_Transformer/optuna_/electricity/'
+                                                data_path = 'electricity.csv'
 
-                                # Define the size configuration for your dataset
-                                seq_len = 24 * 4 *4    # Length of input sequences
-                                label_len = 24 * 4      # Length of labels within the sequence to predict
-                                pred_len = 24 * 4       # Number of steps to predict into the future
+                                                # Define the size configuration for your dataset
+                                                seq_len = 24 * 4 *4    # Length of input sequences
+                                                label_len = 24 * 4      # Length of labels within the sequence to predict
+                                                pred_len = 24 * 4       # Number of steps to predict into the future
 
-                                size = [seq_len, label_len, pred_len]
+                                                size = [seq_len, label_len, pred_len]
 
-                                # Initialize the custom dataset for training, validation, and testing
-                                train_dataset = Dataset_Custom(root_path=root_path, features= 'S', flag='train',  data_path=data_path, step_size = 4)
-                                val_dataset = Dataset_Custom(root_path=root_path, features= 'S',flag='val', data_path=data_path,step_size = 4)
-                                test_dataset = Dataset_Custom(root_path=root_path, features= 'S',flag='test',  data_path=data_path,step_size = 4)
+                                                # Initialize the custom dataset for training, validation, and testing
+                                                train_dataset = Dataset_Custom(root_path=root_path, features= 'S', flag='train',  data_path=data_path, step_size = s_size)
+                                                val_dataset = Dataset_Custom(root_path=root_path, features= 'S',flag='val', data_path=data_path,step_size = s_size)
+                                                test_dataset = Dataset_Custom(root_path=root_path, features= 'S',flag='test',  data_path=data_path,step_size = s_size)
 
-                                # Optionally, initialize the dataset for prediction (if needed)
-                                #pred_dataset = Dataset_Pred(root_path=root_path, flag='pred', size=size, data_path=data_path, inverse=True)
+                                                # Optionally, initialize the dataset for prediction (if needed)
+                                                #pred_dataset = Dataset_Pred(root_path=root_path, flag='pred', size=size, data_path=data_path, inverse=True)
 
-                                # Example on how to create DataLoaders for PyTorch training (adjust batch_size as needed)
-                                batch_size = 128
-                                train_loader = DataLoader(train_dataset, batch_size=batch_size, shuffle=True, drop_last = True)
-                                val_loader = DataLoader(val_dataset, batch_size=batch_size, shuffle=False, drop_last = True)
-                                test_loader = DataLoader(test_dataset, batch_size=batch_size, shuffle=False, drop_last = False)
+                                                # Example on how to create DataLoaders for PyTorch training (adjust batch_size as needed)
+                                                batch_size = bs
+                                                train_loader = DataLoader(train_dataset, batch_size=batch_size, shuffle=True, drop_last = True)
+                                                val_loader = DataLoader(val_dataset, batch_size=batch_size, shuffle=False, drop_last = True)
+                                                test_loader = DataLoader(test_dataset, batch_size=batch_size, shuffle=False, drop_last = False)
+                                                
+                                            else:
+                                                
+                                                # Specify the file path
+                                                root_path = '/home/choi/Wave_Transformer/optuna_/electricity/'
+                                                data_path = 'electricity.csv'
+                                                # Size parameters
+
+                                                seq_len = 24*4*4
+                                                pred_len = 24*4
+                                                batch_size = 128
+                                                # Initialize the custom dataset for training, validation, and testing
+                                                train_dataset = Dataset_Custom(root_path=root_path, features= 'M', flag='train', data_path=data_path, step_size =s_size)
+                                                val_dataset = Dataset_Custom(root_path=root_path, features= 'M',flag='val', data_path=data_path,step_size = s_size)
+                                                test_dataset = Dataset_Custom(root_path=root_path, features= 'M',flag='test', data_path=data_path,step_size = s_size)
+
+                                                # Optionally, initialize the dataset for prediction (if needed)
+                                                #pred_dataset = Dataset_Pred(root_path=root_path, flag='pred', size=size, data_path=data_path, inverse=True)
+
+                                                # Example on how to create DataLoaders for PyTorch training (adjust batch_size as needed)
+                                                batch_size = bs
+                                                train_loader = DataLoader(train_dataset, batch_size=batch_size, shuffle=True, drop_last = True)
+                                                val_loader = DataLoader(val_dataset, batch_size=batch_size, shuffle=False, drop_last = True)
+                                                test_loader = DataLoader(test_dataset, batch_size=batch_size, shuffle=False, drop_last = False)
+                                            print(f"Running experiment with Data_load_type = {data_load_type}, TCN_type={TCN_type}, attention_type={attention_type}, dropout_enabled={dropout_enabled}, skip_enabled={skip_enabled}, general_skip={general_skip_type}, Revin={revin_type},  Pos_Encoder_Type = {pos_encoder_type}, batch_size = {bs}, step_size = {s_size}, kernel_size = {k_size}, decompose_layer = {decompose_layer} ")
+                                            dropout_rate = 0.10146011891748014 if dropout_enabled else 0.0
+                                            # Adjust the model instantiation to include all hyperparameters
+                                            model = DWT_MLP_Model(input_channels=321+4, seq_length=seq_, pred_length = pred_,mlp_hidden_size=128, 
+                                                                output_channels=321+4, decompose_layers=decompose_layer, 
+                                                                dropout=dropout_rate, dilation=2, 
+                                                                mode='symmetric', wave='haar', kernel_size=k_size, 
+                                                                attention_type=attention_type, TCN_type=TCN_type, 
+                                                                num_encoder_layers=3, nhead=8, 
+                                                                dropout_=dropout_enabled,
+                                                                skip_=True, general_skip_=general_skip_type, Revin_=revin_type, pos_encoder_type_ = pos_encoder_type)
+
+                                            # Define criterion and optimizer
+                                            criterion = nn.MSELoss()
+                                            optimizer = optim.Adam(model.parameters(), lr=0.0052230056036904522, 
+                                                                weight_decay=1.0059977697794999e-04)
+
+                                            train_losses = []
+                                            val_losses = []
+
+                                            # Early stopping parameters
+                                            patience = 10
+                                            best_val_loss = float('inf')
+                                            patience_counter = 0
+
+                                            num_epochs = 30
+
+                                            # Start the timer
+                                            start_time = time.time()
+                                            
+                                            best_model_path = f"best_model_{data_load_type}_{TCN_type}_{attention_type}_{dropout_enabled}_{skip_enabled}_{general_skip_type}_{revin_type}_{pos_encoder_type}_{bs}_{decompose_layer}_{k_size}_{s_size}.pt"
+
+                                            
+                                            for epoch in range(num_epochs):
+                                                model.train()
+                                    
+                                                train_loss = 0.0
+                        
+                                                for seq_x, seq_y, seq_x_mark, seq_y_mark in train_loader:
+                                            
+                                                    inputs = torch.cat((seq_x, seq_x_mark), dim=-1)
+                                                
+                                                    targets = torch.cat((seq_y, seq_y_mark), dim=-1)
                                 
-                            else:
-                                
-                                # Specify the file path
-                                root_path = '/home/choi/Wave_Transformer/optuna_/electricity/'
-                                data_path = 'electricity.csv'
-                                # Size parameters
+                                                    optimizer.zero_grad()
+                                                    outputs = model(inputs)
+                                                    loss = criterion(outputs, targets[:, :, :-4])  # Assuming specific output handling
+                                                    loss.backward()
+                                                    optimizer.step()
+                                            
+                                                    train_loss += loss.item() * inputs.size(0)
+                                        
+                                                train_loss /= len(train_loader.dataset)
+                                                train_losses.append(train_loss)
+                                        
+                                                # Validation phase
+                                                model.eval()
+                                                val_loss = 0.0
+                                                with torch.no_grad():
+                                                    for seq_x, seq_y, seq_x_mark, seq_y_mark in val_loader:
+                                                        inputs = torch.cat((seq_x, seq_x_mark), dim=-1)
+                                                        targets = torch.cat((seq_y, seq_y_mark), dim=-1)
+                                                        outputs = model(inputs)
+                                                        loss = criterion(outputs, targets[:, :, :-4])  # Same output handling assumption
+                                                        val_loss += loss.item() * inputs.size(0)
+                                        
+                                                val_loss /= len(val_loader.dataset)
+                                                val_losses.append(val_loss)
+                                        
+                                                if (epoch + 1) % 10 == 0:
+                                                    print(f'Epoch [{epoch+1}/{num_epochs}], Train Loss: {train_loss:.4f}, Val Loss: {val_loss:.4f}')
+                                        
+                                                if val_loss < best_val_loss:
+                                                    best_val_loss = val_loss
+                                                    patience_counter = 0
+                                                    torch.save(model.state_dict(), best_model_path)
+                                                    print(f"New best model saved at {best_model_path}")
+                                                else:
+                                                    patience_counter += 1
+                                            
+                                                if patience_counter >= patience:
+                                                    print("Early stopping triggered")
+                                                    break
 
-                                seq_len = 24*4*4
-                                pred_len = 24*4
-                                batch_size = 128
-                                # Initialize the custom dataset for training, validation, and testing
-                                train_dataset = Dataset_Custom(root_path=root_path, features= 'M', flag='train', data_path=data_path, step_size = 4)
-                                val_dataset = Dataset_Custom(root_path=root_path, features= 'M',flag='val', data_path=data_path,step_size = 4)
-                                test_dataset = Dataset_Custom(root_path=root_path, features= 'M',flag='test', data_path=data_path,step_size = 4)
+                                            end_time = time.time()
+                                            total_time = end_time - start_time
+                                            print(f'Total Model Running Time: {total_time:.2f} seconds for configuration: Data_load_type = {data_load_type}, TCN_type={TCN_type}, attention_type={attention_type}, dropout_enabled={dropout_enabled}, skip_enabled={skip_enabled}, general_skip={general_skip_type}, Revin={revin_type} ,batch_size = {bs}, step_size = {s_size}, kernel_size = {k_size}, decompose_layer = {decompose_layer}, Pos_Encoder_Type = {pos_encoder_type}')
+                                            best_model = DWT_MLP_Model(input_channels=321+4, seq_length=seq_, pred_length = pred_, mlp_hidden_size=128, 
+                                            output_channels=321+4, decompose_layers=decompose_layer, dropout=dropout_rate, dilation=2, 
+                                            mode='symmetric', wave='haar', kernel_size=k_size, 
+                                            attention_type=attention_type, TCN_type=TCN_type, 
+                                            num_encoder_layers=3, nhead=8, 
+                                            dropout_=dropout_enabled,
+                                            skip_=True, general_skip_=general_skip_type, Revin_=revin_type, pos_encoder_type_ = pos_encoder_type)
+                                            best_model.load_state_dict(torch.load(best_model_path))
+                                            # Evaluation on test data
+                                            best_model.eval()
+                                            test_loss = 0.0
+                                            with torch.no_grad():
+                                                for seq_x, seq_y, seq_x_mark, seq_y_mark in test_loader:
+                                                    inputs = torch.cat((seq_x, seq_x_mark), dim=-1)
+                                                    targets = torch.cat((seq_y, seq_y_mark), dim=-1)
+                                                    outputs = best_model(inputs)
+                                                    loss = criterion(outputs, targets[:, :, :-4])  # Assuming specific output handling
+                                                    test_loss += loss.item() * inputs.size(0)
 
-                                # Optionally, initialize the dataset for prediction (if needed)
-                                #pred_dataset = Dataset_Pred(root_path=root_path, flag='pred', size=size, data_path=data_path, inverse=True)
-
-                                # Example on how to create DataLoaders for PyTorch training (adjust batch_size as needed)
-                                batch_size = 128
-                                train_loader = DataLoader(train_dataset, batch_size=batch_size, shuffle=True, drop_last = True)
-                                val_loader = DataLoader(val_dataset, batch_size=batch_size, shuffle=False, drop_last = True)
-                                test_loader = DataLoader(test_dataset, batch_size=batch_size, shuffle=False, drop_last = False)
-                            print(f"Running experiment with Data_load_type = {data_load_type}, TCN_type={TCN_type}, attention_type={attention_type}, dropout_enabled={dropout_enabled}, general_skip={general_skip_type}, Revin={revin_type},  Pos_Encoder_Type = {pos_encoder_type}")
-                            dropout_rate = 0.10146011891748014 if dropout_enabled else 0.0
-                            # Adjust the model instantiation to include all hyperparameters
-                            model = DWT_MLP_Model(input_channels=321+4, seq_length=seq_, pred_length = pred_,mlp_hidden_size=128, 
-                                                output_channels=321+4, decompose_layers=3, 
-                                                dropout=dropout_rate, dilation=2, 
-                                                mode='symmetric', wave='haar', kernel_size=5, 
-                                                attention_type=attention_type, TCN_type=TCN_type, 
-                                                num_encoder_layers=3, nhead=8, 
-                                                dropout_=dropout_enabled,
-                                                skip_=True, general_skip_=general_skip_type, Revin_=revin_type, pos_encoder_type_ = pos_encoder_type)
-
-                            # Define criterion and optimizer
-                            criterion = nn.MSELoss()
-                            optimizer = optim.Adam(model.parameters(), lr=0.0052230056036904522, 
-                                                weight_decay=1.0059977697794999e-04)
-
-                            train_losses = []
-                            val_losses = []
-
-                            # Early stopping parameters
-                            patience = 15
-                            best_val_loss = float('inf')
-                            patience_counter = 0
-
-                            num_epochs = 50
-
-                            # Start the timer
-                            start_time = time.time()
-                            
-                            best_model_path = f"best_model_{data_load_type}_{TCN_type}_{attention_type}_{dropout_enabled}_{general_skip_type}_{revin_type}_{pos_encoder_type}.pt"
-
-                            
-                            for epoch in range(num_epochs):
-                                model.train()
-                                print('Model is Running')
-                                train_loss = 0.0
-        
-                                for seq_x, seq_y, seq_x_mark, seq_y_mark in train_loader:
-                            
-                                    inputs = torch.cat((seq_x, seq_x_mark), dim=-1)
-                                
-                                    targets = torch.cat((seq_y, seq_y_mark), dim=-1)
-                
-                                    optimizer.zero_grad()
-                                    outputs = model(inputs)
-                                    loss = criterion(outputs, targets[:, :, :-4])  # Assuming specific output handling
-                                    loss.backward()
-                                    optimizer.step()
-                            
-                                    train_loss += loss.item() * inputs.size(0)
-                        
-                                train_loss /= len(train_loader.dataset)
-                                train_losses.append(train_loss)
-                        
-                                # Validation phase
-                                model.eval()
-                                val_loss = 0.0
-                                with torch.no_grad():
-                                    for seq_x, seq_y, seq_x_mark, seq_y_mark in val_loader:
-                                        inputs = torch.cat((seq_x, seq_x_mark), dim=-1)
-                                        targets = torch.cat((seq_y, seq_y_mark), dim=-1)
-                                        outputs = model(inputs)
-                                        loss = criterion(outputs, targets[:, :, :-4])  # Same output handling assumption
-                                        val_loss += loss.item() * inputs.size(0)
-                        
-                                val_loss /= len(val_loader.dataset)
-                                val_losses.append(val_loss)
-                        
-                                if (epoch + 1) % 10 == 0:
-                                    print(f'Epoch [{epoch+1}/{num_epochs}], Train Loss: {train_loss:.4f}, Val Loss: {val_loss:.4f}')
-                        
-                                if val_loss < best_val_loss:
-                                    best_val_loss = val_loss
-                                    patience_counter = 0
-                                    torch.save(model.state_dict(), best_model_path)
-                                    print(f"New best model saved at {best_model_path}")
-                                else:
-                                    patience_counter += 1
-                            
-                                if patience_counter >= patience:
-                                    print("Early stopping triggered")
-                                    break
-
-                            end_time = time.time()
-                            total_time = end_time - start_time
-                            print(f'Total Model Running Time: {total_time:.2f} seconds for configuration: Data_load_type = {data_load_type}, TCN_type={TCN_type}, attention_type={attention_type}, dropout_enabled={dropout_enabled},  general_skip={general_skip_type}, Revin={revin_type} , Pos_Encoder_Type = {pos_encoder_type}')
-                            best_model = DWT_MLP_Model(input_channels=321+4, seq_length=seq_, pred_length = pred_, mlp_hidden_size=128, 
-                            output_channels=321+4, decompose_layers=3, dropout=dropout_rate, dilation=2, 
-                            mode='symmetric', wave='haar', kernel_size=5, 
-                            attention_type=attention_type, TCN_type=TCN_type, 
-                            num_encoder_layers=3, nhead=8, 
-                            dropout_=dropout_enabled,
-                            skip_=True, general_skip_=general_skip_type, Revin_=revin_type, pos_encoder_type_ = pos_encoder_type)
-                            best_model.load_state_dict(torch.load(best_model_path))
-                            # Evaluation on test data
-                            best_model.eval()
-                            test_loss = 0.0
-                            with torch.no_grad():
-                                for seq_x, seq_y, seq_x_mark, seq_y_mark in test_loader:
-                                    inputs = torch.cat((seq_x, seq_x_mark), dim=-1)
-                                    targets = torch.cat((seq_y, seq_y_mark), dim=-1)
-                                    outputs = best_model(inputs)
-                                    loss = criterion(outputs, targets[:, :, :-4])  # Assuming specific output handling
-                                    test_loss += loss.item() * inputs.size(0)
-
-                            test_loss /= len(test_loader.dataset)
-                           
-                            print(f'Test Loss for configuration: TCN_type={TCN_type}, attention_type={attention_type}, dropout_enabled={dropout_enabled}, general_skip={general_skip_type}, Revin={revin_type}, Data Load Type={data_load_type}, Pos_Encoder_Type = {pos_encoder_type}: {test_loss:.4f}')
+                                            test_loss /= len(test_loader.dataset)
+                                        
+                                            print(f'Test Loss for configuration: TCN_type={TCN_type}, attention_type={attention_type}, dropout_enabled={dropout_enabled}, skip_enabled={skip_enabled}, general_skip={general_skip_type}, Revin={revin_type}, Data Load Type={data_load_type}, Pos_Encoder_Type = {pos_encoder_type}, batch_size = {bs}, step_size = {s_size}, kernel_size = {k_size}, decompose_layer = {decompose_layer} : {test_loss:.4f}')
 
 
 
