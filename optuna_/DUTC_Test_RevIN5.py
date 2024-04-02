@@ -817,15 +817,15 @@ pred_ = 24*4
 TCN_types = ['dilated2']
 attention_types = ['original']
 dropout_types = [True]
-pos_encoder_types = [ 'Original', 'Projected']
+pos_encoder_types = [ 'Projected']
 general_skip_types = ['skip']
 revin_types = [True]
 data_load_types = ['multivariate']
-step_sizes = [1,8,16]
+step_sizes = [1,8,16,32,64]
 skip_enabled = True
 kernel_sizes = [3,5]
-decompose_layers = [1,3]
-batch_sizes = [32,64]
+decompose_layers = [1,3,5]
+batch_sizes = [32,64,128]
 
 
 
@@ -913,11 +913,11 @@ for data_load_type in data_load_types:
                                             val_losses = []
 
                                             # Early stopping parameters
-                                            patience = 10
+                                            patience = 15
                                             best_val_loss = float('inf')
                                             patience_counter = 0
 
-                                            num_epochs = 30
+                                            num_epochs = 200
 
                                             # Start the timer
                                             start_time = time.time()

@@ -1,0 +1,1063 @@
+Running experiment with Data_load_type = multivariate, TCN_type=dilated2, attention_type=original, dropout_enabled=True, skip_enabled=True, general_skip=skip, Revin=True,  Pos_Encoder_Type = Original, batch_size = 32, step_size = 1, kernel_size = 3, decompose_layer = 1 
+New best model saved at best_model_multivariate_dilated2_original_True_True_skip_True_Original_32_1_3_1.pt
+New best model saved at best_model_multivariate_dilated2_original_True_True_skip_True_Original_32_1_3_1.pt
+New best model saved at best_model_multivariate_dilated2_original_True_True_skip_True_Original_32_1_3_1.pt
+New best model saved at best_model_multivariate_dilated2_original_True_True_skip_True_Original_32_1_3_1.pt
+New best model saved at best_model_multivariate_dilated2_original_True_True_skip_True_Original_32_1_3_1.pt
+Epoch [10/30], Train Loss: 0.1797, Val Loss: 0.2088
+New best model saved at best_model_multivariate_dilated2_original_True_True_skip_True_Original_32_1_3_1.pt
+New best model saved at best_model_multivariate_dilated2_original_True_True_skip_True_Original_32_1_3_1.pt
+Epoch [20/30], Train Loss: 0.1767, Val Loss: 0.2138
+New best model saved at best_model_multivariate_dilated2_original_True_True_skip_True_Original_32_1_3_1.pt
+Epoch [30/30], Train Loss: 0.1759, Val Loss: 0.2043
+Total Model Running Time: 4561.59 seconds for configuration: Data_load_type = multivariate, TCN_type=dilated2, attention_type=original, dropout_enabled=True, skip_enabled=True, general_skip=skip, Revin=True ,batch_size = 32, step_size = 1, kernel_size = 3, decompose_layer = 1, Pos_Encoder_Type = Original
+Test Loss for configuration: TCN_type=dilated2, attention_type=original, dropout_enabled=True, skip_enabled=True, general_skip=skip, Revin=True, Data Load Type=multivariate, Pos_Encoder_Type = Original, batch_size = 32, step_size = 1, kernel_size = 3, decompose_layer = 1 : 0.2066
+Running experiment with Data_load_type = multivariate, TCN_type=dilated2, attention_type=original, dropout_enabled=True, skip_enabled=True, general_skip=skip, Revin=True,  Pos_Encoder_Type = Original, batch_size = 64, step_size = 1, kernel_size = 3, decompose_layer = 1 
+New best model saved at best_model_multivariate_dilated2_original_True_True_skip_True_Original_64_1_3_1.pt
+New best model saved at best_model_multivariate_dilated2_original_True_True_skip_True_Original_64_1_3_1.pt
+New best model saved at best_model_multivariate_dilated2_original_True_True_skip_True_Original_64_1_3_1.pt
+New best model saved at best_model_multivariate_dilated2_original_True_True_skip_True_Original_64_1_3_1.pt
+New best model saved at best_model_multivariate_dilated2_original_True_True_skip_True_Original_64_1_3_1.pt
+New best model saved at best_model_multivariate_dilated2_original_True_True_skip_True_Original_64_1_3_1.pt
+Epoch [10/30], Train Loss: 0.1749, Val Loss: 0.2025
+New best model saved at best_model_multivariate_dilated2_original_True_True_skip_True_Original_64_1_3_1.pt
+Epoch [20/30], Train Loss: 0.1667, Val Loss: 0.2053
+Early stopping triggered
+Total Model Running Time: 2563.52 seconds for configuration: Data_load_type = multivariate, TCN_type=dilated2, attention_type=original, dropout_enabled=True, skip_enabled=True, general_skip=skip, Revin=True ,batch_size = 64, step_size = 1, kernel_size = 3, decompose_layer = 1, Pos_Encoder_Type = Original
+Test Loss for configuration: TCN_type=dilated2, attention_type=original, dropout_enabled=True, skip_enabled=True, general_skip=skip, Revin=True, Data Load Type=multivariate, Pos_Encoder_Type = Original, batch_size = 64, step_size = 1, kernel_size = 3, decompose_layer = 1 : 0.2103
+Running experiment with Data_load_type = multivariate, TCN_type=dilated2, attention_type=original, dropout_enabled=True, skip_enabled=True, general_skip=skip, Revin=True,  Pos_Encoder_Type = Original, batch_size = 32, step_size = 1, kernel_size = 3, decompose_layer = 3 
+New best model saved at best_model_multivariate_dilated2_original_True_True_skip_True_Original_32_3_3_1.pt
+New best model saved at best_model_multivariate_dilated2_original_True_True_skip_True_Original_32_3_3_1.pt
+New best model saved at best_model_multivariate_dilated2_original_True_True_skip_True_Original_32_3_3_1.pt
+New best model saved at best_model_multivariate_dilated2_original_True_True_skip_True_Original_32_3_3_1.pt
+New best model saved at best_model_multivariate_dilated2_original_True_True_skip_True_Original_32_3_3_1.pt
+Epoch [10/30], Train Loss: 0.2144, Val Loss: 0.2290
+New best model saved at best_model_multivariate_dilated2_original_True_True_skip_True_Original_32_3_3_1.pt
+New best model saved at best_model_multivariate_dilated2_original_True_True_skip_True_Original_32_3_3_1.pt
+New best model saved at best_model_multivariate_dilated2_original_True_True_skip_True_Original_32_3_3_1.pt
+New best model saved at best_model_multivariate_dilated2_original_True_True_skip_True_Original_32_3_3_1.pt
+New best model saved at best_model_multivariate_dilated2_original_True_True_skip_True_Original_32_3_3_1.pt
+New best model saved at best_model_multivariate_dilated2_original_True_True_skip_True_Original_32_3_3_1.pt
+Epoch [20/30], Train Loss: 0.2073, Val Loss: 0.2285
+New best model saved at best_model_multivariate_dilated2_original_True_True_skip_True_Original_32_3_3_1.pt
+New best model saved at best_model_multivariate_dilated2_original_True_True_skip_True_Original_32_3_3_1.pt
+Epoch [30/30], Train Loss: 0.2061, Val Loss: 0.2308
+Total Model Running Time: 7748.00 seconds for configuration: Data_load_type = multivariate, TCN_type=dilated2, attention_type=original, dropout_enabled=True, skip_enabled=True, general_skip=skip, Revin=True ,batch_size = 32, step_size = 1, kernel_size = 3, decompose_layer = 3, Pos_Encoder_Type = Original
+Test Loss for configuration: TCN_type=dilated2, attention_type=original, dropout_enabled=True, skip_enabled=True, general_skip=skip, Revin=True, Data Load Type=multivariate, Pos_Encoder_Type = Original, batch_size = 32, step_size = 1, kernel_size = 3, decompose_layer = 3 : 0.2220
+Running experiment with Data_load_type = multivariate, TCN_type=dilated2, attention_type=original, dropout_enabled=True, skip_enabled=True, general_skip=skip, Revin=True,  Pos_Encoder_Type = Original, batch_size = 64, step_size = 1, kernel_size = 3, decompose_layer = 3 
+New best model saved at best_model_multivariate_dilated2_original_True_True_skip_True_Original_64_3_3_1.pt
+New best model saved at best_model_multivariate_dilated2_original_True_True_skip_True_Original_64_3_3_1.pt
+New best model saved at best_model_multivariate_dilated2_original_True_True_skip_True_Original_64_3_3_1.pt
+New best model saved at best_model_multivariate_dilated2_original_True_True_skip_True_Original_64_3_3_1.pt
+New best model saved at best_model_multivariate_dilated2_original_True_True_skip_True_Original_64_3_3_1.pt
+New best model saved at best_model_multivariate_dilated2_original_True_True_skip_True_Original_64_3_3_1.pt
+New best model saved at best_model_multivariate_dilated2_original_True_True_skip_True_Original_64_3_3_1.pt
+Epoch [10/30], Train Loss: 0.2027, Val Loss: 0.2216
+New best model saved at best_model_multivariate_dilated2_original_True_True_skip_True_Original_64_3_3_1.pt
+New best model saved at best_model_multivariate_dilated2_original_True_True_skip_True_Original_64_3_3_1.pt
+New best model saved at best_model_multivariate_dilated2_original_True_True_skip_True_Original_64_3_3_1.pt
+Epoch [20/30], Train Loss: 0.1979, Val Loss: 0.2201
+New best model saved at best_model_multivariate_dilated2_original_True_True_skip_True_Original_64_3_3_1.pt
+Epoch [30/30], Train Loss: 0.1952, Val Loss: 0.2189
+Total Model Running Time: 6498.17 seconds for configuration: Data_load_type = multivariate, TCN_type=dilated2, attention_type=original, dropout_enabled=True, skip_enabled=True, general_skip=skip, Revin=True ,batch_size = 64, step_size = 1, kernel_size = 3, decompose_layer = 3, Pos_Encoder_Type = Original
+Test Loss for configuration: TCN_type=dilated2, attention_type=original, dropout_enabled=True, skip_enabled=True, general_skip=skip, Revin=True, Data Load Type=multivariate, Pos_Encoder_Type = Original, batch_size = 64, step_size = 1, kernel_size = 3, decompose_layer = 3 : 0.2178
+Running experiment with Data_load_type = multivariate, TCN_type=dilated2, attention_type=original, dropout_enabled=True, skip_enabled=True, general_skip=skip, Revin=True,  Pos_Encoder_Type = Original, batch_size = 32, step_size = 8, kernel_size = 3, decompose_layer = 1 
+New best model saved at best_model_multivariate_dilated2_original_True_True_skip_True_Original_32_1_3_8.pt
+New best model saved at best_model_multivariate_dilated2_original_True_True_skip_True_Original_32_1_3_8.pt
+New best model saved at best_model_multivariate_dilated2_original_True_True_skip_True_Original_32_1_3_8.pt
+New best model saved at best_model_multivariate_dilated2_original_True_True_skip_True_Original_32_1_3_8.pt
+New best model saved at best_model_multivariate_dilated2_original_True_True_skip_True_Original_32_1_3_8.pt
+New best model saved at best_model_multivariate_dilated2_original_True_True_skip_True_Original_32_1_3_8.pt
+New best model saved at best_model_multivariate_dilated2_original_True_True_skip_True_Original_32_1_3_8.pt
+New best model saved at best_model_multivariate_dilated2_original_True_True_skip_True_Original_32_1_3_8.pt
+Epoch [10/30], Train Loss: 0.2341, Val Loss: 0.2328
+New best model saved at best_model_multivariate_dilated2_original_True_True_skip_True_Original_32_1_3_8.pt
+New best model saved at best_model_multivariate_dilated2_original_True_True_skip_True_Original_32_1_3_8.pt
+New best model saved at best_model_multivariate_dilated2_original_True_True_skip_True_Original_32_1_3_8.pt
+New best model saved at best_model_multivariate_dilated2_original_True_True_skip_True_Original_32_1_3_8.pt
+New best model saved at best_model_multivariate_dilated2_original_True_True_skip_True_Original_32_1_3_8.pt
+New best model saved at best_model_multivariate_dilated2_original_True_True_skip_True_Original_32_1_3_8.pt
+Epoch [20/30], Train Loss: 0.1978, Val Loss: 0.2046
+New best model saved at best_model_multivariate_dilated2_original_True_True_skip_True_Original_32_1_3_8.pt
+New best model saved at best_model_multivariate_dilated2_original_True_True_skip_True_Original_32_1_3_8.pt
+New best model saved at best_model_multivariate_dilated2_original_True_True_skip_True_Original_32_1_3_8.pt
+New best model saved at best_model_multivariate_dilated2_original_True_True_skip_True_Original_32_1_3_8.pt
+Epoch [30/30], Train Loss: 0.1871, Val Loss: 0.2017
+New best model saved at best_model_multivariate_dilated2_original_True_True_skip_True_Original_32_1_3_8.pt
+Total Model Running Time: 433.30 seconds for configuration: Data_load_type = multivariate, TCN_type=dilated2, attention_type=original, dropout_enabled=True, skip_enabled=True, general_skip=skip, Revin=True ,batch_size = 32, step_size = 8, kernel_size = 3, decompose_layer = 1, Pos_Encoder_Type = Original
+Test Loss for configuration: TCN_type=dilated2, attention_type=original, dropout_enabled=True, skip_enabled=True, general_skip=skip, Revin=True, Data Load Type=multivariate, Pos_Encoder_Type = Original, batch_size = 32, step_size = 8, kernel_size = 3, decompose_layer = 1 : 0.2131
+Running experiment with Data_load_type = multivariate, TCN_type=dilated2, attention_type=original, dropout_enabled=True, skip_enabled=True, general_skip=skip, Revin=True,  Pos_Encoder_Type = Original, batch_size = 64, step_size = 8, kernel_size = 3, decompose_layer = 1 
+New best model saved at best_model_multivariate_dilated2_original_True_True_skip_True_Original_64_1_3_8.pt
+New best model saved at best_model_multivariate_dilated2_original_True_True_skip_True_Original_64_1_3_8.pt
+New best model saved at best_model_multivariate_dilated2_original_True_True_skip_True_Original_64_1_3_8.pt
+New best model saved at best_model_multivariate_dilated2_original_True_True_skip_True_Original_64_1_3_8.pt
+New best model saved at best_model_multivariate_dilated2_original_True_True_skip_True_Original_64_1_3_8.pt
+New best model saved at best_model_multivariate_dilated2_original_True_True_skip_True_Original_64_1_3_8.pt
+New best model saved at best_model_multivariate_dilated2_original_True_True_skip_True_Original_64_1_3_8.pt
+New best model saved at best_model_multivariate_dilated2_original_True_True_skip_True_Original_64_1_3_8.pt
+New best model saved at best_model_multivariate_dilated2_original_True_True_skip_True_Original_64_1_3_8.pt
+Epoch [10/30], Train Loss: 0.2456, Val Loss: 0.2395
+New best model saved at best_model_multivariate_dilated2_original_True_True_skip_True_Original_64_1_3_8.pt
+New best model saved at best_model_multivariate_dilated2_original_True_True_skip_True_Original_64_1_3_8.pt
+New best model saved at best_model_multivariate_dilated2_original_True_True_skip_True_Original_64_1_3_8.pt
+New best model saved at best_model_multivariate_dilated2_original_True_True_skip_True_Original_64_1_3_8.pt
+New best model saved at best_model_multivariate_dilated2_original_True_True_skip_True_Original_64_1_3_8.pt
+New best model saved at best_model_multivariate_dilated2_original_True_True_skip_True_Original_64_1_3_8.pt
+Epoch [20/30], Train Loss: 0.2192, Val Loss: 0.2145
+New best model saved at best_model_multivariate_dilated2_original_True_True_skip_True_Original_64_1_3_8.pt
+New best model saved at best_model_multivariate_dilated2_original_True_True_skip_True_Original_64_1_3_8.pt
+New best model saved at best_model_multivariate_dilated2_original_True_True_skip_True_Original_64_1_3_8.pt
+New best model saved at best_model_multivariate_dilated2_original_True_True_skip_True_Original_64_1_3_8.pt
+New best model saved at best_model_multivariate_dilated2_original_True_True_skip_True_Original_64_1_3_8.pt
+Epoch [30/30], Train Loss: 0.1950, Val Loss: 0.1975
+Total Model Running Time: 374.87 seconds for configuration: Data_load_type = multivariate, TCN_type=dilated2, attention_type=original, dropout_enabled=True, skip_enabled=True, general_skip=skip, Revin=True ,batch_size = 64, step_size = 8, kernel_size = 3, decompose_layer = 1, Pos_Encoder_Type = Original
+Test Loss for configuration: TCN_type=dilated2, attention_type=original, dropout_enabled=True, skip_enabled=True, general_skip=skip, Revin=True, Data Load Type=multivariate, Pos_Encoder_Type = Original, batch_size = 64, step_size = 8, kernel_size = 3, decompose_layer = 1 : 0.2150
+Running experiment with Data_load_type = multivariate, TCN_type=dilated2, attention_type=original, dropout_enabled=True, skip_enabled=True, general_skip=skip, Revin=True,  Pos_Encoder_Type = Original, batch_size = 32, step_size = 8, kernel_size = 3, decompose_layer = 3 
+New best model saved at best_model_multivariate_dilated2_original_True_True_skip_True_Original_32_3_3_8.pt
+New best model saved at best_model_multivariate_dilated2_original_True_True_skip_True_Original_32_3_3_8.pt
+New best model saved at best_model_multivariate_dilated2_original_True_True_skip_True_Original_32_3_3_8.pt
+New best model saved at best_model_multivariate_dilated2_original_True_True_skip_True_Original_32_3_3_8.pt
+New best model saved at best_model_multivariate_dilated2_original_True_True_skip_True_Original_32_3_3_8.pt
+New best model saved at best_model_multivariate_dilated2_original_True_True_skip_True_Original_32_3_3_8.pt
+New best model saved at best_model_multivariate_dilated2_original_True_True_skip_True_Original_32_3_3_8.pt
+New best model saved at best_model_multivariate_dilated2_original_True_True_skip_True_Original_32_3_3_8.pt
+Epoch [10/30], Train Loss: 0.2363, Val Loss: 0.2588
+New best model saved at best_model_multivariate_dilated2_original_True_True_skip_True_Original_32_3_3_8.pt
+New best model saved at best_model_multivariate_dilated2_original_True_True_skip_True_Original_32_3_3_8.pt
+New best model saved at best_model_multivariate_dilated2_original_True_True_skip_True_Original_32_3_3_8.pt
+New best model saved at best_model_multivariate_dilated2_original_True_True_skip_True_Original_32_3_3_8.pt
+New best model saved at best_model_multivariate_dilated2_original_True_True_skip_True_Original_32_3_3_8.pt
+New best model saved at best_model_multivariate_dilated2_original_True_True_skip_True_Original_32_3_3_8.pt
+Epoch [20/30], Train Loss: 0.2150, Val Loss: 0.2530
+New best model saved at best_model_multivariate_dilated2_original_True_True_skip_True_Original_32_3_3_8.pt
+New best model saved at best_model_multivariate_dilated2_original_True_True_skip_True_Original_32_3_3_8.pt
+New best model saved at best_model_multivariate_dilated2_original_True_True_skip_True_Original_32_3_3_8.pt
+Epoch [30/30], Train Loss: 0.2049, Val Loss: 0.2481
+Total Model Running Time: 708.31 seconds for configuration: Data_load_type = multivariate, TCN_type=dilated2, attention_type=original, dropout_enabled=True, skip_enabled=True, general_skip=skip, Revin=True ,batch_size = 32, step_size = 8, kernel_size = 3, decompose_layer = 3, Pos_Encoder_Type = Original
+Test Loss for configuration: TCN_type=dilated2, attention_type=original, dropout_enabled=True, skip_enabled=True, general_skip=skip, Revin=True, Data Load Type=multivariate, Pos_Encoder_Type = Original, batch_size = 32, step_size = 8, kernel_size = 3, decompose_layer = 3 : 0.2509
+Running experiment with Data_load_type = multivariate, TCN_type=dilated2, attention_type=original, dropout_enabled=True, skip_enabled=True, general_skip=skip, Revin=True,  Pos_Encoder_Type = Original, batch_size = 64, step_size = 8, kernel_size = 3, decompose_layer = 3 
+New best model saved at best_model_multivariate_dilated2_original_True_True_skip_True_Original_64_3_3_8.pt
+New best model saved at best_model_multivariate_dilated2_original_True_True_skip_True_Original_64_3_3_8.pt
+New best model saved at best_model_multivariate_dilated2_original_True_True_skip_True_Original_64_3_3_8.pt
+New best model saved at best_model_multivariate_dilated2_original_True_True_skip_True_Original_64_3_3_8.pt
+New best model saved at best_model_multivariate_dilated2_original_True_True_skip_True_Original_64_3_3_8.pt
+New best model saved at best_model_multivariate_dilated2_original_True_True_skip_True_Original_64_3_3_8.pt
+New best model saved at best_model_multivariate_dilated2_original_True_True_skip_True_Original_64_3_3_8.pt
+New best model saved at best_model_multivariate_dilated2_original_True_True_skip_True_Original_64_3_3_8.pt
+New best model saved at best_model_multivariate_dilated2_original_True_True_skip_True_Original_64_3_3_8.pt
+Epoch [10/30], Train Loss: 0.2519, Val Loss: 0.2541
+New best model saved at best_model_multivariate_dilated2_original_True_True_skip_True_Original_64_3_3_8.pt
+New best model saved at best_model_multivariate_dilated2_original_True_True_skip_True_Original_64_3_3_8.pt
+New best model saved at best_model_multivariate_dilated2_original_True_True_skip_True_Original_64_3_3_8.pt
+New best model saved at best_model_multivariate_dilated2_original_True_True_skip_True_Original_64_3_3_8.pt
+New best model saved at best_model_multivariate_dilated2_original_True_True_skip_True_Original_64_3_3_8.pt
+New best model saved at best_model_multivariate_dilated2_original_True_True_skip_True_Original_64_3_3_8.pt
+New best model saved at best_model_multivariate_dilated2_original_True_True_skip_True_Original_64_3_3_8.pt
+New best model saved at best_model_multivariate_dilated2_original_True_True_skip_True_Original_64_3_3_8.pt
+Epoch [20/30], Train Loss: 0.2246, Val Loss: 0.2387
+New best model saved at best_model_multivariate_dilated2_original_True_True_skip_True_Original_64_3_3_8.pt
+New best model saved at best_model_multivariate_dilated2_original_True_True_skip_True_Original_64_3_3_8.pt
+New best model saved at best_model_multivariate_dilated2_original_True_True_skip_True_Original_64_3_3_8.pt
+Epoch [30/30], Train Loss: 0.2067, Val Loss: 0.2374
+Total Model Running Time: 580.98 seconds for configuration: Data_load_type = multivariate, TCN_type=dilated2, attention_type=original, dropout_enabled=True, skip_enabled=True, general_skip=skip, Revin=True ,batch_size = 64, step_size = 8, kernel_size = 3, decompose_layer = 3, Pos_Encoder_Type = Original
+Test Loss for configuration: TCN_type=dilated2, attention_type=original, dropout_enabled=True, skip_enabled=True, general_skip=skip, Revin=True, Data Load Type=multivariate, Pos_Encoder_Type = Original, batch_size = 64, step_size = 8, kernel_size = 3, decompose_layer = 3 : 0.2530
+Running experiment with Data_load_type = multivariate, TCN_type=dilated2, attention_type=original, dropout_enabled=True, skip_enabled=True, general_skip=skip, Revin=True,  Pos_Encoder_Type = Original, batch_size = 32, step_size = 16, kernel_size = 3, decompose_layer = 1 
+New best model saved at best_model_multivariate_dilated2_original_True_True_skip_True_Original_32_1_3_16.pt
+New best model saved at best_model_multivariate_dilated2_original_True_True_skip_True_Original_32_1_3_16.pt
+New best model saved at best_model_multivariate_dilated2_original_True_True_skip_True_Original_32_1_3_16.pt
+New best model saved at best_model_multivariate_dilated2_original_True_True_skip_True_Original_32_1_3_16.pt
+New best model saved at best_model_multivariate_dilated2_original_True_True_skip_True_Original_32_1_3_16.pt
+New best model saved at best_model_multivariate_dilated2_original_True_True_skip_True_Original_32_1_3_16.pt
+New best model saved at best_model_multivariate_dilated2_original_True_True_skip_True_Original_32_1_3_16.pt
+New best model saved at best_model_multivariate_dilated2_original_True_True_skip_True_Original_32_1_3_16.pt
+New best model saved at best_model_multivariate_dilated2_original_True_True_skip_True_Original_32_1_3_16.pt
+Epoch [10/30], Train Loss: 0.2530, Val Loss: 0.2374
+New best model saved at best_model_multivariate_dilated2_original_True_True_skip_True_Original_32_1_3_16.pt
+New best model saved at best_model_multivariate_dilated2_original_True_True_skip_True_Original_32_1_3_16.pt
+New best model saved at best_model_multivariate_dilated2_original_True_True_skip_True_Original_32_1_3_16.pt
+New best model saved at best_model_multivariate_dilated2_original_True_True_skip_True_Original_32_1_3_16.pt
+New best model saved at best_model_multivariate_dilated2_original_True_True_skip_True_Original_32_1_3_16.pt
+New best model saved at best_model_multivariate_dilated2_original_True_True_skip_True_Original_32_1_3_16.pt
+New best model saved at best_model_multivariate_dilated2_original_True_True_skip_True_Original_32_1_3_16.pt
+Epoch [20/30], Train Loss: 0.2299, Val Loss: 0.2180
+New best model saved at best_model_multivariate_dilated2_original_True_True_skip_True_Original_32_1_3_16.pt
+New best model saved at best_model_multivariate_dilated2_original_True_True_skip_True_Original_32_1_3_16.pt
+New best model saved at best_model_multivariate_dilated2_original_True_True_skip_True_Original_32_1_3_16.pt
+New best model saved at best_model_multivariate_dilated2_original_True_True_skip_True_Original_32_1_3_16.pt
+New best model saved at best_model_multivariate_dilated2_original_True_True_skip_True_Original_32_1_3_16.pt
+New best model saved at best_model_multivariate_dilated2_original_True_True_skip_True_Original_32_1_3_16.pt
+New best model saved at best_model_multivariate_dilated2_original_True_True_skip_True_Original_32_1_3_16.pt
+Epoch [30/30], Train Loss: 0.2109, Val Loss: 0.2113
+Total Model Running Time: 207.27 seconds for configuration: Data_load_type = multivariate, TCN_type=dilated2, attention_type=original, dropout_enabled=True, skip_enabled=True, general_skip=skip, Revin=True ,batch_size = 32, step_size = 16, kernel_size = 3, decompose_layer = 1, Pos_Encoder_Type = Original
+Test Loss for configuration: TCN_type=dilated2, attention_type=original, dropout_enabled=True, skip_enabled=True, general_skip=skip, Revin=True, Data Load Type=multivariate, Pos_Encoder_Type = Original, batch_size = 32, step_size = 16, kernel_size = 3, decompose_layer = 1 : 0.2152
+Running experiment with Data_load_type = multivariate, TCN_type=dilated2, attention_type=original, dropout_enabled=True, skip_enabled=True, general_skip=skip, Revin=True,  Pos_Encoder_Type = Original, batch_size = 64, step_size = 16, kernel_size = 3, decompose_layer = 1 
+New best model saved at best_model_multivariate_dilated2_original_True_True_skip_True_Original_64_1_3_16.pt
+New best model saved at best_model_multivariate_dilated2_original_True_True_skip_True_Original_64_1_3_16.pt
+New best model saved at best_model_multivariate_dilated2_original_True_True_skip_True_Original_64_1_3_16.pt
+New best model saved at best_model_multivariate_dilated2_original_True_True_skip_True_Original_64_1_3_16.pt
+New best model saved at best_model_multivariate_dilated2_original_True_True_skip_True_Original_64_1_3_16.pt
+New best model saved at best_model_multivariate_dilated2_original_True_True_skip_True_Original_64_1_3_16.pt
+New best model saved at best_model_multivariate_dilated2_original_True_True_skip_True_Original_64_1_3_16.pt
+New best model saved at best_model_multivariate_dilated2_original_True_True_skip_True_Original_64_1_3_16.pt
+New best model saved at best_model_multivariate_dilated2_original_True_True_skip_True_Original_64_1_3_16.pt
+Epoch [10/30], Train Loss: 0.2626, Val Loss: 0.2207
+New best model saved at best_model_multivariate_dilated2_original_True_True_skip_True_Original_64_1_3_16.pt
+New best model saved at best_model_multivariate_dilated2_original_True_True_skip_True_Original_64_1_3_16.pt
+New best model saved at best_model_multivariate_dilated2_original_True_True_skip_True_Original_64_1_3_16.pt
+New best model saved at best_model_multivariate_dilated2_original_True_True_skip_True_Original_64_1_3_16.pt
+New best model saved at best_model_multivariate_dilated2_original_True_True_skip_True_Original_64_1_3_16.pt
+New best model saved at best_model_multivariate_dilated2_original_True_True_skip_True_Original_64_1_3_16.pt
+New best model saved at best_model_multivariate_dilated2_original_True_True_skip_True_Original_64_1_3_16.pt
+Epoch [20/30], Train Loss: 0.2442, Val Loss: 0.2098
+New best model saved at best_model_multivariate_dilated2_original_True_True_skip_True_Original_64_1_3_16.pt
+New best model saved at best_model_multivariate_dilated2_original_True_True_skip_True_Original_64_1_3_16.pt
+New best model saved at best_model_multivariate_dilated2_original_True_True_skip_True_Original_64_1_3_16.pt
+New best model saved at best_model_multivariate_dilated2_original_True_True_skip_True_Original_64_1_3_16.pt
+New best model saved at best_model_multivariate_dilated2_original_True_True_skip_True_Original_64_1_3_16.pt
+Epoch [30/30], Train Loss: 0.2350, Val Loss: 0.2013
+Total Model Running Time: 189.50 seconds for configuration: Data_load_type = multivariate, TCN_type=dilated2, attention_type=original, dropout_enabled=True, skip_enabled=True, general_skip=skip, Revin=True ,batch_size = 64, step_size = 16, kernel_size = 3, decompose_layer = 1, Pos_Encoder_Type = Original
+Test Loss for configuration: TCN_type=dilated2, attention_type=original, dropout_enabled=True, skip_enabled=True, general_skip=skip, Revin=True, Data Load Type=multivariate, Pos_Encoder_Type = Original, batch_size = 64, step_size = 16, kernel_size = 3, decompose_layer = 1 : 0.2400
+Running experiment with Data_load_type = multivariate, TCN_type=dilated2, attention_type=original, dropout_enabled=True, skip_enabled=True, general_skip=skip, Revin=True,  Pos_Encoder_Type = Original, batch_size = 32, step_size = 16, kernel_size = 3, decompose_layer = 3 
+New best model saved at best_model_multivariate_dilated2_original_True_True_skip_True_Original_32_3_3_16.pt
+New best model saved at best_model_multivariate_dilated2_original_True_True_skip_True_Original_32_3_3_16.pt
+New best model saved at best_model_multivariate_dilated2_original_True_True_skip_True_Original_32_3_3_16.pt
+New best model saved at best_model_multivariate_dilated2_original_True_True_skip_True_Original_32_3_3_16.pt
+New best model saved at best_model_multivariate_dilated2_original_True_True_skip_True_Original_32_3_3_16.pt
+New best model saved at best_model_multivariate_dilated2_original_True_True_skip_True_Original_32_3_3_16.pt
+New best model saved at best_model_multivariate_dilated2_original_True_True_skip_True_Original_32_3_3_16.pt
+New best model saved at best_model_multivariate_dilated2_original_True_True_skip_True_Original_32_3_3_16.pt
+New best model saved at best_model_multivariate_dilated2_original_True_True_skip_True_Original_32_3_3_16.pt
+Epoch [10/30], Train Loss: 0.2539, Val Loss: 0.2581
+New best model saved at best_model_multivariate_dilated2_original_True_True_skip_True_Original_32_3_3_16.pt
+New best model saved at best_model_multivariate_dilated2_original_True_True_skip_True_Original_32_3_3_16.pt
+New best model saved at best_model_multivariate_dilated2_original_True_True_skip_True_Original_32_3_3_16.pt
+New best model saved at best_model_multivariate_dilated2_original_True_True_skip_True_Original_32_3_3_16.pt
+New best model saved at best_model_multivariate_dilated2_original_True_True_skip_True_Original_32_3_3_16.pt
+Epoch [20/30], Train Loss: 0.2358, Val Loss: 0.2461
+New best model saved at best_model_multivariate_dilated2_original_True_True_skip_True_Original_32_3_3_16.pt
+New best model saved at best_model_multivariate_dilated2_original_True_True_skip_True_Original_32_3_3_16.pt
+New best model saved at best_model_multivariate_dilated2_original_True_True_skip_True_Original_32_3_3_16.pt
+New best model saved at best_model_multivariate_dilated2_original_True_True_skip_True_Original_32_3_3_16.pt
+New best model saved at best_model_multivariate_dilated2_original_True_True_skip_True_Original_32_3_3_16.pt
+Epoch [30/30], Train Loss: 0.2191, Val Loss: 0.2392
+New best model saved at best_model_multivariate_dilated2_original_True_True_skip_True_Original_32_3_3_16.pt
+Total Model Running Time: 342.80 seconds for configuration: Data_load_type = multivariate, TCN_type=dilated2, attention_type=original, dropout_enabled=True, skip_enabled=True, general_skip=skip, Revin=True ,batch_size = 32, step_size = 16, kernel_size = 3, decompose_layer = 3, Pos_Encoder_Type = Original
+Test Loss for configuration: TCN_type=dilated2, attention_type=original, dropout_enabled=True, skip_enabled=True, general_skip=skip, Revin=True, Data Load Type=multivariate, Pos_Encoder_Type = Original, batch_size = 32, step_size = 16, kernel_size = 3, decompose_layer = 3 : 0.2534
+Running experiment with Data_load_type = multivariate, TCN_type=dilated2, attention_type=original, dropout_enabled=True, skip_enabled=True, general_skip=skip, Revin=True,  Pos_Encoder_Type = Original, batch_size = 64, step_size = 16, kernel_size = 3, decompose_layer = 3 
+New best model saved at best_model_multivariate_dilated2_original_True_True_skip_True_Original_64_3_3_16.pt
+New best model saved at best_model_multivariate_dilated2_original_True_True_skip_True_Original_64_3_3_16.pt
+New best model saved at best_model_multivariate_dilated2_original_True_True_skip_True_Original_64_3_3_16.pt
+New best model saved at best_model_multivariate_dilated2_original_True_True_skip_True_Original_64_3_3_16.pt
+New best model saved at best_model_multivariate_dilated2_original_True_True_skip_True_Original_64_3_3_16.pt
+New best model saved at best_model_multivariate_dilated2_original_True_True_skip_True_Original_64_3_3_16.pt
+New best model saved at best_model_multivariate_dilated2_original_True_True_skip_True_Original_64_3_3_16.pt
+New best model saved at best_model_multivariate_dilated2_original_True_True_skip_True_Original_64_3_3_16.pt
+New best model saved at best_model_multivariate_dilated2_original_True_True_skip_True_Original_64_3_3_16.pt
+Epoch [10/30], Train Loss: 0.2637, Val Loss: 0.2308
+New best model saved at best_model_multivariate_dilated2_original_True_True_skip_True_Original_64_3_3_16.pt
+New best model saved at best_model_multivariate_dilated2_original_True_True_skip_True_Original_64_3_3_16.pt
+Epoch [20/30], Train Loss: 0.2469, Val Loss: 0.2284
+New best model saved at best_model_multivariate_dilated2_original_True_True_skip_True_Original_64_3_3_16.pt
+New best model saved at best_model_multivariate_dilated2_original_True_True_skip_True_Original_64_3_3_16.pt
+New best model saved at best_model_multivariate_dilated2_original_True_True_skip_True_Original_64_3_3_16.pt
+New best model saved at best_model_multivariate_dilated2_original_True_True_skip_True_Original_64_3_3_16.pt
+Epoch [30/30], Train Loss: 0.2341, Val Loss: 0.2217
+New best model saved at best_model_multivariate_dilated2_original_True_True_skip_True_Original_64_3_3_16.pt
+Total Model Running Time: 285.51 seconds for configuration: Data_load_type = multivariate, TCN_type=dilated2, attention_type=original, dropout_enabled=True, skip_enabled=True, general_skip=skip, Revin=True ,batch_size = 64, step_size = 16, kernel_size = 3, decompose_layer = 3, Pos_Encoder_Type = Original
+Test Loss for configuration: TCN_type=dilated2, attention_type=original, dropout_enabled=True, skip_enabled=True, general_skip=skip, Revin=True, Data Load Type=multivariate, Pos_Encoder_Type = Original, batch_size = 64, step_size = 16, kernel_size = 3, decompose_layer = 3 : 0.2654
+Running experiment with Data_load_type = multivariate, TCN_type=dilated2, attention_type=original, dropout_enabled=True, skip_enabled=True, general_skip=skip, Revin=True,  Pos_Encoder_Type = Original, batch_size = 32, step_size = 1, kernel_size = 5, decompose_layer = 1 
+New best model saved at best_model_multivariate_dilated2_original_True_True_skip_True_Original_32_1_5_1.pt
+New best model saved at best_model_multivariate_dilated2_original_True_True_skip_True_Original_32_1_5_1.pt
+New best model saved at best_model_multivariate_dilated2_original_True_True_skip_True_Original_32_1_5_1.pt
+New best model saved at best_model_multivariate_dilated2_original_True_True_skip_True_Original_32_1_5_1.pt
+New best model saved at best_model_multivariate_dilated2_original_True_True_skip_True_Original_32_1_5_1.pt
+New best model saved at best_model_multivariate_dilated2_original_True_True_skip_True_Original_32_1_5_1.pt
+New best model saved at best_model_multivariate_dilated2_original_True_True_skip_True_Original_32_1_5_1.pt
+Epoch [10/30], Train Loss: 0.1808, Val Loss: 0.2041
+New best model saved at best_model_multivariate_dilated2_original_True_True_skip_True_Original_32_1_5_1.pt
+New best model saved at best_model_multivariate_dilated2_original_True_True_skip_True_Original_32_1_5_1.pt
+New best model saved at best_model_multivariate_dilated2_original_True_True_skip_True_Original_32_1_5_1.pt
+Epoch [20/30], Train Loss: 0.1780, Val Loss: 0.2151
+Early stopping triggered
+Total Model Running Time: 4030.56 seconds for configuration: Data_load_type = multivariate, TCN_type=dilated2, attention_type=original, dropout_enabled=True, skip_enabled=True, general_skip=skip, Revin=True ,batch_size = 32, step_size = 1, kernel_size = 5, decompose_layer = 1, Pos_Encoder_Type = Original
+Test Loss for configuration: TCN_type=dilated2, attention_type=original, dropout_enabled=True, skip_enabled=True, general_skip=skip, Revin=True, Data Load Type=multivariate, Pos_Encoder_Type = Original, batch_size = 32, step_size = 1, kernel_size = 5, decompose_layer = 1 : 0.2067
+Running experiment with Data_load_type = multivariate, TCN_type=dilated2, attention_type=original, dropout_enabled=True, skip_enabled=True, general_skip=skip, Revin=True,  Pos_Encoder_Type = Original, batch_size = 64, step_size = 1, kernel_size = 5, decompose_layer = 1 
+New best model saved at best_model_multivariate_dilated2_original_True_True_skip_True_Original_64_1_5_1.pt
+New best model saved at best_model_multivariate_dilated2_original_True_True_skip_True_Original_64_1_5_1.pt
+New best model saved at best_model_multivariate_dilated2_original_True_True_skip_True_Original_64_1_5_1.pt
+New best model saved at best_model_multivariate_dilated2_original_True_True_skip_True_Original_64_1_5_1.pt
+New best model saved at best_model_multivariate_dilated2_original_True_True_skip_True_Original_64_1_5_1.pt
+New best model saved at best_model_multivariate_dilated2_original_True_True_skip_True_Original_64_1_5_1.pt
+Epoch [10/30], Train Loss: 0.1756, Val Loss: 0.2032
+New best model saved at best_model_multivariate_dilated2_original_True_True_skip_True_Original_64_1_5_1.pt
+New best model saved at best_model_multivariate_dilated2_original_True_True_skip_True_Original_64_1_5_1.pt
+Epoch [20/30], Train Loss: 0.1693, Val Loss: 0.2051
+New best model saved at best_model_multivariate_dilated2_original_True_True_skip_True_Original_64_1_5_1.pt
+Epoch [30/30], Train Loss: 0.1673, Val Loss: 0.1992
+Total Model Running Time: 4226.99 seconds for configuration: Data_load_type = multivariate, TCN_type=dilated2, attention_type=original, dropout_enabled=True, skip_enabled=True, general_skip=skip, Revin=True ,batch_size = 64, step_size = 1, kernel_size = 5, decompose_layer = 1, Pos_Encoder_Type = Original
+Test Loss for configuration: TCN_type=dilated2, attention_type=original, dropout_enabled=True, skip_enabled=True, general_skip=skip, Revin=True, Data Load Type=multivariate, Pos_Encoder_Type = Original, batch_size = 64, step_size = 1, kernel_size = 5, decompose_layer = 1 : 0.2068
+Running experiment with Data_load_type = multivariate, TCN_type=dilated2, attention_type=original, dropout_enabled=True, skip_enabled=True, general_skip=skip, Revin=True,  Pos_Encoder_Type = Original, batch_size = 32, step_size = 1, kernel_size = 5, decompose_layer = 3 
+New best model saved at best_model_multivariate_dilated2_original_True_True_skip_True_Original_32_3_5_1.pt
+New best model saved at best_model_multivariate_dilated2_original_True_True_skip_True_Original_32_3_5_1.pt
+New best model saved at best_model_multivariate_dilated2_original_True_True_skip_True_Original_32_3_5_1.pt
+New best model saved at best_model_multivariate_dilated2_original_True_True_skip_True_Original_32_3_5_1.pt
+New best model saved at best_model_multivariate_dilated2_original_True_True_skip_True_Original_32_3_5_1.pt
+New best model saved at best_model_multivariate_dilated2_original_True_True_skip_True_Original_32_3_5_1.pt
+New best model saved at best_model_multivariate_dilated2_original_True_True_skip_True_Original_32_3_5_1.pt
+New best model saved at best_model_multivariate_dilated2_original_True_True_skip_True_Original_32_3_5_1.pt
+Epoch [10/30], Train Loss: 0.2102, Val Loss: 0.2259
+New best model saved at best_model_multivariate_dilated2_original_True_True_skip_True_Original_32_3_5_1.pt
+New best model saved at best_model_multivariate_dilated2_original_True_True_skip_True_Original_32_3_5_1.pt
+New best model saved at best_model_multivariate_dilated2_original_True_True_skip_True_Original_32_3_5_1.pt
+New best model saved at best_model_multivariate_dilated2_original_True_True_skip_True_Original_32_3_5_1.pt
+Epoch [20/30], Train Loss: 0.2060, Val Loss: 0.2242
+New best model saved at best_model_multivariate_dilated2_original_True_True_skip_True_Original_32_3_5_1.pt
+New best model saved at best_model_multivariate_dilated2_original_True_True_skip_True_Original_32_3_5_1.pt
+New best model saved at best_model_multivariate_dilated2_original_True_True_skip_True_Original_32_3_5_1.pt
+New best model saved at best_model_multivariate_dilated2_original_True_True_skip_True_Original_32_3_5_1.pt
+Epoch [30/30], Train Loss: 0.2050, Val Loss: 0.2229
+Total Model Running Time: 8003.22 seconds for configuration: Data_load_type = multivariate, TCN_type=dilated2, attention_type=original, dropout_enabled=True, skip_enabled=True, general_skip=skip, Revin=True ,batch_size = 32, step_size = 1, kernel_size = 5, decompose_layer = 3, Pos_Encoder_Type = Original
+Test Loss for configuration: TCN_type=dilated2, attention_type=original, dropout_enabled=True, skip_enabled=True, general_skip=skip, Revin=True, Data Load Type=multivariate, Pos_Encoder_Type = Original, batch_size = 32, step_size = 1, kernel_size = 5, decompose_layer = 3 : 0.2214
+Running experiment with Data_load_type = multivariate, TCN_type=dilated2, attention_type=original, dropout_enabled=True, skip_enabled=True, general_skip=skip, Revin=True,  Pos_Encoder_Type = Original, batch_size = 64, step_size = 1, kernel_size = 5, decompose_layer = 3 
+New best model saved at best_model_multivariate_dilated2_original_True_True_skip_True_Original_64_3_5_1.pt
+New best model saved at best_model_multivariate_dilated2_original_True_True_skip_True_Original_64_3_5_1.pt
+New best model saved at best_model_multivariate_dilated2_original_True_True_skip_True_Original_64_3_5_1.pt
+New best model saved at best_model_multivariate_dilated2_original_True_True_skip_True_Original_64_3_5_1.pt
+New best model saved at best_model_multivariate_dilated2_original_True_True_skip_True_Original_64_3_5_1.pt
+New best model saved at best_model_multivariate_dilated2_original_True_True_skip_True_Original_64_3_5_1.pt
+New best model saved at best_model_multivariate_dilated2_original_True_True_skip_True_Original_64_3_5_1.pt
+New best model saved at best_model_multivariate_dilated2_original_True_True_skip_True_Original_64_3_5_1.pt
+Epoch [10/30], Train Loss: 0.2039, Val Loss: 0.2212
+New best model saved at best_model_multivariate_dilated2_original_True_True_skip_True_Original_64_3_5_1.pt
+New best model saved at best_model_multivariate_dilated2_original_True_True_skip_True_Original_64_3_5_1.pt
+New best model saved at best_model_multivariate_dilated2_original_True_True_skip_True_Original_64_3_5_1.pt
+Epoch [20/30], Train Loss: 0.1978, Val Loss: 0.2197
+New best model saved at best_model_multivariate_dilated2_original_True_True_skip_True_Original_64_3_5_1.pt
+New best model saved at best_model_multivariate_dilated2_original_True_True_skip_True_Original_64_3_5_1.pt
+Epoch [30/30], Train Loss: 0.1959, Val Loss: 0.2152
+Total Model Running Time: 6276.38 seconds for configuration: Data_load_type = multivariate, TCN_type=dilated2, attention_type=original, dropout_enabled=True, skip_enabled=True, general_skip=skip, Revin=True ,batch_size = 64, step_size = 1, kernel_size = 5, decompose_layer = 3, Pos_Encoder_Type = Original
+Test Loss for configuration: TCN_type=dilated2, attention_type=original, dropout_enabled=True, skip_enabled=True, general_skip=skip, Revin=True, Data Load Type=multivariate, Pos_Encoder_Type = Original, batch_size = 64, step_size = 1, kernel_size = 5, decompose_layer = 3 : 0.2186
+Running experiment with Data_load_type = multivariate, TCN_type=dilated2, attention_type=original, dropout_enabled=True, skip_enabled=True, general_skip=skip, Revin=True,  Pos_Encoder_Type = Original, batch_size = 32, step_size = 8, kernel_size = 5, decompose_layer = 1 
+New best model saved at best_model_multivariate_dilated2_original_True_True_skip_True_Original_32_1_5_8.pt
+New best model saved at best_model_multivariate_dilated2_original_True_True_skip_True_Original_32_1_5_8.pt
+New best model saved at best_model_multivariate_dilated2_original_True_True_skip_True_Original_32_1_5_8.pt
+New best model saved at best_model_multivariate_dilated2_original_True_True_skip_True_Original_32_1_5_8.pt
+New best model saved at best_model_multivariate_dilated2_original_True_True_skip_True_Original_32_1_5_8.pt
+New best model saved at best_model_multivariate_dilated2_original_True_True_skip_True_Original_32_1_5_8.pt
+New best model saved at best_model_multivariate_dilated2_original_True_True_skip_True_Original_32_1_5_8.pt
+New best model saved at best_model_multivariate_dilated2_original_True_True_skip_True_Original_32_1_5_8.pt
+New best model saved at best_model_multivariate_dilated2_original_True_True_skip_True_Original_32_1_5_8.pt
+Epoch [10/30], Train Loss: 0.2334, Val Loss: 0.2270
+New best model saved at best_model_multivariate_dilated2_original_True_True_skip_True_Original_32_1_5_8.pt
+New best model saved at best_model_multivariate_dilated2_original_True_True_skip_True_Original_32_1_5_8.pt
+New best model saved at best_model_multivariate_dilated2_original_True_True_skip_True_Original_32_1_5_8.pt
+New best model saved at best_model_multivariate_dilated2_original_True_True_skip_True_Original_32_1_5_8.pt
+New best model saved at best_model_multivariate_dilated2_original_True_True_skip_True_Original_32_1_5_8.pt
+New best model saved at best_model_multivariate_dilated2_original_True_True_skip_True_Original_32_1_5_8.pt
+New best model saved at best_model_multivariate_dilated2_original_True_True_skip_True_Original_32_1_5_8.pt
+New best model saved at best_model_multivariate_dilated2_original_True_True_skip_True_Original_32_1_5_8.pt
+Epoch [20/30], Train Loss: 0.1999, Val Loss: 0.2044
+New best model saved at best_model_multivariate_dilated2_original_True_True_skip_True_Original_32_1_5_8.pt
+New best model saved at best_model_multivariate_dilated2_original_True_True_skip_True_Original_32_1_5_8.pt
+New best model saved at best_model_multivariate_dilated2_original_True_True_skip_True_Original_32_1_5_8.pt
+New best model saved at best_model_multivariate_dilated2_original_True_True_skip_True_Original_32_1_5_8.pt
+New best model saved at best_model_multivariate_dilated2_original_True_True_skip_True_Original_32_1_5_8.pt
+Epoch [30/30], Train Loss: 0.1888, Val Loss: 0.2017
+Total Model Running Time: 490.29 seconds for configuration: Data_load_type = multivariate, TCN_type=dilated2, attention_type=original, dropout_enabled=True, skip_enabled=True, general_skip=skip, Revin=True ,batch_size = 32, step_size = 8, kernel_size = 5, decompose_layer = 1, Pos_Encoder_Type = Original
+Test Loss for configuration: TCN_type=dilated2, attention_type=original, dropout_enabled=True, skip_enabled=True, general_skip=skip, Revin=True, Data Load Type=multivariate, Pos_Encoder_Type = Original, batch_size = 32, step_size = 8, kernel_size = 5, decompose_layer = 1 : 0.2092
+Running experiment with Data_load_type = multivariate, TCN_type=dilated2, attention_type=original, dropout_enabled=True, skip_enabled=True, general_skip=skip, Revin=True,  Pos_Encoder_Type = Original, batch_size = 64, step_size = 8, kernel_size = 5, decompose_layer = 1 
+New best model saved at best_model_multivariate_dilated2_original_True_True_skip_True_Original_64_1_5_8.pt
+New best model saved at best_model_multivariate_dilated2_original_True_True_skip_True_Original_64_1_5_8.pt
+New best model saved at best_model_multivariate_dilated2_original_True_True_skip_True_Original_64_1_5_8.pt
+New best model saved at best_model_multivariate_dilated2_original_True_True_skip_True_Original_64_1_5_8.pt
+New best model saved at best_model_multivariate_dilated2_original_True_True_skip_True_Original_64_1_5_8.pt
+New best model saved at best_model_multivariate_dilated2_original_True_True_skip_True_Original_64_1_5_8.pt
+New best model saved at best_model_multivariate_dilated2_original_True_True_skip_True_Original_64_1_5_8.pt
+New best model saved at best_model_multivariate_dilated2_original_True_True_skip_True_Original_64_1_5_8.pt
+Epoch [10/30], Train Loss: 0.2449, Val Loss: 0.2356
+New best model saved at best_model_multivariate_dilated2_original_True_True_skip_True_Original_64_1_5_8.pt
+New best model saved at best_model_multivariate_dilated2_original_True_True_skip_True_Original_64_1_5_8.pt
+New best model saved at best_model_multivariate_dilated2_original_True_True_skip_True_Original_64_1_5_8.pt
+New best model saved at best_model_multivariate_dilated2_original_True_True_skip_True_Original_64_1_5_8.pt
+New best model saved at best_model_multivariate_dilated2_original_True_True_skip_True_Original_64_1_5_8.pt
+New best model saved at best_model_multivariate_dilated2_original_True_True_skip_True_Original_64_1_5_8.pt
+New best model saved at best_model_multivariate_dilated2_original_True_True_skip_True_Original_64_1_5_8.pt
+Epoch [20/30], Train Loss: 0.2191, Val Loss: 0.2074
+New best model saved at best_model_multivariate_dilated2_original_True_True_skip_True_Original_64_1_5_8.pt
+New best model saved at best_model_multivariate_dilated2_original_True_True_skip_True_Original_64_1_5_8.pt
+New best model saved at best_model_multivariate_dilated2_original_True_True_skip_True_Original_64_1_5_8.pt
+New best model saved at best_model_multivariate_dilated2_original_True_True_skip_True_Original_64_1_5_8.pt
+New best model saved at best_model_multivariate_dilated2_original_True_True_skip_True_Original_64_1_5_8.pt
+New best model saved at best_model_multivariate_dilated2_original_True_True_skip_True_Original_64_1_5_8.pt
+New best model saved at best_model_multivariate_dilated2_original_True_True_skip_True_Original_64_1_5_8.pt
+New best model saved at best_model_multivariate_dilated2_original_True_True_skip_True_Original_64_1_5_8.pt
+Epoch [30/30], Train Loss: 0.1946, Val Loss: 0.1986
+Total Model Running Time: 429.13 seconds for configuration: Data_load_type = multivariate, TCN_type=dilated2, attention_type=original, dropout_enabled=True, skip_enabled=True, general_skip=skip, Revin=True ,batch_size = 64, step_size = 8, kernel_size = 5, decompose_layer = 1, Pos_Encoder_Type = Original
+Test Loss for configuration: TCN_type=dilated2, attention_type=original, dropout_enabled=True, skip_enabled=True, general_skip=skip, Revin=True, Data Load Type=multivariate, Pos_Encoder_Type = Original, batch_size = 64, step_size = 8, kernel_size = 5, decompose_layer = 1 : 0.2137
+Running experiment with Data_load_type = multivariate, TCN_type=dilated2, attention_type=original, dropout_enabled=True, skip_enabled=True, general_skip=skip, Revin=True,  Pos_Encoder_Type = Original, batch_size = 32, step_size = 8, kernel_size = 5, decompose_layer = 3 
+New best model saved at best_model_multivariate_dilated2_original_True_True_skip_True_Original_32_3_5_8.pt
+New best model saved at best_model_multivariate_dilated2_original_True_True_skip_True_Original_32_3_5_8.pt
+New best model saved at best_model_multivariate_dilated2_original_True_True_skip_True_Original_32_3_5_8.pt
+New best model saved at best_model_multivariate_dilated2_original_True_True_skip_True_Original_32_3_5_8.pt
+New best model saved at best_model_multivariate_dilated2_original_True_True_skip_True_Original_32_3_5_8.pt
+New best model saved at best_model_multivariate_dilated2_original_True_True_skip_True_Original_32_3_5_8.pt
+New best model saved at best_model_multivariate_dilated2_original_True_True_skip_True_Original_32_3_5_8.pt
+New best model saved at best_model_multivariate_dilated2_original_True_True_skip_True_Original_32_3_5_8.pt
+Epoch [10/30], Train Loss: 0.2360, Val Loss: 0.2621
+New best model saved at best_model_multivariate_dilated2_original_True_True_skip_True_Original_32_3_5_8.pt
+New best model saved at best_model_multivariate_dilated2_original_True_True_skip_True_Original_32_3_5_8.pt
+New best model saved at best_model_multivariate_dilated2_original_True_True_skip_True_Original_32_3_5_8.pt
+New best model saved at best_model_multivariate_dilated2_original_True_True_skip_True_Original_32_3_5_8.pt
+New best model saved at best_model_multivariate_dilated2_original_True_True_skip_True_Original_32_3_5_8.pt
+New best model saved at best_model_multivariate_dilated2_original_True_True_skip_True_Original_32_3_5_8.pt
+Epoch [20/30], Train Loss: 0.2118, Val Loss: 0.2507
+New best model saved at best_model_multivariate_dilated2_original_True_True_skip_True_Original_32_3_5_8.pt
+New best model saved at best_model_multivariate_dilated2_original_True_True_skip_True_Original_32_3_5_8.pt
+New best model saved at best_model_multivariate_dilated2_original_True_True_skip_True_Original_32_3_5_8.pt
+New best model saved at best_model_multivariate_dilated2_original_True_True_skip_True_Original_32_3_5_8.pt
+Epoch [30/30], Train Loss: 0.2036, Val Loss: 0.2494
+Total Model Running Time: 763.33 seconds for configuration: Data_load_type = multivariate, TCN_type=dilated2, attention_type=original, dropout_enabled=True, skip_enabled=True, general_skip=skip, Revin=True ,batch_size = 32, step_size = 8, kernel_size = 5, decompose_layer = 3, Pos_Encoder_Type = Original
+Test Loss for configuration: TCN_type=dilated2, attention_type=original, dropout_enabled=True, skip_enabled=True, general_skip=skip, Revin=True, Data Load Type=multivariate, Pos_Encoder_Type = Original, batch_size = 32, step_size = 8, kernel_size = 5, decompose_layer = 3 : 0.2609
+Running experiment with Data_load_type = multivariate, TCN_type=dilated2, attention_type=original, dropout_enabled=True, skip_enabled=True, general_skip=skip, Revin=True,  Pos_Encoder_Type = Original, batch_size = 64, step_size = 8, kernel_size = 5, decompose_layer = 3 
+New best model saved at best_model_multivariate_dilated2_original_True_True_skip_True_Original_64_3_5_8.pt
+New best model saved at best_model_multivariate_dilated2_original_True_True_skip_True_Original_64_3_5_8.pt
+New best model saved at best_model_multivariate_dilated2_original_True_True_skip_True_Original_64_3_5_8.pt
+New best model saved at best_model_multivariate_dilated2_original_True_True_skip_True_Original_64_3_5_8.pt
+New best model saved at best_model_multivariate_dilated2_original_True_True_skip_True_Original_64_3_5_8.pt
+New best model saved at best_model_multivariate_dilated2_original_True_True_skip_True_Original_64_3_5_8.pt
+New best model saved at best_model_multivariate_dilated2_original_True_True_skip_True_Original_64_3_5_8.pt
+New best model saved at best_model_multivariate_dilated2_original_True_True_skip_True_Original_64_3_5_8.pt
+New best model saved at best_model_multivariate_dilated2_original_True_True_skip_True_Original_64_3_5_8.pt
+Epoch [10/30], Train Loss: 0.2553, Val Loss: 0.2548
+New best model saved at best_model_multivariate_dilated2_original_True_True_skip_True_Original_64_3_5_8.pt
+New best model saved at best_model_multivariate_dilated2_original_True_True_skip_True_Original_64_3_5_8.pt
+New best model saved at best_model_multivariate_dilated2_original_True_True_skip_True_Original_64_3_5_8.pt
+New best model saved at best_model_multivariate_dilated2_original_True_True_skip_True_Original_64_3_5_8.pt
+New best model saved at best_model_multivariate_dilated2_original_True_True_skip_True_Original_64_3_5_8.pt
+New best model saved at best_model_multivariate_dilated2_original_True_True_skip_True_Original_64_3_5_8.pt
+Epoch [20/30], Train Loss: 0.2325, Val Loss: 0.2415
+New best model saved at best_model_multivariate_dilated2_original_True_True_skip_True_Original_64_3_5_8.pt
+New best model saved at best_model_multivariate_dilated2_original_True_True_skip_True_Original_64_3_5_8.pt
+Epoch [30/30], Train Loss: 0.2165, Val Loss: 0.2413
+Total Model Running Time: 634.26 seconds for configuration: Data_load_type = multivariate, TCN_type=dilated2, attention_type=original, dropout_enabled=True, skip_enabled=True, general_skip=skip, Revin=True ,batch_size = 64, step_size = 8, kernel_size = 5, decompose_layer = 3, Pos_Encoder_Type = Original
+Test Loss for configuration: TCN_type=dilated2, attention_type=original, dropout_enabled=True, skip_enabled=True, general_skip=skip, Revin=True, Data Load Type=multivariate, Pos_Encoder_Type = Original, batch_size = 64, step_size = 8, kernel_size = 5, decompose_layer = 3 : 0.2639
+Running experiment with Data_load_type = multivariate, TCN_type=dilated2, attention_type=original, dropout_enabled=True, skip_enabled=True, general_skip=skip, Revin=True,  Pos_Encoder_Type = Original, batch_size = 32, step_size = 16, kernel_size = 5, decompose_layer = 1 
+New best model saved at best_model_multivariate_dilated2_original_True_True_skip_True_Original_32_1_5_16.pt
+New best model saved at best_model_multivariate_dilated2_original_True_True_skip_True_Original_32_1_5_16.pt
+New best model saved at best_model_multivariate_dilated2_original_True_True_skip_True_Original_32_1_5_16.pt
+New best model saved at best_model_multivariate_dilated2_original_True_True_skip_True_Original_32_1_5_16.pt
+New best model saved at best_model_multivariate_dilated2_original_True_True_skip_True_Original_32_1_5_16.pt
+New best model saved at best_model_multivariate_dilated2_original_True_True_skip_True_Original_32_1_5_16.pt
+New best model saved at best_model_multivariate_dilated2_original_True_True_skip_True_Original_32_1_5_16.pt
+New best model saved at best_model_multivariate_dilated2_original_True_True_skip_True_Original_32_1_5_16.pt
+Epoch [10/30], Train Loss: 0.2503, Val Loss: 0.2388
+New best model saved at best_model_multivariate_dilated2_original_True_True_skip_True_Original_32_1_5_16.pt
+New best model saved at best_model_multivariate_dilated2_original_True_True_skip_True_Original_32_1_5_16.pt
+New best model saved at best_model_multivariate_dilated2_original_True_True_skip_True_Original_32_1_5_16.pt
+New best model saved at best_model_multivariate_dilated2_original_True_True_skip_True_Original_32_1_5_16.pt
+New best model saved at best_model_multivariate_dilated2_original_True_True_skip_True_Original_32_1_5_16.pt
+New best model saved at best_model_multivariate_dilated2_original_True_True_skip_True_Original_32_1_5_16.pt
+New best model saved at best_model_multivariate_dilated2_original_True_True_skip_True_Original_32_1_5_16.pt
+New best model saved at best_model_multivariate_dilated2_original_True_True_skip_True_Original_32_1_5_16.pt
+Epoch [20/30], Train Loss: 0.2290, Val Loss: 0.2216
+New best model saved at best_model_multivariate_dilated2_original_True_True_skip_True_Original_32_1_5_16.pt
+New best model saved at best_model_multivariate_dilated2_original_True_True_skip_True_Original_32_1_5_16.pt
+New best model saved at best_model_multivariate_dilated2_original_True_True_skip_True_Original_32_1_5_16.pt
+New best model saved at best_model_multivariate_dilated2_original_True_True_skip_True_Original_32_1_5_16.pt
+New best model saved at best_model_multivariate_dilated2_original_True_True_skip_True_Original_32_1_5_16.pt
+New best model saved at best_model_multivariate_dilated2_original_True_True_skip_True_Original_32_1_5_16.pt
+New best model saved at best_model_multivariate_dilated2_original_True_True_skip_True_Original_32_1_5_16.pt
+New best model saved at best_model_multivariate_dilated2_original_True_True_skip_True_Original_32_1_5_16.pt
+Epoch [30/30], Train Loss: 0.2065, Val Loss: 0.2043
+Total Model Running Time: 235.21 seconds for configuration: Data_load_type = multivariate, TCN_type=dilated2, attention_type=original, dropout_enabled=True, skip_enabled=True, general_skip=skip, Revin=True ,batch_size = 32, step_size = 16, kernel_size = 5, decompose_layer = 1, Pos_Encoder_Type = Original
+Test Loss for configuration: TCN_type=dilated2, attention_type=original, dropout_enabled=True, skip_enabled=True, general_skip=skip, Revin=True, Data Load Type=multivariate, Pos_Encoder_Type = Original, batch_size = 32, step_size = 16, kernel_size = 5, decompose_layer = 1 : 0.2157
+Running experiment with Data_load_type = multivariate, TCN_type=dilated2, attention_type=original, dropout_enabled=True, skip_enabled=True, general_skip=skip, Revin=True,  Pos_Encoder_Type = Original, batch_size = 64, step_size = 16, kernel_size = 5, decompose_layer = 1 
+New best model saved at best_model_multivariate_dilated2_original_True_True_skip_True_Original_64_1_5_16.pt
+New best model saved at best_model_multivariate_dilated2_original_True_True_skip_True_Original_64_1_5_16.pt
+New best model saved at best_model_multivariate_dilated2_original_True_True_skip_True_Original_64_1_5_16.pt
+New best model saved at best_model_multivariate_dilated2_original_True_True_skip_True_Original_64_1_5_16.pt
+New best model saved at best_model_multivariate_dilated2_original_True_True_skip_True_Original_64_1_5_16.pt
+New best model saved at best_model_multivariate_dilated2_original_True_True_skip_True_Original_64_1_5_16.pt
+New best model saved at best_model_multivariate_dilated2_original_True_True_skip_True_Original_64_1_5_16.pt
+New best model saved at best_model_multivariate_dilated2_original_True_True_skip_True_Original_64_1_5_16.pt
+New best model saved at best_model_multivariate_dilated2_original_True_True_skip_True_Original_64_1_5_16.pt
+Epoch [10/30], Train Loss: 0.2609, Val Loss: 0.2216
+New best model saved at best_model_multivariate_dilated2_original_True_True_skip_True_Original_64_1_5_16.pt
+New best model saved at best_model_multivariate_dilated2_original_True_True_skip_True_Original_64_1_5_16.pt
+New best model saved at best_model_multivariate_dilated2_original_True_True_skip_True_Original_64_1_5_16.pt
+New best model saved at best_model_multivariate_dilated2_original_True_True_skip_True_Original_64_1_5_16.pt
+New best model saved at best_model_multivariate_dilated2_original_True_True_skip_True_Original_64_1_5_16.pt
+New best model saved at best_model_multivariate_dilated2_original_True_True_skip_True_Original_64_1_5_16.pt
+Epoch [20/30], Train Loss: 0.2452, Val Loss: 0.2118
+New best model saved at best_model_multivariate_dilated2_original_True_True_skip_True_Original_64_1_5_16.pt
+New best model saved at best_model_multivariate_dilated2_original_True_True_skip_True_Original_64_1_5_16.pt
+New best model saved at best_model_multivariate_dilated2_original_True_True_skip_True_Original_64_1_5_16.pt
+New best model saved at best_model_multivariate_dilated2_original_True_True_skip_True_Original_64_1_5_16.pt
+New best model saved at best_model_multivariate_dilated2_original_True_True_skip_True_Original_64_1_5_16.pt
+Epoch [30/30], Train Loss: 0.2387, Val Loss: 0.2004
+New best model saved at best_model_multivariate_dilated2_original_True_True_skip_True_Original_64_1_5_16.pt
+Total Model Running Time: 217.37 seconds for configuration: Data_load_type = multivariate, TCN_type=dilated2, attention_type=original, dropout_enabled=True, skip_enabled=True, general_skip=skip, Revin=True ,batch_size = 64, step_size = 16, kernel_size = 5, decompose_layer = 1, Pos_Encoder_Type = Original
+Test Loss for configuration: TCN_type=dilated2, attention_type=original, dropout_enabled=True, skip_enabled=True, general_skip=skip, Revin=True, Data Load Type=multivariate, Pos_Encoder_Type = Original, batch_size = 64, step_size = 16, kernel_size = 5, decompose_layer = 1 : 0.2370
+Running experiment with Data_load_type = multivariate, TCN_type=dilated2, attention_type=original, dropout_enabled=True, skip_enabled=True, general_skip=skip, Revin=True,  Pos_Encoder_Type = Original, batch_size = 32, step_size = 16, kernel_size = 5, decompose_layer = 3 
+New best model saved at best_model_multivariate_dilated2_original_True_True_skip_True_Original_32_3_5_16.pt
+New best model saved at best_model_multivariate_dilated2_original_True_True_skip_True_Original_32_3_5_16.pt
+New best model saved at best_model_multivariate_dilated2_original_True_True_skip_True_Original_32_3_5_16.pt
+New best model saved at best_model_multivariate_dilated2_original_True_True_skip_True_Original_32_3_5_16.pt
+New best model saved at best_model_multivariate_dilated2_original_True_True_skip_True_Original_32_3_5_16.pt
+New best model saved at best_model_multivariate_dilated2_original_True_True_skip_True_Original_32_3_5_16.pt
+New best model saved at best_model_multivariate_dilated2_original_True_True_skip_True_Original_32_3_5_16.pt
+New best model saved at best_model_multivariate_dilated2_original_True_True_skip_True_Original_32_3_5_16.pt
+New best model saved at best_model_multivariate_dilated2_original_True_True_skip_True_Original_32_3_5_16.pt
+Epoch [10/30], Train Loss: 0.2611, Val Loss: 0.2567
+New best model saved at best_model_multivariate_dilated2_original_True_True_skip_True_Original_32_3_5_16.pt
+New best model saved at best_model_multivariate_dilated2_original_True_True_skip_True_Original_32_3_5_16.pt
+New best model saved at best_model_multivariate_dilated2_original_True_True_skip_True_Original_32_3_5_16.pt
+New best model saved at best_model_multivariate_dilated2_original_True_True_skip_True_Original_32_3_5_16.pt
+New best model saved at best_model_multivariate_dilated2_original_True_True_skip_True_Original_32_3_5_16.pt
+New best model saved at best_model_multivariate_dilated2_original_True_True_skip_True_Original_32_3_5_16.pt
+New best model saved at best_model_multivariate_dilated2_original_True_True_skip_True_Original_32_3_5_16.pt
+Epoch [20/30], Train Loss: 0.2429, Val Loss: 0.2495
+New best model saved at best_model_multivariate_dilated2_original_True_True_skip_True_Original_32_3_5_16.pt
+New best model saved at best_model_multivariate_dilated2_original_True_True_skip_True_Original_32_3_5_16.pt
+New best model saved at best_model_multivariate_dilated2_original_True_True_skip_True_Original_32_3_5_16.pt
+Epoch [30/30], Train Loss: 0.2280, Val Loss: 0.2398
+New best model saved at best_model_multivariate_dilated2_original_True_True_skip_True_Original_32_3_5_16.pt
+Total Model Running Time: 377.87 seconds for configuration: Data_load_type = multivariate, TCN_type=dilated2, attention_type=original, dropout_enabled=True, skip_enabled=True, general_skip=skip, Revin=True ,batch_size = 32, step_size = 16, kernel_size = 5, decompose_layer = 3, Pos_Encoder_Type = Original
+Test Loss for configuration: TCN_type=dilated2, attention_type=original, dropout_enabled=True, skip_enabled=True, general_skip=skip, Revin=True, Data Load Type=multivariate, Pos_Encoder_Type = Original, batch_size = 32, step_size = 16, kernel_size = 5, decompose_layer = 3 : 0.2504
+Running experiment with Data_load_type = multivariate, TCN_type=dilated2, attention_type=original, dropout_enabled=True, skip_enabled=True, general_skip=skip, Revin=True,  Pos_Encoder_Type = Original, batch_size = 64, step_size = 16, kernel_size = 5, decompose_layer = 3 
+New best model saved at best_model_multivariate_dilated2_original_True_True_skip_True_Original_64_3_5_16.pt
+New best model saved at best_model_multivariate_dilated2_original_True_True_skip_True_Original_64_3_5_16.pt
+New best model saved at best_model_multivariate_dilated2_original_True_True_skip_True_Original_64_3_5_16.pt
+New best model saved at best_model_multivariate_dilated2_original_True_True_skip_True_Original_64_3_5_16.pt
+New best model saved at best_model_multivariate_dilated2_original_True_True_skip_True_Original_64_3_5_16.pt
+New best model saved at best_model_multivariate_dilated2_original_True_True_skip_True_Original_64_3_5_16.pt
+Epoch [10/30], Train Loss: 0.2732, Val Loss: 0.2369
+New best model saved at best_model_multivariate_dilated2_original_True_True_skip_True_Original_64_3_5_16.pt
+New best model saved at best_model_multivariate_dilated2_original_True_True_skip_True_Original_64_3_5_16.pt
+New best model saved at best_model_multivariate_dilated2_original_True_True_skip_True_Original_64_3_5_16.pt
+New best model saved at best_model_multivariate_dilated2_original_True_True_skip_True_Original_64_3_5_16.pt
+New best model saved at best_model_multivariate_dilated2_original_True_True_skip_True_Original_64_3_5_16.pt
+New best model saved at best_model_multivariate_dilated2_original_True_True_skip_True_Original_64_3_5_16.pt
+New best model saved at best_model_multivariate_dilated2_original_True_True_skip_True_Original_64_3_5_16.pt
+Epoch [20/30], Train Loss: 0.2492, Val Loss: 0.2256
+New best model saved at best_model_multivariate_dilated2_original_True_True_skip_True_Original_64_3_5_16.pt
+New best model saved at best_model_multivariate_dilated2_original_True_True_skip_True_Original_64_3_5_16.pt
+New best model saved at best_model_multivariate_dilated2_original_True_True_skip_True_Original_64_3_5_16.pt
+New best model saved at best_model_multivariate_dilated2_original_True_True_skip_True_Original_64_3_5_16.pt
+Epoch [30/30], Train Loss: 0.2381, Val Loss: 0.2184
+New best model saved at best_model_multivariate_dilated2_original_True_True_skip_True_Original_64_3_5_16.pt
+Total Model Running Time: 318.04 seconds for configuration: Data_load_type = multivariate, TCN_type=dilated2, attention_type=original, dropout_enabled=True, skip_enabled=True, general_skip=skip, Revin=True ,batch_size = 64, step_size = 16, kernel_size = 5, decompose_layer = 3, Pos_Encoder_Type = Original
+Test Loss for configuration: TCN_type=dilated2, attention_type=original, dropout_enabled=True, skip_enabled=True, general_skip=skip, Revin=True, Data Load Type=multivariate, Pos_Encoder_Type = Original, batch_size = 64, step_size = 16, kernel_size = 5, decompose_layer = 3 : 0.2673
+Running experiment with Data_load_type = multivariate, TCN_type=dilated2, attention_type=original, dropout_enabled=True, skip_enabled=True, general_skip=skip, Revin=True,  Pos_Encoder_Type = Projected, batch_size = 32, step_size = 1, kernel_size = 3, decompose_layer = 1 
+New best model saved at best_model_multivariate_dilated2_original_True_True_skip_True_Projected_32_1_3_1.pt
+New best model saved at best_model_multivariate_dilated2_original_True_True_skip_True_Projected_32_1_3_1.pt
+New best model saved at best_model_multivariate_dilated2_original_True_True_skip_True_Projected_32_1_3_1.pt
+New best model saved at best_model_multivariate_dilated2_original_True_True_skip_True_Projected_32_1_3_1.pt
+New best model saved at best_model_multivariate_dilated2_original_True_True_skip_True_Projected_32_1_3_1.pt
+New best model saved at best_model_multivariate_dilated2_original_True_True_skip_True_Projected_32_1_3_1.pt
+New best model saved at best_model_multivariate_dilated2_original_True_True_skip_True_Projected_32_1_3_1.pt
+Epoch [10/30], Train Loss: 0.1874, Val Loss: 0.2211
+New best model saved at best_model_multivariate_dilated2_original_True_True_skip_True_Projected_32_1_3_1.pt
+New best model saved at best_model_multivariate_dilated2_original_True_True_skip_True_Projected_32_1_3_1.pt
+New best model saved at best_model_multivariate_dilated2_original_True_True_skip_True_Projected_32_1_3_1.pt
+New best model saved at best_model_multivariate_dilated2_original_True_True_skip_True_Projected_32_1_3_1.pt
+Epoch [20/30], Train Loss: 0.1774, Val Loss: 0.2114
+Early stopping triggered
+Total Model Running Time: 5111.86 seconds for configuration: Data_load_type = multivariate, TCN_type=dilated2, attention_type=original, dropout_enabled=True, skip_enabled=True, general_skip=skip, Revin=True ,batch_size = 32, step_size = 1, kernel_size = 3, decompose_layer = 1, Pos_Encoder_Type = Projected
+Test Loss for configuration: TCN_type=dilated2, attention_type=original, dropout_enabled=True, skip_enabled=True, general_skip=skip, Revin=True, Data Load Type=multivariate, Pos_Encoder_Type = Projected, batch_size = 32, step_size = 1, kernel_size = 3, decompose_layer = 1 : 0.2118
+Running experiment with Data_load_type = multivariate, TCN_type=dilated2, attention_type=original, dropout_enabled=True, skip_enabled=True, general_skip=skip, Revin=True,  Pos_Encoder_Type = Projected, batch_size = 64, step_size = 1, kernel_size = 3, decompose_layer = 1 
+New best model saved at best_model_multivariate_dilated2_original_True_True_skip_True_Projected_64_1_3_1.pt
+New best model saved at best_model_multivariate_dilated2_original_True_True_skip_True_Projected_64_1_3_1.pt
+New best model saved at best_model_multivariate_dilated2_original_True_True_skip_True_Projected_64_1_3_1.pt
+New best model saved at best_model_multivariate_dilated2_original_True_True_skip_True_Projected_64_1_3_1.pt
+New best model saved at best_model_multivariate_dilated2_original_True_True_skip_True_Projected_64_1_3_1.pt
+New best model saved at best_model_multivariate_dilated2_original_True_True_skip_True_Projected_64_1_3_1.pt
+New best model saved at best_model_multivariate_dilated2_original_True_True_skip_True_Projected_64_1_3_1.pt
+New best model saved at best_model_multivariate_dilated2_original_True_True_skip_True_Projected_64_1_3_1.pt
+Epoch [10/30], Train Loss: 0.1953, Val Loss: 0.2175
+New best model saved at best_model_multivariate_dilated2_original_True_True_skip_True_Projected_64_1_3_1.pt
+New best model saved at best_model_multivariate_dilated2_original_True_True_skip_True_Projected_64_1_3_1.pt
+New best model saved at best_model_multivariate_dilated2_original_True_True_skip_True_Projected_64_1_3_1.pt
+New best model saved at best_model_multivariate_dilated2_original_True_True_skip_True_Projected_64_1_3_1.pt
+New best model saved at best_model_multivariate_dilated2_original_True_True_skip_True_Projected_64_1_3_1.pt
+New best model saved at best_model_multivariate_dilated2_original_True_True_skip_True_Projected_64_1_3_1.pt
+Epoch [20/30], Train Loss: 0.1688, Val Loss: 0.2102
+New best model saved at best_model_multivariate_dilated2_original_True_True_skip_True_Projected_64_1_3_1.pt
+New best model saved at best_model_multivariate_dilated2_original_True_True_skip_True_Projected_64_1_3_1.pt
+New best model saved at best_model_multivariate_dilated2_original_True_True_skip_True_Projected_64_1_3_1.pt
+Epoch [30/30], Train Loss: 0.1825, Val Loss: 0.2049
+Total Model Running Time: 4300.87 seconds for configuration: Data_load_type = multivariate, TCN_type=dilated2, attention_type=original, dropout_enabled=True, skip_enabled=True, general_skip=skip, Revin=True ,batch_size = 64, step_size = 1, kernel_size = 3, decompose_layer = 1, Pos_Encoder_Type = Projected
+Test Loss for configuration: TCN_type=dilated2, attention_type=original, dropout_enabled=True, skip_enabled=True, general_skip=skip, Revin=True, Data Load Type=multivariate, Pos_Encoder_Type = Projected, batch_size = 64, step_size = 1, kernel_size = 3, decompose_layer = 1 : 0.2121
+Running experiment with Data_load_type = multivariate, TCN_type=dilated2, attention_type=original, dropout_enabled=True, skip_enabled=True, general_skip=skip, Revin=True,  Pos_Encoder_Type = Projected, batch_size = 32, step_size = 1, kernel_size = 3, decompose_layer = 3 
+New best model saved at best_model_multivariate_dilated2_original_True_True_skip_True_Projected_32_3_3_1.pt
+New best model saved at best_model_multivariate_dilated2_original_True_True_skip_True_Projected_32_3_3_1.pt
+New best model saved at best_model_multivariate_dilated2_original_True_True_skip_True_Projected_32_3_3_1.pt
+New best model saved at best_model_multivariate_dilated2_original_True_True_skip_True_Projected_32_3_3_1.pt
+New best model saved at best_model_multivariate_dilated2_original_True_True_skip_True_Projected_32_3_3_1.pt
+New best model saved at best_model_multivariate_dilated2_original_True_True_skip_True_Projected_32_3_3_1.pt
+New best model saved at best_model_multivariate_dilated2_original_True_True_skip_True_Projected_32_3_3_1.pt
+New best model saved at best_model_multivariate_dilated2_original_True_True_skip_True_Projected_32_3_3_1.pt
+Epoch [10/30], Train Loss: 0.2084, Val Loss: 0.2265
+New best model saved at best_model_multivariate_dilated2_original_True_True_skip_True_Projected_32_3_3_1.pt
+New best model saved at best_model_multivariate_dilated2_original_True_True_skip_True_Projected_32_3_3_1.pt
+New best model saved at best_model_multivariate_dilated2_original_True_True_skip_True_Projected_32_3_3_1.pt
+Epoch [20/30], Train Loss: 0.2003, Val Loss: 0.2248
+New best model saved at best_model_multivariate_dilated2_original_True_True_skip_True_Projected_32_3_3_1.pt
+New best model saved at best_model_multivariate_dilated2_original_True_True_skip_True_Projected_32_3_3_1.pt
+New best model saved at best_model_multivariate_dilated2_original_True_True_skip_True_Projected_32_3_3_1.pt
+Epoch [30/30], Train Loss: 0.1986, Val Loss: 0.2212
+Total Model Running Time: 7616.66 seconds for configuration: Data_load_type = multivariate, TCN_type=dilated2, attention_type=original, dropout_enabled=True, skip_enabled=True, general_skip=skip, Revin=True ,batch_size = 32, step_size = 1, kernel_size = 3, decompose_layer = 3, Pos_Encoder_Type = Projected
+Test Loss for configuration: TCN_type=dilated2, attention_type=original, dropout_enabled=True, skip_enabled=True, general_skip=skip, Revin=True, Data Load Type=multivariate, Pos_Encoder_Type = Projected, batch_size = 32, step_size = 1, kernel_size = 3, decompose_layer = 3 : 0.2235
+Running experiment with Data_load_type = multivariate, TCN_type=dilated2, attention_type=original, dropout_enabled=True, skip_enabled=True, general_skip=skip, Revin=True,  Pos_Encoder_Type = Projected, batch_size = 64, step_size = 1, kernel_size = 3, decompose_layer = 3 
+New best model saved at best_model_multivariate_dilated2_original_True_True_skip_True_Projected_64_3_3_1.pt
+New best model saved at best_model_multivariate_dilated2_original_True_True_skip_True_Projected_64_3_3_1.pt
+New best model saved at best_model_multivariate_dilated2_original_True_True_skip_True_Projected_64_3_3_1.pt
+New best model saved at best_model_multivariate_dilated2_original_True_True_skip_True_Projected_64_3_3_1.pt
+New best model saved at best_model_multivariate_dilated2_original_True_True_skip_True_Projected_64_3_3_1.pt
+New best model saved at best_model_multivariate_dilated2_original_True_True_skip_True_Projected_64_3_3_1.pt
+New best model saved at best_model_multivariate_dilated2_original_True_True_skip_True_Projected_64_3_3_1.pt
+New best model saved at best_model_multivariate_dilated2_original_True_True_skip_True_Projected_64_3_3_1.pt
+New best model saved at best_model_multivariate_dilated2_original_True_True_skip_True_Projected_64_3_3_1.pt
+Epoch [10/30], Train Loss: 0.2017, Val Loss: 0.2201
+New best model saved at best_model_multivariate_dilated2_original_True_True_skip_True_Projected_64_3_3_1.pt
+New best model saved at best_model_multivariate_dilated2_original_True_True_skip_True_Projected_64_3_3_1.pt
+New best model saved at best_model_multivariate_dilated2_original_True_True_skip_True_Projected_64_3_3_1.pt
+Epoch [20/30], Train Loss: 0.1887, Val Loss: 0.2174
+New best model saved at best_model_multivariate_dilated2_original_True_True_skip_True_Projected_64_3_3_1.pt
+New best model saved at best_model_multivariate_dilated2_original_True_True_skip_True_Projected_64_3_3_1.pt
+New best model saved at best_model_multivariate_dilated2_original_True_True_skip_True_Projected_64_3_3_1.pt
+Epoch [30/30], Train Loss: 0.1843, Val Loss: 0.2191
+Total Model Running Time: 7146.82 seconds for configuration: Data_load_type = multivariate, TCN_type=dilated2, attention_type=original, dropout_enabled=True, skip_enabled=True, general_skip=skip, Revin=True ,batch_size = 64, step_size = 1, kernel_size = 3, decompose_layer = 3, Pos_Encoder_Type = Projected
+Test Loss for configuration: TCN_type=dilated2, attention_type=original, dropout_enabled=True, skip_enabled=True, general_skip=skip, Revin=True, Data Load Type=multivariate, Pos_Encoder_Type = Projected, batch_size = 64, step_size = 1, kernel_size = 3, decompose_layer = 3 : 0.2192
+Running experiment with Data_load_type = multivariate, TCN_type=dilated2, attention_type=original, dropout_enabled=True, skip_enabled=True, general_skip=skip, Revin=True,  Pos_Encoder_Type = Projected, batch_size = 32, step_size = 8, kernel_size = 3, decompose_layer = 1 
+New best model saved at best_model_multivariate_dilated2_original_True_True_skip_True_Projected_32_1_3_8.pt
+New best model saved at best_model_multivariate_dilated2_original_True_True_skip_True_Projected_32_1_3_8.pt
+New best model saved at best_model_multivariate_dilated2_original_True_True_skip_True_Projected_32_1_3_8.pt
+New best model saved at best_model_multivariate_dilated2_original_True_True_skip_True_Projected_32_1_3_8.pt
+New best model saved at best_model_multivariate_dilated2_original_True_True_skip_True_Projected_32_1_3_8.pt
+New best model saved at best_model_multivariate_dilated2_original_True_True_skip_True_Projected_32_1_3_8.pt
+New best model saved at best_model_multivariate_dilated2_original_True_True_skip_True_Projected_32_1_3_8.pt
+New best model saved at best_model_multivariate_dilated2_original_True_True_skip_True_Projected_32_1_3_8.pt
+New best model saved at best_model_multivariate_dilated2_original_True_True_skip_True_Projected_32_1_3_8.pt
+Epoch [10/30], Train Loss: 0.2371, Val Loss: 0.2414
+New best model saved at best_model_multivariate_dilated2_original_True_True_skip_True_Projected_32_1_3_8.pt
+New best model saved at best_model_multivariate_dilated2_original_True_True_skip_True_Projected_32_1_3_8.pt
+New best model saved at best_model_multivariate_dilated2_original_True_True_skip_True_Projected_32_1_3_8.pt
+New best model saved at best_model_multivariate_dilated2_original_True_True_skip_True_Projected_32_1_3_8.pt
+New best model saved at best_model_multivariate_dilated2_original_True_True_skip_True_Projected_32_1_3_8.pt
+New best model saved at best_model_multivariate_dilated2_original_True_True_skip_True_Projected_32_1_3_8.pt
+Epoch [20/30], Train Loss: 0.2066, Val Loss: 0.2106
+New best model saved at best_model_multivariate_dilated2_original_True_True_skip_True_Projected_32_1_3_8.pt
+New best model saved at best_model_multivariate_dilated2_original_True_True_skip_True_Projected_32_1_3_8.pt
+New best model saved at best_model_multivariate_dilated2_original_True_True_skip_True_Projected_32_1_3_8.pt
+New best model saved at best_model_multivariate_dilated2_original_True_True_skip_True_Projected_32_1_3_8.pt
+Epoch [30/30], Train Loss: 0.1941, Val Loss: 0.2080
+Total Model Running Time: 439.55 seconds for configuration: Data_load_type = multivariate, TCN_type=dilated2, attention_type=original, dropout_enabled=True, skip_enabled=True, general_skip=skip, Revin=True ,batch_size = 32, step_size = 8, kernel_size = 3, decompose_layer = 1, Pos_Encoder_Type = Projected
+Test Loss for configuration: TCN_type=dilated2, attention_type=original, dropout_enabled=True, skip_enabled=True, general_skip=skip, Revin=True, Data Load Type=multivariate, Pos_Encoder_Type = Projected, batch_size = 32, step_size = 8, kernel_size = 3, decompose_layer = 1 : 0.2186
+Running experiment with Data_load_type = multivariate, TCN_type=dilated2, attention_type=original, dropout_enabled=True, skip_enabled=True, general_skip=skip, Revin=True,  Pos_Encoder_Type = Projected, batch_size = 64, step_size = 8, kernel_size = 3, decompose_layer = 1 
+New best model saved at best_model_multivariate_dilated2_original_True_True_skip_True_Projected_64_1_3_8.pt
+New best model saved at best_model_multivariate_dilated2_original_True_True_skip_True_Projected_64_1_3_8.pt
+New best model saved at best_model_multivariate_dilated2_original_True_True_skip_True_Projected_64_1_3_8.pt
+New best model saved at best_model_multivariate_dilated2_original_True_True_skip_True_Projected_64_1_3_8.pt
+New best model saved at best_model_multivariate_dilated2_original_True_True_skip_True_Projected_64_1_3_8.pt
+New best model saved at best_model_multivariate_dilated2_original_True_True_skip_True_Projected_64_1_3_8.pt
+New best model saved at best_model_multivariate_dilated2_original_True_True_skip_True_Projected_64_1_3_8.pt
+New best model saved at best_model_multivariate_dilated2_original_True_True_skip_True_Projected_64_1_3_8.pt
+New best model saved at best_model_multivariate_dilated2_original_True_True_skip_True_Projected_64_1_3_8.pt
+Epoch [10/30], Train Loss: 0.2770, Val Loss: 0.2630
+New best model saved at best_model_multivariate_dilated2_original_True_True_skip_True_Projected_64_1_3_8.pt
+New best model saved at best_model_multivariate_dilated2_original_True_True_skip_True_Projected_64_1_3_8.pt
+New best model saved at best_model_multivariate_dilated2_original_True_True_skip_True_Projected_64_1_3_8.pt
+New best model saved at best_model_multivariate_dilated2_original_True_True_skip_True_Projected_64_1_3_8.pt
+New best model saved at best_model_multivariate_dilated2_original_True_True_skip_True_Projected_64_1_3_8.pt
+New best model saved at best_model_multivariate_dilated2_original_True_True_skip_True_Projected_64_1_3_8.pt
+New best model saved at best_model_multivariate_dilated2_original_True_True_skip_True_Projected_64_1_3_8.pt
+Epoch [20/30], Train Loss: 0.2246, Val Loss: 0.2166
+New best model saved at best_model_multivariate_dilated2_original_True_True_skip_True_Projected_64_1_3_8.pt
+New best model saved at best_model_multivariate_dilated2_original_True_True_skip_True_Projected_64_1_3_8.pt
+New best model saved at best_model_multivariate_dilated2_original_True_True_skip_True_Projected_64_1_3_8.pt
+New best model saved at best_model_multivariate_dilated2_original_True_True_skip_True_Projected_64_1_3_8.pt
+New best model saved at best_model_multivariate_dilated2_original_True_True_skip_True_Projected_64_1_3_8.pt
+Epoch [30/30], Train Loss: 0.2008, Val Loss: 0.2022
+Total Model Running Time: 390.29 seconds for configuration: Data_load_type = multivariate, TCN_type=dilated2, attention_type=original, dropout_enabled=True, skip_enabled=True, general_skip=skip, Revin=True ,batch_size = 64, step_size = 8, kernel_size = 3, decompose_layer = 1, Pos_Encoder_Type = Projected
+Test Loss for configuration: TCN_type=dilated2, attention_type=original, dropout_enabled=True, skip_enabled=True, general_skip=skip, Revin=True, Data Load Type=multivariate, Pos_Encoder_Type = Projected, batch_size = 64, step_size = 8, kernel_size = 3, decompose_layer = 1 : 0.2204
+Running experiment with Data_load_type = multivariate, TCN_type=dilated2, attention_type=original, dropout_enabled=True, skip_enabled=True, general_skip=skip, Revin=True,  Pos_Encoder_Type = Projected, batch_size = 32, step_size = 8, kernel_size = 3, decompose_layer = 3 
+New best model saved at best_model_multivariate_dilated2_original_True_True_skip_True_Projected_32_3_3_8.pt
+New best model saved at best_model_multivariate_dilated2_original_True_True_skip_True_Projected_32_3_3_8.pt
+New best model saved at best_model_multivariate_dilated2_original_True_True_skip_True_Projected_32_3_3_8.pt
+New best model saved at best_model_multivariate_dilated2_original_True_True_skip_True_Projected_32_3_3_8.pt
+Epoch [10/30], Train Loss: 0.3063, Val Loss: 0.3206
+New best model saved at best_model_multivariate_dilated2_original_True_True_skip_True_Projected_32_3_3_8.pt
+New best model saved at best_model_multivariate_dilated2_original_True_True_skip_True_Projected_32_3_3_8.pt
+New best model saved at best_model_multivariate_dilated2_original_True_True_skip_True_Projected_32_3_3_8.pt
+Epoch [20/30], Train Loss: 0.2428, Val Loss: 0.2685
+New best model saved at best_model_multivariate_dilated2_original_True_True_skip_True_Projected_32_3_3_8.pt
+New best model saved at best_model_multivariate_dilated2_original_True_True_skip_True_Projected_32_3_3_8.pt
+New best model saved at best_model_multivariate_dilated2_original_True_True_skip_True_Projected_32_3_3_8.pt
+New best model saved at best_model_multivariate_dilated2_original_True_True_skip_True_Projected_32_3_3_8.pt
+New best model saved at best_model_multivariate_dilated2_original_True_True_skip_True_Projected_32_3_3_8.pt
+Epoch [30/30], Train Loss: 0.2216, Val Loss: 0.2581
+Total Model Running Time: 742.47 seconds for configuration: Data_load_type = multivariate, TCN_type=dilated2, attention_type=original, dropout_enabled=True, skip_enabled=True, general_skip=skip, Revin=True ,batch_size = 32, step_size = 8, kernel_size = 3, decompose_layer = 3, Pos_Encoder_Type = Projected
+Test Loss for configuration: TCN_type=dilated2, attention_type=original, dropout_enabled=True, skip_enabled=True, general_skip=skip, Revin=True, Data Load Type=multivariate, Pos_Encoder_Type = Projected, batch_size = 32, step_size = 8, kernel_size = 3, decompose_layer = 3 : 0.2689
+Running experiment with Data_load_type = multivariate, TCN_type=dilated2, attention_type=original, dropout_enabled=True, skip_enabled=True, general_skip=skip, Revin=True,  Pos_Encoder_Type = Projected, batch_size = 64, step_size = 8, kernel_size = 3, decompose_layer = 3 
+New best model saved at best_model_multivariate_dilated2_original_True_True_skip_True_Projected_64_3_3_8.pt
+New best model saved at best_model_multivariate_dilated2_original_True_True_skip_True_Projected_64_3_3_8.pt
+New best model saved at best_model_multivariate_dilated2_original_True_True_skip_True_Projected_64_3_3_8.pt
+New best model saved at best_model_multivariate_dilated2_original_True_True_skip_True_Projected_64_3_3_8.pt
+New best model saved at best_model_multivariate_dilated2_original_True_True_skip_True_Projected_64_3_3_8.pt
+Epoch [10/30], Train Loss: 0.2897, Val Loss: 0.2865
+New best model saved at best_model_multivariate_dilated2_original_True_True_skip_True_Projected_64_3_3_8.pt
+New best model saved at best_model_multivariate_dilated2_original_True_True_skip_True_Projected_64_3_3_8.pt
+New best model saved at best_model_multivariate_dilated2_original_True_True_skip_True_Projected_64_3_3_8.pt
+New best model saved at best_model_multivariate_dilated2_original_True_True_skip_True_Projected_64_3_3_8.pt
+New best model saved at best_model_multivariate_dilated2_original_True_True_skip_True_Projected_64_3_3_8.pt
+Epoch [20/30], Train Loss: 0.2338, Val Loss: 0.2457
+New best model saved at best_model_multivariate_dilated2_original_True_True_skip_True_Projected_64_3_3_8.pt
+New best model saved at best_model_multivariate_dilated2_original_True_True_skip_True_Projected_64_3_3_8.pt
+New best model saved at best_model_multivariate_dilated2_original_True_True_skip_True_Projected_64_3_3_8.pt
+New best model saved at best_model_multivariate_dilated2_original_True_True_skip_True_Projected_64_3_3_8.pt
+Epoch [30/30], Train Loss: 0.2153, Val Loss: 0.2451
+Total Model Running Time: 601.40 seconds for configuration: Data_load_type = multivariate, TCN_type=dilated2, attention_type=original, dropout_enabled=True, skip_enabled=True, general_skip=skip, Revin=True ,batch_size = 64, step_size = 8, kernel_size = 3, decompose_layer = 3, Pos_Encoder_Type = Projected
+Test Loss for configuration: TCN_type=dilated2, attention_type=original, dropout_enabled=True, skip_enabled=True, general_skip=skip, Revin=True, Data Load Type=multivariate, Pos_Encoder_Type = Projected, batch_size = 64, step_size = 8, kernel_size = 3, decompose_layer = 3 : 0.2620
+Running experiment with Data_load_type = multivariate, TCN_type=dilated2, attention_type=original, dropout_enabled=True, skip_enabled=True, general_skip=skip, Revin=True,  Pos_Encoder_Type = Projected, batch_size = 32, step_size = 16, kernel_size = 3, decompose_layer = 1 
+New best model saved at best_model_multivariate_dilated2_original_True_True_skip_True_Projected_32_1_3_16.pt
+New best model saved at best_model_multivariate_dilated2_original_True_True_skip_True_Projected_32_1_3_16.pt
+New best model saved at best_model_multivariate_dilated2_original_True_True_skip_True_Projected_32_1_3_16.pt
+New best model saved at best_model_multivariate_dilated2_original_True_True_skip_True_Projected_32_1_3_16.pt
+New best model saved at best_model_multivariate_dilated2_original_True_True_skip_True_Projected_32_1_3_16.pt
+Epoch [10/30], Train Loss: 0.3001, Val Loss: 0.2828
+New best model saved at best_model_multivariate_dilated2_original_True_True_skip_True_Projected_32_1_3_16.pt
+New best model saved at best_model_multivariate_dilated2_original_True_True_skip_True_Projected_32_1_3_16.pt
+New best model saved at best_model_multivariate_dilated2_original_True_True_skip_True_Projected_32_1_3_16.pt
+New best model saved at best_model_multivariate_dilated2_original_True_True_skip_True_Projected_32_1_3_16.pt
+New best model saved at best_model_multivariate_dilated2_original_True_True_skip_True_Projected_32_1_3_16.pt
+New best model saved at best_model_multivariate_dilated2_original_True_True_skip_True_Projected_32_1_3_16.pt
+New best model saved at best_model_multivariate_dilated2_original_True_True_skip_True_Projected_32_1_3_16.pt
+New best model saved at best_model_multivariate_dilated2_original_True_True_skip_True_Projected_32_1_3_16.pt
+New best model saved at best_model_multivariate_dilated2_original_True_True_skip_True_Projected_32_1_3_16.pt
+Epoch [20/30], Train Loss: 0.2584, Val Loss: 0.2456
+New best model saved at best_model_multivariate_dilated2_original_True_True_skip_True_Projected_32_1_3_16.pt
+New best model saved at best_model_multivariate_dilated2_original_True_True_skip_True_Projected_32_1_3_16.pt
+New best model saved at best_model_multivariate_dilated2_original_True_True_skip_True_Projected_32_1_3_16.pt
+New best model saved at best_model_multivariate_dilated2_original_True_True_skip_True_Projected_32_1_3_16.pt
+New best model saved at best_model_multivariate_dilated2_original_True_True_skip_True_Projected_32_1_3_16.pt
+New best model saved at best_model_multivariate_dilated2_original_True_True_skip_True_Projected_32_1_3_16.pt
+New best model saved at best_model_multivariate_dilated2_original_True_True_skip_True_Projected_32_1_3_16.pt
+Epoch [30/30], Train Loss: 0.2257, Val Loss: 0.2188
+New best model saved at best_model_multivariate_dilated2_original_True_True_skip_True_Projected_32_1_3_16.pt
+Total Model Running Time: 219.37 seconds for configuration: Data_load_type = multivariate, TCN_type=dilated2, attention_type=original, dropout_enabled=True, skip_enabled=True, general_skip=skip, Revin=True ,batch_size = 32, step_size = 16, kernel_size = 3, decompose_layer = 1, Pos_Encoder_Type = Projected
+Test Loss for configuration: TCN_type=dilated2, attention_type=original, dropout_enabled=True, skip_enabled=True, general_skip=skip, Revin=True, Data Load Type=multivariate, Pos_Encoder_Type = Projected, batch_size = 32, step_size = 16, kernel_size = 3, decompose_layer = 1 : 0.2312
+Running experiment with Data_load_type = multivariate, TCN_type=dilated2, attention_type=original, dropout_enabled=True, skip_enabled=True, general_skip=skip, Revin=True,  Pos_Encoder_Type = Projected, batch_size = 64, step_size = 16, kernel_size = 3, decompose_layer = 1 
+New best model saved at best_model_multivariate_dilated2_original_True_True_skip_True_Projected_64_1_3_16.pt
+New best model saved at best_model_multivariate_dilated2_original_True_True_skip_True_Projected_64_1_3_16.pt
+New best model saved at best_model_multivariate_dilated2_original_True_True_skip_True_Projected_64_1_3_16.pt
+New best model saved at best_model_multivariate_dilated2_original_True_True_skip_True_Projected_64_1_3_16.pt
+New best model saved at best_model_multivariate_dilated2_original_True_True_skip_True_Projected_64_1_3_16.pt
+New best model saved at best_model_multivariate_dilated2_original_True_True_skip_True_Projected_64_1_3_16.pt
+New best model saved at best_model_multivariate_dilated2_original_True_True_skip_True_Projected_64_1_3_16.pt
+New best model saved at best_model_multivariate_dilated2_original_True_True_skip_True_Projected_64_1_3_16.pt
+New best model saved at best_model_multivariate_dilated2_original_True_True_skip_True_Projected_64_1_3_16.pt
+Epoch [10/30], Train Loss: 0.3000, Val Loss: 0.2544
+New best model saved at best_model_multivariate_dilated2_original_True_True_skip_True_Projected_64_1_3_16.pt
+New best model saved at best_model_multivariate_dilated2_original_True_True_skip_True_Projected_64_1_3_16.pt
+New best model saved at best_model_multivariate_dilated2_original_True_True_skip_True_Projected_64_1_3_16.pt
+New best model saved at best_model_multivariate_dilated2_original_True_True_skip_True_Projected_64_1_3_16.pt
+New best model saved at best_model_multivariate_dilated2_original_True_True_skip_True_Projected_64_1_3_16.pt
+New best model saved at best_model_multivariate_dilated2_original_True_True_skip_True_Projected_64_1_3_16.pt
+New best model saved at best_model_multivariate_dilated2_original_True_True_skip_True_Projected_64_1_3_16.pt
+New best model saved at best_model_multivariate_dilated2_original_True_True_skip_True_Projected_64_1_3_16.pt
+Epoch [20/30], Train Loss: 0.2696, Val Loss: 0.2290
+New best model saved at best_model_multivariate_dilated2_original_True_True_skip_True_Projected_64_1_3_16.pt
+New best model saved at best_model_multivariate_dilated2_original_True_True_skip_True_Projected_64_1_3_16.pt
+New best model saved at best_model_multivariate_dilated2_original_True_True_skip_True_Projected_64_1_3_16.pt
+New best model saved at best_model_multivariate_dilated2_original_True_True_skip_True_Projected_64_1_3_16.pt
+New best model saved at best_model_multivariate_dilated2_original_True_True_skip_True_Projected_64_1_3_16.pt
+New best model saved at best_model_multivariate_dilated2_original_True_True_skip_True_Projected_64_1_3_16.pt
+New best model saved at best_model_multivariate_dilated2_original_True_True_skip_True_Projected_64_1_3_16.pt
+Epoch [30/30], Train Loss: 0.2345, Val Loss: 0.2012
+Total Model Running Time: 197.03 seconds for configuration: Data_load_type = multivariate, TCN_type=dilated2, attention_type=original, dropout_enabled=True, skip_enabled=True, general_skip=skip, Revin=True ,batch_size = 64, step_size = 16, kernel_size = 3, decompose_layer = 1, Pos_Encoder_Type = Projected
+Test Loss for configuration: TCN_type=dilated2, attention_type=original, dropout_enabled=True, skip_enabled=True, general_skip=skip, Revin=True, Data Load Type=multivariate, Pos_Encoder_Type = Projected, batch_size = 64, step_size = 16, kernel_size = 3, decompose_layer = 1 : 0.2350
+Running experiment with Data_load_type = multivariate, TCN_type=dilated2, attention_type=original, dropout_enabled=True, skip_enabled=True, general_skip=skip, Revin=True,  Pos_Encoder_Type = Projected, batch_size = 32, step_size = 16, kernel_size = 3, decompose_layer = 3 
+New best model saved at best_model_multivariate_dilated2_original_True_True_skip_True_Projected_32_3_3_16.pt
+New best model saved at best_model_multivariate_dilated2_original_True_True_skip_True_Projected_32_3_3_16.pt
+New best model saved at best_model_multivariate_dilated2_original_True_True_skip_True_Projected_32_3_3_16.pt
+New best model saved at best_model_multivariate_dilated2_original_True_True_skip_True_Projected_32_3_3_16.pt
+New best model saved at best_model_multivariate_dilated2_original_True_True_skip_True_Projected_32_3_3_16.pt
+Epoch [10/30], Train Loss: 0.2975, Val Loss: 0.2916
+New best model saved at best_model_multivariate_dilated2_original_True_True_skip_True_Projected_32_3_3_16.pt
+New best model saved at best_model_multivariate_dilated2_original_True_True_skip_True_Projected_32_3_3_16.pt
+New best model saved at best_model_multivariate_dilated2_original_True_True_skip_True_Projected_32_3_3_16.pt
+Epoch [20/30], Train Loss: 0.2838, Val Loss: 0.2843
+New best model saved at best_model_multivariate_dilated2_original_True_True_skip_True_Projected_32_3_3_16.pt
+New best model saved at best_model_multivariate_dilated2_original_True_True_skip_True_Projected_32_3_3_16.pt
+New best model saved at best_model_multivariate_dilated2_original_True_True_skip_True_Projected_32_3_3_16.pt
+New best model saved at best_model_multivariate_dilated2_original_True_True_skip_True_Projected_32_3_3_16.pt
+New best model saved at best_model_multivariate_dilated2_original_True_True_skip_True_Projected_32_3_3_16.pt
+Epoch [30/30], Train Loss: 0.2416, Val Loss: 0.2556
+New best model saved at best_model_multivariate_dilated2_original_True_True_skip_True_Projected_32_3_3_16.pt
+Total Model Running Time: 359.53 seconds for configuration: Data_load_type = multivariate, TCN_type=dilated2, attention_type=original, dropout_enabled=True, skip_enabled=True, general_skip=skip, Revin=True ,batch_size = 32, step_size = 16, kernel_size = 3, decompose_layer = 3, Pos_Encoder_Type = Projected
+Test Loss for configuration: TCN_type=dilated2, attention_type=original, dropout_enabled=True, skip_enabled=True, general_skip=skip, Revin=True, Data Load Type=multivariate, Pos_Encoder_Type = Projected, batch_size = 32, step_size = 16, kernel_size = 3, decompose_layer = 3 : 0.2764
+Running experiment with Data_load_type = multivariate, TCN_type=dilated2, attention_type=original, dropout_enabled=True, skip_enabled=True, general_skip=skip, Revin=True,  Pos_Encoder_Type = Projected, batch_size = 64, step_size = 16, kernel_size = 3, decompose_layer = 3 
+New best model saved at best_model_multivariate_dilated2_original_True_True_skip_True_Projected_64_3_3_16.pt
+New best model saved at best_model_multivariate_dilated2_original_True_True_skip_True_Projected_64_3_3_16.pt
+New best model saved at best_model_multivariate_dilated2_original_True_True_skip_True_Projected_64_3_3_16.pt
+New best model saved at best_model_multivariate_dilated2_original_True_True_skip_True_Projected_64_3_3_16.pt
+New best model saved at best_model_multivariate_dilated2_original_True_True_skip_True_Projected_64_3_3_16.pt
+New best model saved at best_model_multivariate_dilated2_original_True_True_skip_True_Projected_64_3_3_16.pt
+New best model saved at best_model_multivariate_dilated2_original_True_True_skip_True_Projected_64_3_3_16.pt
+Epoch [10/30], Train Loss: 0.2983, Val Loss: 0.2587
+Early stopping triggered
+Total Model Running Time: 192.49 seconds for configuration: Data_load_type = multivariate, TCN_type=dilated2, attention_type=original, dropout_enabled=True, skip_enabled=True, general_skip=skip, Revin=True ,batch_size = 64, step_size = 16, kernel_size = 3, decompose_layer = 3, Pos_Encoder_Type = Projected
+Test Loss for configuration: TCN_type=dilated2, attention_type=original, dropout_enabled=True, skip_enabled=True, general_skip=skip, Revin=True, Data Load Type=multivariate, Pos_Encoder_Type = Projected, batch_size = 64, step_size = 16, kernel_size = 3, decompose_layer = 3 : 0.3232
+Running experiment with Data_load_type = multivariate, TCN_type=dilated2, attention_type=original, dropout_enabled=True, skip_enabled=True, general_skip=skip, Revin=True,  Pos_Encoder_Type = Projected, batch_size = 32, step_size = 1, kernel_size = 5, decompose_layer = 1 
+New best model saved at best_model_multivariate_dilated2_original_True_True_skip_True_Projected_32_1_5_1.pt
+New best model saved at best_model_multivariate_dilated2_original_True_True_skip_True_Projected_32_1_5_1.pt
+New best model saved at best_model_multivariate_dilated2_original_True_True_skip_True_Projected_32_1_5_1.pt
+New best model saved at best_model_multivariate_dilated2_original_True_True_skip_True_Projected_32_1_5_1.pt
+New best model saved at best_model_multivariate_dilated2_original_True_True_skip_True_Projected_32_1_5_1.pt
+New best model saved at best_model_multivariate_dilated2_original_True_True_skip_True_Projected_32_1_5_1.pt
+New best model saved at best_model_multivariate_dilated2_original_True_True_skip_True_Projected_32_1_5_1.pt
+Epoch [10/30], Train Loss: 0.1973, Val Loss: 0.2154
+New best model saved at best_model_multivariate_dilated2_original_True_True_skip_True_Projected_32_1_5_1.pt
+New best model saved at best_model_multivariate_dilated2_original_True_True_skip_True_Projected_32_1_5_1.pt
+New best model saved at best_model_multivariate_dilated2_original_True_True_skip_True_Projected_32_1_5_1.pt
+New best model saved at best_model_multivariate_dilated2_original_True_True_skip_True_Projected_32_1_5_1.pt
+New best model saved at best_model_multivariate_dilated2_original_True_True_skip_True_Projected_32_1_5_1.pt
+Epoch [20/30], Train Loss: 0.1864, Val Loss: 0.2111
+New best model saved at best_model_multivariate_dilated2_original_True_True_skip_True_Projected_32_1_5_1.pt
+New best model saved at best_model_multivariate_dilated2_original_True_True_skip_True_Projected_32_1_5_1.pt
+New best model saved at best_model_multivariate_dilated2_original_True_True_skip_True_Projected_32_1_5_1.pt
+New best model saved at best_model_multivariate_dilated2_original_True_True_skip_True_Projected_32_1_5_1.pt
+Epoch [30/30], Train Loss: 0.1878, Val Loss: 0.2113
+Total Model Running Time: 5566.42 seconds for configuration: Data_load_type = multivariate, TCN_type=dilated2, attention_type=original, dropout_enabled=True, skip_enabled=True, general_skip=skip, Revin=True ,batch_size = 32, step_size = 1, kernel_size = 5, decompose_layer = 1, Pos_Encoder_Type = Projected
+Test Loss for configuration: TCN_type=dilated2, attention_type=original, dropout_enabled=True, skip_enabled=True, general_skip=skip, Revin=True, Data Load Type=multivariate, Pos_Encoder_Type = Projected, batch_size = 32, step_size = 1, kernel_size = 5, decompose_layer = 1 : 0.2128
+Running experiment with Data_load_type = multivariate, TCN_type=dilated2, attention_type=original, dropout_enabled=True, skip_enabled=True, general_skip=skip, Revin=True,  Pos_Encoder_Type = Projected, batch_size = 64, step_size = 1, kernel_size = 5, decompose_layer = 1 
+New best model saved at best_model_multivariate_dilated2_original_True_True_skip_True_Projected_64_1_5_1.pt
+New best model saved at best_model_multivariate_dilated2_original_True_True_skip_True_Projected_64_1_5_1.pt
+New best model saved at best_model_multivariate_dilated2_original_True_True_skip_True_Projected_64_1_5_1.pt
+New best model saved at best_model_multivariate_dilated2_original_True_True_skip_True_Projected_64_1_5_1.pt
+New best model saved at best_model_multivariate_dilated2_original_True_True_skip_True_Projected_64_1_5_1.pt
+New best model saved at best_model_multivariate_dilated2_original_True_True_skip_True_Projected_64_1_5_1.pt
+New best model saved at best_model_multivariate_dilated2_original_True_True_skip_True_Projected_64_1_5_1.pt
+New best model saved at best_model_multivariate_dilated2_original_True_True_skip_True_Projected_64_1_5_1.pt
+New best model saved at best_model_multivariate_dilated2_original_True_True_skip_True_Projected_64_1_5_1.pt
+Epoch [10/30], Train Loss: 0.1723, Val Loss: 0.2088
+New best model saved at best_model_multivariate_dilated2_original_True_True_skip_True_Projected_64_1_5_1.pt
+New best model saved at best_model_multivariate_dilated2_original_True_True_skip_True_Projected_64_1_5_1.pt
+Epoch [20/30], Train Loss: 0.1648, Val Loss: 0.2019
+New best model saved at best_model_multivariate_dilated2_original_True_True_skip_True_Projected_64_1_5_1.pt
+New best model saved at best_model_multivariate_dilated2_original_True_True_skip_True_Projected_64_1_5_1.pt
+New best model saved at best_model_multivariate_dilated2_original_True_True_skip_True_Projected_64_1_5_1.pt
+Epoch [30/30], Train Loss: 0.1660, Val Loss: 0.2041
+Total Model Running Time: 4255.62 seconds for configuration: Data_load_type = multivariate, TCN_type=dilated2, attention_type=original, dropout_enabled=True, skip_enabled=True, general_skip=skip, Revin=True ,batch_size = 64, step_size = 1, kernel_size = 5, decompose_layer = 1, Pos_Encoder_Type = Projected
+Test Loss for configuration: TCN_type=dilated2, attention_type=original, dropout_enabled=True, skip_enabled=True, general_skip=skip, Revin=True, Data Load Type=multivariate, Pos_Encoder_Type = Projected, batch_size = 64, step_size = 1, kernel_size = 5, decompose_layer = 1 : 0.2060
+Running experiment with Data_load_type = multivariate, TCN_type=dilated2, attention_type=original, dropout_enabled=True, skip_enabled=True, general_skip=skip, Revin=True,  Pos_Encoder_Type = Projected, batch_size = 32, step_size = 1, kernel_size = 5, decompose_layer = 3 
+New best model saved at best_model_multivariate_dilated2_original_True_True_skip_True_Projected_32_3_5_1.pt
+New best model saved at best_model_multivariate_dilated2_original_True_True_skip_True_Projected_32_3_5_1.pt
+New best model saved at best_model_multivariate_dilated2_original_True_True_skip_True_Projected_32_3_5_1.pt
+New best model saved at best_model_multivariate_dilated2_original_True_True_skip_True_Projected_32_3_5_1.pt
+New best model saved at best_model_multivariate_dilated2_original_True_True_skip_True_Projected_32_3_5_1.pt
+Epoch [10/30], Train Loss: 0.2030, Val Loss: 0.2238
+New best model saved at best_model_multivariate_dilated2_original_True_True_skip_True_Projected_32_3_5_1.pt
+New best model saved at best_model_multivariate_dilated2_original_True_True_skip_True_Projected_32_3_5_1.pt
+New best model saved at best_model_multivariate_dilated2_original_True_True_skip_True_Projected_32_3_5_1.pt
+Epoch [20/30], Train Loss: 0.1974, Val Loss: 0.2325
+New best model saved at best_model_multivariate_dilated2_original_True_True_skip_True_Projected_32_3_5_1.pt
+New best model saved at best_model_multivariate_dilated2_original_True_True_skip_True_Projected_32_3_5_1.pt
+Epoch [30/30], Train Loss: 0.1960, Val Loss: 0.2246
+Total Model Running Time: 8360.29 seconds for configuration: Data_load_type = multivariate, TCN_type=dilated2, attention_type=original, dropout_enabled=True, skip_enabled=True, general_skip=skip, Revin=True ,batch_size = 32, step_size = 1, kernel_size = 5, decompose_layer = 3, Pos_Encoder_Type = Projected
+Test Loss for configuration: TCN_type=dilated2, attention_type=original, dropout_enabled=True, skip_enabled=True, general_skip=skip, Revin=True, Data Load Type=multivariate, Pos_Encoder_Type = Projected, batch_size = 32, step_size = 1, kernel_size = 5, decompose_layer = 3 : 0.2220
+Running experiment with Data_load_type = multivariate, TCN_type=dilated2, attention_type=original, dropout_enabled=True, skip_enabled=True, general_skip=skip, Revin=True,  Pos_Encoder_Type = Projected, batch_size = 64, step_size = 1, kernel_size = 5, decompose_layer = 3 
+New best model saved at best_model_multivariate_dilated2_original_True_True_skip_True_Projected_64_3_5_1.pt
+New best model saved at best_model_multivariate_dilated2_original_True_True_skip_True_Projected_64_3_5_1.pt
+New best model saved at best_model_multivariate_dilated2_original_True_True_skip_True_Projected_64_3_5_1.pt
+New best model saved at best_model_multivariate_dilated2_original_True_True_skip_True_Projected_64_3_5_1.pt
+New best model saved at best_model_multivariate_dilated2_original_True_True_skip_True_Projected_64_3_5_1.pt
+New best model saved at best_model_multivariate_dilated2_original_True_True_skip_True_Projected_64_3_5_1.pt
+New best model saved at best_model_multivariate_dilated2_original_True_True_skip_True_Projected_64_3_5_1.pt
+New best model saved at best_model_multivariate_dilated2_original_True_True_skip_True_Projected_64_3_5_1.pt
+Epoch [10/30], Train Loss: 0.1964, Val Loss: 0.2183
+New best model saved at best_model_multivariate_dilated2_original_True_True_skip_True_Projected_64_3_5_1.pt
+New best model saved at best_model_multivariate_dilated2_original_True_True_skip_True_Projected_64_3_5_1.pt
+New best model saved at best_model_multivariate_dilated2_original_True_True_skip_True_Projected_64_3_5_1.pt
+New best model saved at best_model_multivariate_dilated2_original_True_True_skip_True_Projected_64_3_5_1.pt
+New best model saved at best_model_multivariate_dilated2_original_True_True_skip_True_Projected_64_3_5_1.pt
+Epoch [20/30], Train Loss: 0.1860, Val Loss: 0.2152
+New best model saved at best_model_multivariate_dilated2_original_True_True_skip_True_Projected_64_3_5_1.pt
+New best model saved at best_model_multivariate_dilated2_original_True_True_skip_True_Projected_64_3_5_1.pt
+Epoch [30/30], Train Loss: 0.1833, Val Loss: 0.2163
+Total Model Running Time: 7357.52 seconds for configuration: Data_load_type = multivariate, TCN_type=dilated2, attention_type=original, dropout_enabled=True, skip_enabled=True, general_skip=skip, Revin=True ,batch_size = 64, step_size = 1, kernel_size = 5, decompose_layer = 3, Pos_Encoder_Type = Projected
+Test Loss for configuration: TCN_type=dilated2, attention_type=original, dropout_enabled=True, skip_enabled=True, general_skip=skip, Revin=True, Data Load Type=multivariate, Pos_Encoder_Type = Projected, batch_size = 64, step_size = 1, kernel_size = 5, decompose_layer = 3 : 0.2162
+Running experiment with Data_load_type = multivariate, TCN_type=dilated2, attention_type=original, dropout_enabled=True, skip_enabled=True, general_skip=skip, Revin=True,  Pos_Encoder_Type = Projected, batch_size = 32, step_size = 8, kernel_size = 5, decompose_layer = 1 
+New best model saved at best_model_multivariate_dilated2_original_True_True_skip_True_Projected_32_1_5_8.pt
+New best model saved at best_model_multivariate_dilated2_original_True_True_skip_True_Projected_32_1_5_8.pt
+New best model saved at best_model_multivariate_dilated2_original_True_True_skip_True_Projected_32_1_5_8.pt
+New best model saved at best_model_multivariate_dilated2_original_True_True_skip_True_Projected_32_1_5_8.pt
+New best model saved at best_model_multivariate_dilated2_original_True_True_skip_True_Projected_32_1_5_8.pt
+New best model saved at best_model_multivariate_dilated2_original_True_True_skip_True_Projected_32_1_5_8.pt
+New best model saved at best_model_multivariate_dilated2_original_True_True_skip_True_Projected_32_1_5_8.pt
+Epoch [10/30], Train Loss: 0.2434, Val Loss: 0.2403
+New best model saved at best_model_multivariate_dilated2_original_True_True_skip_True_Projected_32_1_5_8.pt
+New best model saved at best_model_multivariate_dilated2_original_True_True_skip_True_Projected_32_1_5_8.pt
+New best model saved at best_model_multivariate_dilated2_original_True_True_skip_True_Projected_32_1_5_8.pt
+New best model saved at best_model_multivariate_dilated2_original_True_True_skip_True_Projected_32_1_5_8.pt
+New best model saved at best_model_multivariate_dilated2_original_True_True_skip_True_Projected_32_1_5_8.pt
+New best model saved at best_model_multivariate_dilated2_original_True_True_skip_True_Projected_32_1_5_8.pt
+New best model saved at best_model_multivariate_dilated2_original_True_True_skip_True_Projected_32_1_5_8.pt
+New best model saved at best_model_multivariate_dilated2_original_True_True_skip_True_Projected_32_1_5_8.pt
+New best model saved at best_model_multivariate_dilated2_original_True_True_skip_True_Projected_32_1_5_8.pt
+Epoch [20/30], Train Loss: 0.2115, Val Loss: 0.2142
+New best model saved at best_model_multivariate_dilated2_original_True_True_skip_True_Projected_32_1_5_8.pt
+New best model saved at best_model_multivariate_dilated2_original_True_True_skip_True_Projected_32_1_5_8.pt
+New best model saved at best_model_multivariate_dilated2_original_True_True_skip_True_Projected_32_1_5_8.pt
+New best model saved at best_model_multivariate_dilated2_original_True_True_skip_True_Projected_32_1_5_8.pt
+New best model saved at best_model_multivariate_dilated2_original_True_True_skip_True_Projected_32_1_5_8.pt
+Epoch [30/30], Train Loss: 0.1961, Val Loss: 0.2073
+Total Model Running Time: 505.93 seconds for configuration: Data_load_type = multivariate, TCN_type=dilated2, attention_type=original, dropout_enabled=True, skip_enabled=True, general_skip=skip, Revin=True ,batch_size = 32, step_size = 8, kernel_size = 5, decompose_layer = 1, Pos_Encoder_Type = Projected
+Test Loss for configuration: TCN_type=dilated2, attention_type=original, dropout_enabled=True, skip_enabled=True, general_skip=skip, Revin=True, Data Load Type=multivariate, Pos_Encoder_Type = Projected, batch_size = 32, step_size = 8, kernel_size = 5, decompose_layer = 1 : 0.2168
+Running experiment with Data_load_type = multivariate, TCN_type=dilated2, attention_type=original, dropout_enabled=True, skip_enabled=True, general_skip=skip, Revin=True,  Pos_Encoder_Type = Projected, batch_size = 64, step_size = 8, kernel_size = 5, decompose_layer = 1 
+New best model saved at best_model_multivariate_dilated2_original_True_True_skip_True_Projected_64_1_5_8.pt
+New best model saved at best_model_multivariate_dilated2_original_True_True_skip_True_Projected_64_1_5_8.pt
+New best model saved at best_model_multivariate_dilated2_original_True_True_skip_True_Projected_64_1_5_8.pt
+New best model saved at best_model_multivariate_dilated2_original_True_True_skip_True_Projected_64_1_5_8.pt
+New best model saved at best_model_multivariate_dilated2_original_True_True_skip_True_Projected_64_1_5_8.pt
+New best model saved at best_model_multivariate_dilated2_original_True_True_skip_True_Projected_64_1_5_8.pt
+New best model saved at best_model_multivariate_dilated2_original_True_True_skip_True_Projected_64_1_5_8.pt
+New best model saved at best_model_multivariate_dilated2_original_True_True_skip_True_Projected_64_1_5_8.pt
+Epoch [10/30], Train Loss: 0.2757, Val Loss: 0.2566
+New best model saved at best_model_multivariate_dilated2_original_True_True_skip_True_Projected_64_1_5_8.pt
+New best model saved at best_model_multivariate_dilated2_original_True_True_skip_True_Projected_64_1_5_8.pt
+New best model saved at best_model_multivariate_dilated2_original_True_True_skip_True_Projected_64_1_5_8.pt
+New best model saved at best_model_multivariate_dilated2_original_True_True_skip_True_Projected_64_1_5_8.pt
+New best model saved at best_model_multivariate_dilated2_original_True_True_skip_True_Projected_64_1_5_8.pt
+New best model saved at best_model_multivariate_dilated2_original_True_True_skip_True_Projected_64_1_5_8.pt
+New best model saved at best_model_multivariate_dilated2_original_True_True_skip_True_Projected_64_1_5_8.pt
+New best model saved at best_model_multivariate_dilated2_original_True_True_skip_True_Projected_64_1_5_8.pt
+New best model saved at best_model_multivariate_dilated2_original_True_True_skip_True_Projected_64_1_5_8.pt
+Epoch [20/30], Train Loss: 0.2243, Val Loss: 0.2138
+New best model saved at best_model_multivariate_dilated2_original_True_True_skip_True_Projected_64_1_5_8.pt
+New best model saved at best_model_multivariate_dilated2_original_True_True_skip_True_Projected_64_1_5_8.pt
+New best model saved at best_model_multivariate_dilated2_original_True_True_skip_True_Projected_64_1_5_8.pt
+New best model saved at best_model_multivariate_dilated2_original_True_True_skip_True_Projected_64_1_5_8.pt
+New best model saved at best_model_multivariate_dilated2_original_True_True_skip_True_Projected_64_1_5_8.pt
+Epoch [30/30], Train Loss: 0.1986, Val Loss: 0.1999
+Total Model Running Time: 449.62 seconds for configuration: Data_load_type = multivariate, TCN_type=dilated2, attention_type=original, dropout_enabled=True, skip_enabled=True, general_skip=skip, Revin=True ,batch_size = 64, step_size = 8, kernel_size = 5, decompose_layer = 1, Pos_Encoder_Type = Projected
+Test Loss for configuration: TCN_type=dilated2, attention_type=original, dropout_enabled=True, skip_enabled=True, general_skip=skip, Revin=True, Data Load Type=multivariate, Pos_Encoder_Type = Projected, batch_size = 64, step_size = 8, kernel_size = 5, decompose_layer = 1 : 0.2171
+Running experiment with Data_load_type = multivariate, TCN_type=dilated2, attention_type=original, dropout_enabled=True, skip_enabled=True, general_skip=skip, Revin=True,  Pos_Encoder_Type = Projected, batch_size = 32, step_size = 8, kernel_size = 5, decompose_layer = 3 
+New best model saved at best_model_multivariate_dilated2_original_True_True_skip_True_Projected_32_3_5_8.pt
+New best model saved at best_model_multivariate_dilated2_original_True_True_skip_True_Projected_32_3_5_8.pt
+New best model saved at best_model_multivariate_dilated2_original_True_True_skip_True_Projected_32_3_5_8.pt
+Epoch [10/30], Train Loss: 0.2925, Val Loss: 0.3038
+New best model saved at best_model_multivariate_dilated2_original_True_True_skip_True_Projected_32_3_5_8.pt
+New best model saved at best_model_multivariate_dilated2_original_True_True_skip_True_Projected_32_3_5_8.pt
+New best model saved at best_model_multivariate_dilated2_original_True_True_skip_True_Projected_32_3_5_8.pt
+New best model saved at best_model_multivariate_dilated2_original_True_True_skip_True_Projected_32_3_5_8.pt
+New best model saved at best_model_multivariate_dilated2_original_True_True_skip_True_Projected_32_3_5_8.pt
+New best model saved at best_model_multivariate_dilated2_original_True_True_skip_True_Projected_32_3_5_8.pt
+Epoch [20/30], Train Loss: 0.2362, Val Loss: 0.2624
+New best model saved at best_model_multivariate_dilated2_original_True_True_skip_True_Projected_32_3_5_8.pt
+New best model saved at best_model_multivariate_dilated2_original_True_True_skip_True_Projected_32_3_5_8.pt
+New best model saved at best_model_multivariate_dilated2_original_True_True_skip_True_Projected_32_3_5_8.pt
+New best model saved at best_model_multivariate_dilated2_original_True_True_skip_True_Projected_32_3_5_8.pt
+Epoch [30/30], Train Loss: 0.2266, Val Loss: 0.2599
+Total Model Running Time: 818.89 seconds for configuration: Data_load_type = multivariate, TCN_type=dilated2, attention_type=original, dropout_enabled=True, skip_enabled=True, general_skip=skip, Revin=True ,batch_size = 32, step_size = 8, kernel_size = 5, decompose_layer = 3, Pos_Encoder_Type = Projected
+Test Loss for configuration: TCN_type=dilated2, attention_type=original, dropout_enabled=True, skip_enabled=True, general_skip=skip, Revin=True, Data Load Type=multivariate, Pos_Encoder_Type = Projected, batch_size = 32, step_size = 8, kernel_size = 5, decompose_layer = 3 : 0.2696
+Running experiment with Data_load_type = multivariate, TCN_type=dilated2, attention_type=original, dropout_enabled=True, skip_enabled=True, general_skip=skip, Revin=True,  Pos_Encoder_Type = Projected, batch_size = 64, step_size = 8, kernel_size = 5, decompose_layer = 3 
+New best model saved at best_model_multivariate_dilated2_original_True_True_skip_True_Projected_64_3_5_8.pt
+New best model saved at best_model_multivariate_dilated2_original_True_True_skip_True_Projected_64_3_5_8.pt
+New best model saved at best_model_multivariate_dilated2_original_True_True_skip_True_Projected_64_3_5_8.pt
+New best model saved at best_model_multivariate_dilated2_original_True_True_skip_True_Projected_64_3_5_8.pt
+Epoch [10/30], Train Loss: 0.2900, Val Loss: 0.2880
+New best model saved at best_model_multivariate_dilated2_original_True_True_skip_True_Projected_64_3_5_8.pt
+New best model saved at best_model_multivariate_dilated2_original_True_True_skip_True_Projected_64_3_5_8.pt
+New best model saved at best_model_multivariate_dilated2_original_True_True_skip_True_Projected_64_3_5_8.pt
+New best model saved at best_model_multivariate_dilated2_original_True_True_skip_True_Projected_64_3_5_8.pt
+New best model saved at best_model_multivariate_dilated2_original_True_True_skip_True_Projected_64_3_5_8.pt
+Epoch [20/30], Train Loss: 0.2379, Val Loss: 0.2493
+New best model saved at best_model_multivariate_dilated2_original_True_True_skip_True_Projected_64_3_5_8.pt
+New best model saved at best_model_multivariate_dilated2_original_True_True_skip_True_Projected_64_3_5_8.pt
+New best model saved at best_model_multivariate_dilated2_original_True_True_skip_True_Projected_64_3_5_8.pt
+New best model saved at best_model_multivariate_dilated2_original_True_True_skip_True_Projected_64_3_5_8.pt
+New best model saved at best_model_multivariate_dilated2_original_True_True_skip_True_Projected_64_3_5_8.pt
+Epoch [30/30], Train Loss: 0.2185, Val Loss: 0.2442
+Total Model Running Time: 665.03 seconds for configuration: Data_load_type = multivariate, TCN_type=dilated2, attention_type=original, dropout_enabled=True, skip_enabled=True, general_skip=skip, Revin=True ,batch_size = 64, step_size = 8, kernel_size = 5, decompose_layer = 3, Pos_Encoder_Type = Projected
+Test Loss for configuration: TCN_type=dilated2, attention_type=original, dropout_enabled=True, skip_enabled=True, general_skip=skip, Revin=True, Data Load Type=multivariate, Pos_Encoder_Type = Projected, batch_size = 64, step_size = 8, kernel_size = 5, decompose_layer = 3 : 0.2653
+Running experiment with Data_load_type = multivariate, TCN_type=dilated2, attention_type=original, dropout_enabled=True, skip_enabled=True, general_skip=skip, Revin=True,  Pos_Encoder_Type = Projected, batch_size = 32, step_size = 16, kernel_size = 5, decompose_layer = 1 
+New best model saved at best_model_multivariate_dilated2_original_True_True_skip_True_Projected_32_1_5_16.pt
+New best model saved at best_model_multivariate_dilated2_original_True_True_skip_True_Projected_32_1_5_16.pt
+New best model saved at best_model_multivariate_dilated2_original_True_True_skip_True_Projected_32_1_5_16.pt
+New best model saved at best_model_multivariate_dilated2_original_True_True_skip_True_Projected_32_1_5_16.pt
+New best model saved at best_model_multivariate_dilated2_original_True_True_skip_True_Projected_32_1_5_16.pt
+New best model saved at best_model_multivariate_dilated2_original_True_True_skip_True_Projected_32_1_5_16.pt
+New best model saved at best_model_multivariate_dilated2_original_True_True_skip_True_Projected_32_1_5_16.pt
+New best model saved at best_model_multivariate_dilated2_original_True_True_skip_True_Projected_32_1_5_16.pt
+New best model saved at best_model_multivariate_dilated2_original_True_True_skip_True_Projected_32_1_5_16.pt
+Epoch [10/30], Train Loss: 0.3040, Val Loss: 0.2852
+New best model saved at best_model_multivariate_dilated2_original_True_True_skip_True_Projected_32_1_5_16.pt
+New best model saved at best_model_multivariate_dilated2_original_True_True_skip_True_Projected_32_1_5_16.pt
+New best model saved at best_model_multivariate_dilated2_original_True_True_skip_True_Projected_32_1_5_16.pt
+New best model saved at best_model_multivariate_dilated2_original_True_True_skip_True_Projected_32_1_5_16.pt
+New best model saved at best_model_multivariate_dilated2_original_True_True_skip_True_Projected_32_1_5_16.pt
+New best model saved at best_model_multivariate_dilated2_original_True_True_skip_True_Projected_32_1_5_16.pt
+Epoch [20/30], Train Loss: 0.2839, Val Loss: 0.2674
+New best model saved at best_model_multivariate_dilated2_original_True_True_skip_True_Projected_32_1_5_16.pt
+New best model saved at best_model_multivariate_dilated2_original_True_True_skip_True_Projected_32_1_5_16.pt
+New best model saved at best_model_multivariate_dilated2_original_True_True_skip_True_Projected_32_1_5_16.pt
+New best model saved at best_model_multivariate_dilated2_original_True_True_skip_True_Projected_32_1_5_16.pt
+New best model saved at best_model_multivariate_dilated2_original_True_True_skip_True_Projected_32_1_5_16.pt
+New best model saved at best_model_multivariate_dilated2_original_True_True_skip_True_Projected_32_1_5_16.pt
+New best model saved at best_model_multivariate_dilated2_original_True_True_skip_True_Projected_32_1_5_16.pt
+Epoch [30/30], Train Loss: 0.2377, Val Loss: 0.2222
+New best model saved at best_model_multivariate_dilated2_original_True_True_skip_True_Projected_32_1_5_16.pt
+Total Model Running Time: 246.50 seconds for configuration: Data_load_type = multivariate, TCN_type=dilated2, attention_type=original, dropout_enabled=True, skip_enabled=True, general_skip=skip, Revin=True ,batch_size = 32, step_size = 16, kernel_size = 5, decompose_layer = 1, Pos_Encoder_Type = Projected
+Test Loss for configuration: TCN_type=dilated2, attention_type=original, dropout_enabled=True, skip_enabled=True, general_skip=skip, Revin=True, Data Load Type=multivariate, Pos_Encoder_Type = Projected, batch_size = 32, step_size = 16, kernel_size = 5, decompose_layer = 1 : 0.2323
+Running experiment with Data_load_type = multivariate, TCN_type=dilated2, attention_type=original, dropout_enabled=True, skip_enabled=True, general_skip=skip, Revin=True,  Pos_Encoder_Type = Projected, batch_size = 64, step_size = 16, kernel_size = 5, decompose_layer = 1 
+New best model saved at best_model_multivariate_dilated2_original_True_True_skip_True_Projected_64_1_5_16.pt
+New best model saved at best_model_multivariate_dilated2_original_True_True_skip_True_Projected_64_1_5_16.pt
+New best model saved at best_model_multivariate_dilated2_original_True_True_skip_True_Projected_64_1_5_16.pt
+New best model saved at best_model_multivariate_dilated2_original_True_True_skip_True_Projected_64_1_5_16.pt
+New best model saved at best_model_multivariate_dilated2_original_True_True_skip_True_Projected_64_1_5_16.pt
+New best model saved at best_model_multivariate_dilated2_original_True_True_skip_True_Projected_64_1_5_16.pt
+New best model saved at best_model_multivariate_dilated2_original_True_True_skip_True_Projected_64_1_5_16.pt
+Epoch [10/30], Train Loss: 0.2983, Val Loss: 0.2520
+New best model saved at best_model_multivariate_dilated2_original_True_True_skip_True_Projected_64_1_5_16.pt
+New best model saved at best_model_multivariate_dilated2_original_True_True_skip_True_Projected_64_1_5_16.pt
+New best model saved at best_model_multivariate_dilated2_original_True_True_skip_True_Projected_64_1_5_16.pt
+New best model saved at best_model_multivariate_dilated2_original_True_True_skip_True_Projected_64_1_5_16.pt
+New best model saved at best_model_multivariate_dilated2_original_True_True_skip_True_Projected_64_1_5_16.pt
+New best model saved at best_model_multivariate_dilated2_original_True_True_skip_True_Projected_64_1_5_16.pt
+New best model saved at best_model_multivariate_dilated2_original_True_True_skip_True_Projected_64_1_5_16.pt
+New best model saved at best_model_multivariate_dilated2_original_True_True_skip_True_Projected_64_1_5_16.pt
+New best model saved at best_model_multivariate_dilated2_original_True_True_skip_True_Projected_64_1_5_16.pt
+New best model saved at best_model_multivariate_dilated2_original_True_True_skip_True_Projected_64_1_5_16.pt
+Epoch [20/30], Train Loss: 0.2549, Val Loss: 0.2127
+New best model saved at best_model_multivariate_dilated2_original_True_True_skip_True_Projected_64_1_5_16.pt
+New best model saved at best_model_multivariate_dilated2_original_True_True_skip_True_Projected_64_1_5_16.pt
+New best model saved at best_model_multivariate_dilated2_original_True_True_skip_True_Projected_64_1_5_16.pt
+New best model saved at best_model_multivariate_dilated2_original_True_True_skip_True_Projected_64_1_5_16.pt
+New best model saved at best_model_multivariate_dilated2_original_True_True_skip_True_Projected_64_1_5_16.pt
+New best model saved at best_model_multivariate_dilated2_original_True_True_skip_True_Projected_64_1_5_16.pt
+Epoch [30/30], Train Loss: 0.2372, Val Loss: 0.1987
+New best model saved at best_model_multivariate_dilated2_original_True_True_skip_True_Projected_64_1_5_16.pt
+Total Model Running Time: 228.04 seconds for configuration: Data_load_type = multivariate, TCN_type=dilated2, attention_type=original, dropout_enabled=True, skip_enabled=True, general_skip=skip, Revin=True ,batch_size = 64, step_size = 16, kernel_size = 5, decompose_layer = 1, Pos_Encoder_Type = Projected
+Test Loss for configuration: TCN_type=dilated2, attention_type=original, dropout_enabled=True, skip_enabled=True, general_skip=skip, Revin=True, Data Load Type=multivariate, Pos_Encoder_Type = Projected, batch_size = 64, step_size = 16, kernel_size = 5, decompose_layer = 1 : 0.2347
+Running experiment with Data_load_type = multivariate, TCN_type=dilated2, attention_type=original, dropout_enabled=True, skip_enabled=True, general_skip=skip, Revin=True,  Pos_Encoder_Type = Projected, batch_size = 32, step_size = 16, kernel_size = 5, decompose_layer = 3 
+New best model saved at best_model_multivariate_dilated2_original_True_True_skip_True_Projected_32_3_5_16.pt
+New best model saved at best_model_multivariate_dilated2_original_True_True_skip_True_Projected_32_3_5_16.pt
+New best model saved at best_model_multivariate_dilated2_original_True_True_skip_True_Projected_32_3_5_16.pt
+New best model saved at best_model_multivariate_dilated2_original_True_True_skip_True_Projected_32_3_5_16.pt
+New best model saved at best_model_multivariate_dilated2_original_True_True_skip_True_Projected_32_3_5_16.pt
+New best model saved at best_model_multivariate_dilated2_original_True_True_skip_True_Projected_32_3_5_16.pt
+Epoch [10/30], Train Loss: 0.2980, Val Loss: 0.2899
+Early stopping triggered
+Total Model Running Time: 222.30 seconds for configuration: Data_load_type = multivariate, TCN_type=dilated2, attention_type=original, dropout_enabled=True, skip_enabled=True, general_skip=skip, Revin=True ,batch_size = 32, step_size = 16, kernel_size = 5, decompose_layer = 3, Pos_Encoder_Type = Projected
+Test Loss for configuration: TCN_type=dilated2, attention_type=original, dropout_enabled=True, skip_enabled=True, general_skip=skip, Revin=True, Data Load Type=multivariate, Pos_Encoder_Type = Projected, batch_size = 32, step_size = 16, kernel_size = 5, decompose_layer = 3 : 0.3144
+Running experiment with Data_load_type = multivariate, TCN_type=dilated2, attention_type=original, dropout_enabled=True, skip_enabled=True, general_skip=skip, Revin=True,  Pos_Encoder_Type = Projected, batch_size = 64, step_size = 16, kernel_size = 5, decompose_layer = 3 
+New best model saved at best_model_multivariate_dilated2_original_True_True_skip_True_Projected_64_3_5_16.pt
+New best model saved at best_model_multivariate_dilated2_original_True_True_skip_True_Projected_64_3_5_16.pt
+New best model saved at best_model_multivariate_dilated2_original_True_True_skip_True_Projected_64_3_5_16.pt
+New best model saved at best_model_multivariate_dilated2_original_True_True_skip_True_Projected_64_3_5_16.pt
+Epoch [10/30], Train Loss: 0.3209, Val Loss: 0.2720
+Early stopping triggered
+Total Model Running Time: 162.80 seconds for configuration: Data_load_type = multivariate, TCN_type=dilated2, attention_type=original, dropout_enabled=True, skip_enabled=True, general_skip=skip, Revin=True ,batch_size = 64, step_size = 16, kernel_size = 5, decompose_layer = 3, Pos_Encoder_Type = Projected
+Test Loss for configuration: TCN_type=dilated2, attention_type=original, dropout_enabled=True, skip_enabled=True, general_skip=skip, Revin=True, Data Load Type=multivariate, Pos_Encoder_Type = Projected, batch_size = 64, step_size = 16, kernel_size = 5, decompose_layer = 3 : 0.3275

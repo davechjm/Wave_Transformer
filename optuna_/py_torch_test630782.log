@@ -1,0 +1,6 @@
+Running experiment with Data_load_type = univariate, TCN_type=dilated2, attention_type=original, dropout_enabled=True, skip_enabled=True, general_skip=skip, Revin=True,  Pos_Encoder_Type = Projected, batch_size = 128, step_size = 64, kernel_size = 5, decompose_layer = 3 
+New best model saved at best_model_univariate_dilated2_original_True_True_skip_True_Projected_128_3_5_64.pt
+Epoch [10/50], Train Loss: 0.2318, Val Loss: 0.0000
+Early stopping triggered
+Total Model Running Time: 23.81 seconds for configuration: Data_load_type = univariate, TCN_type=dilated2, attention_type=original, dropout_enabled=True, skip_enabled=True, general_skip=skip, Revin=True ,batch_size = 128, step_size = 64, kernel_size = 5, decompose_layer = 3, Pos_Encoder_Type = Projected
+Test Loss for configuration: TCN_type=dilated2, attention_type=original, dropout_enabled=True, skip_enabled=True, general_skip=skip, Revin=True, Data Load Type=univariate, Pos_Encoder_Type = Projected, batch_size = 128, step_size = 64, kernel_size = 5, decompose_layer = 3 : 0.9877

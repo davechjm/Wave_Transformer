@@ -1,0 +1,207 @@
+Running experiment with Data_load_type = multivariate, TCN_type=dilated2, attention_type=log, dropout_enabled=True, skip_enabled=True, general_skip=skip, nhead=1, kernel_size = 5, step_szie = 32
+New best model saved at best_model_multivariate_dilated2_log_True_True_skip_1_5_32__Projected_MultiHeadAttention.pt
+New best model saved at best_model_multivariate_dilated2_log_True_True_skip_1_5_32__Projected_MultiHeadAttention.pt
+New best model saved at best_model_multivariate_dilated2_log_True_True_skip_1_5_32__Projected_MultiHeadAttention.pt
+New best model saved at best_model_multivariate_dilated2_log_True_True_skip_1_5_32__Projected_MultiHeadAttention.pt
+New best model saved at best_model_multivariate_dilated2_log_True_True_skip_1_5_32__Projected_MultiHeadAttention.pt
+New best model saved at best_model_multivariate_dilated2_log_True_True_skip_1_5_32__Projected_MultiHeadAttention.pt
+New best model saved at best_model_multivariate_dilated2_log_True_True_skip_1_5_32__Projected_MultiHeadAttention.pt
+New best model saved at best_model_multivariate_dilated2_log_True_True_skip_1_5_32__Projected_MultiHeadAttention.pt
+New best model saved at best_model_multivariate_dilated2_log_True_True_skip_1_5_32__Projected_MultiHeadAttention.pt
+Epoch [10/30], Train Loss: 0.2954, Val Loss: 0.3127
+New best model saved at best_model_multivariate_dilated2_log_True_True_skip_1_5_32__Projected_MultiHeadAttention.pt
+New best model saved at best_model_multivariate_dilated2_log_True_True_skip_1_5_32__Projected_MultiHeadAttention.pt
+New best model saved at best_model_multivariate_dilated2_log_True_True_skip_1_5_32__Projected_MultiHeadAttention.pt
+New best model saved at best_model_multivariate_dilated2_log_True_True_skip_1_5_32__Projected_MultiHeadAttention.pt
+New best model saved at best_model_multivariate_dilated2_log_True_True_skip_1_5_32__Projected_MultiHeadAttention.pt
+New best model saved at best_model_multivariate_dilated2_log_True_True_skip_1_5_32__Projected_MultiHeadAttention.pt
+Epoch [20/30], Train Loss: 0.2926, Val Loss: 0.3106
+New best model saved at best_model_multivariate_dilated2_log_True_True_skip_1_5_32__Projected_MultiHeadAttention.pt
+New best model saved at best_model_multivariate_dilated2_log_True_True_skip_1_5_32__Projected_MultiHeadAttention.pt
+New best model saved at best_model_multivariate_dilated2_log_True_True_skip_1_5_32__Projected_MultiHeadAttention.pt
+New best model saved at best_model_multivariate_dilated2_log_True_True_skip_1_5_32__Projected_MultiHeadAttention.pt
+New best model saved at best_model_multivariate_dilated2_log_True_True_skip_1_5_32__Projected_MultiHeadAttention.pt
+New best model saved at best_model_multivariate_dilated2_log_True_True_skip_1_5_32__Projected_MultiHeadAttention.pt
+New best model saved at best_model_multivariate_dilated2_log_True_True_skip_1_5_32__Projected_MultiHeadAttention.pt
+Epoch [30/30], Train Loss: 0.2911, Val Loss: 0.3133
+Total Model Running Time: 198.35 seconds for configuration: Data_load_type = multivariate, TCN_type=dilated2, attention_type=log, dropout_enabled=True, skip_enabled=True, general_skip=skip,  nhead=1, kernel_size=5, step_size=32, pe_type = Projected
+Test Loss for configuration: TCN_type=dilated2, attention_type=log, dropout_enabled=True, skip_enabled=True, general_skip=skip,  nhead=1, kernel_size=5, step_size = 32, pe_type = Projected, Data Load Type=multivariate: 0.3577
+Running experiment with Data_load_type = multivariate, TCN_type=dilated2, attention_type=log, dropout_enabled=True, skip_enabled=True, general_skip=skip, nhead=1, kernel_size = 7, step_szie = 32
+New best model saved at best_model_multivariate_dilated2_log_True_True_skip_1_7_32__Projected_MultiHeadAttention.pt
+New best model saved at best_model_multivariate_dilated2_log_True_True_skip_1_7_32__Projected_MultiHeadAttention.pt
+New best model saved at best_model_multivariate_dilated2_log_True_True_skip_1_7_32__Projected_MultiHeadAttention.pt
+New best model saved at best_model_multivariate_dilated2_log_True_True_skip_1_7_32__Projected_MultiHeadAttention.pt
+New best model saved at best_model_multivariate_dilated2_log_True_True_skip_1_7_32__Projected_MultiHeadAttention.pt
+New best model saved at best_model_multivariate_dilated2_log_True_True_skip_1_7_32__Projected_MultiHeadAttention.pt
+New best model saved at best_model_multivariate_dilated2_log_True_True_skip_1_7_32__Projected_MultiHeadAttention.pt
+New best model saved at best_model_multivariate_dilated2_log_True_True_skip_1_7_32__Projected_MultiHeadAttention.pt
+New best model saved at best_model_multivariate_dilated2_log_True_True_skip_1_7_32__Projected_MultiHeadAttention.pt
+Epoch [10/30], Train Loss: 0.2935, Val Loss: 0.3126
+New best model saved at best_model_multivariate_dilated2_log_True_True_skip_1_7_32__Projected_MultiHeadAttention.pt
+New best model saved at best_model_multivariate_dilated2_log_True_True_skip_1_7_32__Projected_MultiHeadAttention.pt
+New best model saved at best_model_multivariate_dilated2_log_True_True_skip_1_7_32__Projected_MultiHeadAttention.pt
+New best model saved at best_model_multivariate_dilated2_log_True_True_skip_1_7_32__Projected_MultiHeadAttention.pt
+New best model saved at best_model_multivariate_dilated2_log_True_True_skip_1_7_32__Projected_MultiHeadAttention.pt
+New best model saved at best_model_multivariate_dilated2_log_True_True_skip_1_7_32__Projected_MultiHeadAttention.pt
+New best model saved at best_model_multivariate_dilated2_log_True_True_skip_1_7_32__Projected_MultiHeadAttention.pt
+Epoch [20/30], Train Loss: 0.2920, Val Loss: 0.3124
+New best model saved at best_model_multivariate_dilated2_log_True_True_skip_1_7_32__Projected_MultiHeadAttention.pt
+New best model saved at best_model_multivariate_dilated2_log_True_True_skip_1_7_32__Projected_MultiHeadAttention.pt
+Epoch [30/30], Train Loss: 0.2907, Val Loss: 0.3080
+New best model saved at best_model_multivariate_dilated2_log_True_True_skip_1_7_32__Projected_MultiHeadAttention.pt
+Total Model Running Time: 213.90 seconds for configuration: Data_load_type = multivariate, TCN_type=dilated2, attention_type=log, dropout_enabled=True, skip_enabled=True, general_skip=skip,  nhead=1, kernel_size=7, step_size=32, pe_type = Projected
+Test Loss for configuration: TCN_type=dilated2, attention_type=log, dropout_enabled=True, skip_enabled=True, general_skip=skip,  nhead=1, kernel_size=7, step_size = 32, pe_type = Projected, Data Load Type=multivariate: 0.3581
+Running experiment with Data_load_type = multivariate, TCN_type=dilated2, attention_type=log, dropout_enabled=True, skip_enabled=True, general_skip=skip, nhead=1, kernel_size = 5, step_szie = 64
+New best model saved at best_model_multivariate_dilated2_log_True_True_skip_1_5_64__Projected_MultiHeadAttention.pt
+Epoch [10/30], Train Loss: 0.1957, Val Loss: 0.0000
+Early stopping triggered
+Total Model Running Time: 20.90 seconds for configuration: Data_load_type = multivariate, TCN_type=dilated2, attention_type=log, dropout_enabled=True, skip_enabled=True, general_skip=skip,  nhead=1, kernel_size=5, step_size=64, pe_type = Projected
+Test Loss for configuration: TCN_type=dilated2, attention_type=log, dropout_enabled=True, skip_enabled=True, general_skip=skip,  nhead=1, kernel_size=5, step_size = 64, pe_type = Projected, Data Load Type=multivariate: 0.3632
+Running experiment with Data_load_type = multivariate, TCN_type=dilated2, attention_type=log, dropout_enabled=True, skip_enabled=True, general_skip=skip, nhead=1, kernel_size = 7, step_szie = 64
+New best model saved at best_model_multivariate_dilated2_log_True_True_skip_1_7_64__Projected_MultiHeadAttention.pt
+Epoch [10/30], Train Loss: 0.1921, Val Loss: 0.0000
+Early stopping triggered
+Total Model Running Time: 22.95 seconds for configuration: Data_load_type = multivariate, TCN_type=dilated2, attention_type=log, dropout_enabled=True, skip_enabled=True, general_skip=skip,  nhead=1, kernel_size=7, step_size=64, pe_type = Projected
+Test Loss for configuration: TCN_type=dilated2, attention_type=log, dropout_enabled=True, skip_enabled=True, general_skip=skip,  nhead=1, kernel_size=7, step_size = 64, pe_type = Projected, Data Load Type=multivariate: 0.3632
+Running experiment with Data_load_type = multivariate, TCN_type=dilated2, attention_type=log, dropout_enabled=True, skip_enabled=True, general_skip=skip, nhead=4, kernel_size = 5, step_szie = 32
+New best model saved at best_model_multivariate_dilated2_log_True_True_skip_4_5_32__Projected_MultiHeadAttention.pt
+New best model saved at best_model_multivariate_dilated2_log_True_True_skip_4_5_32__Projected_MultiHeadAttention.pt
+New best model saved at best_model_multivariate_dilated2_log_True_True_skip_4_5_32__Projected_MultiHeadAttention.pt
+New best model saved at best_model_multivariate_dilated2_log_True_True_skip_4_5_32__Projected_MultiHeadAttention.pt
+New best model saved at best_model_multivariate_dilated2_log_True_True_skip_4_5_32__Projected_MultiHeadAttention.pt
+New best model saved at best_model_multivariate_dilated2_log_True_True_skip_4_5_32__Projected_MultiHeadAttention.pt
+New best model saved at best_model_multivariate_dilated2_log_True_True_skip_4_5_32__Projected_MultiHeadAttention.pt
+New best model saved at best_model_multivariate_dilated2_log_True_True_skip_4_5_32__Projected_MultiHeadAttention.pt
+New best model saved at best_model_multivariate_dilated2_log_True_True_skip_4_5_32__Projected_MultiHeadAttention.pt
+Epoch [10/30], Train Loss: 0.2952, Val Loss: 0.3139
+New best model saved at best_model_multivariate_dilated2_log_True_True_skip_4_5_32__Projected_MultiHeadAttention.pt
+New best model saved at best_model_multivariate_dilated2_log_True_True_skip_4_5_32__Projected_MultiHeadAttention.pt
+New best model saved at best_model_multivariate_dilated2_log_True_True_skip_4_5_32__Projected_MultiHeadAttention.pt
+New best model saved at best_model_multivariate_dilated2_log_True_True_skip_4_5_32__Projected_MultiHeadAttention.pt
+New best model saved at best_model_multivariate_dilated2_log_True_True_skip_4_5_32__Projected_MultiHeadAttention.pt
+New best model saved at best_model_multivariate_dilated2_log_True_True_skip_4_5_32__Projected_MultiHeadAttention.pt
+New best model saved at best_model_multivariate_dilated2_log_True_True_skip_4_5_32__Projected_MultiHeadAttention.pt
+New best model saved at best_model_multivariate_dilated2_log_True_True_skip_4_5_32__Projected_MultiHeadAttention.pt
+New best model saved at best_model_multivariate_dilated2_log_True_True_skip_4_5_32__Projected_MultiHeadAttention.pt
+New best model saved at best_model_multivariate_dilated2_log_True_True_skip_4_5_32__Projected_MultiHeadAttention.pt
+Epoch [20/30], Train Loss: 0.2944, Val Loss: 0.3128
+New best model saved at best_model_multivariate_dilated2_log_True_True_skip_4_5_32__Projected_MultiHeadAttention.pt
+Epoch [30/30], Train Loss: 0.2957, Val Loss: 0.3138
+Early stopping triggered
+Total Model Running Time: 816.14 seconds for configuration: Data_load_type = multivariate, TCN_type=dilated2, attention_type=log, dropout_enabled=True, skip_enabled=True, general_skip=skip,  nhead=4, kernel_size=5, step_size=32, pe_type = Projected
+Test Loss for configuration: TCN_type=dilated2, attention_type=log, dropout_enabled=True, skip_enabled=True, general_skip=skip,  nhead=4, kernel_size=5, step_size = 32, pe_type = Projected, Data Load Type=multivariate: 0.3646
+Running experiment with Data_load_type = multivariate, TCN_type=dilated2, attention_type=log, dropout_enabled=True, skip_enabled=True, general_skip=skip, nhead=4, kernel_size = 7, step_szie = 32
+New best model saved at best_model_multivariate_dilated2_log_True_True_skip_4_7_32__Projected_MultiHeadAttention.pt
+New best model saved at best_model_multivariate_dilated2_log_True_True_skip_4_7_32__Projected_MultiHeadAttention.pt
+New best model saved at best_model_multivariate_dilated2_log_True_True_skip_4_7_32__Projected_MultiHeadAttention.pt
+New best model saved at best_model_multivariate_dilated2_log_True_True_skip_4_7_32__Projected_MultiHeadAttention.pt
+New best model saved at best_model_multivariate_dilated2_log_True_True_skip_4_7_32__Projected_MultiHeadAttention.pt
+New best model saved at best_model_multivariate_dilated2_log_True_True_skip_4_7_32__Projected_MultiHeadAttention.pt
+New best model saved at best_model_multivariate_dilated2_log_True_True_skip_4_7_32__Projected_MultiHeadAttention.pt
+New best model saved at best_model_multivariate_dilated2_log_True_True_skip_4_7_32__Projected_MultiHeadAttention.pt
+Epoch [10/30], Train Loss: 0.2933, Val Loss: 0.3139
+New best model saved at best_model_multivariate_dilated2_log_True_True_skip_4_7_32__Projected_MultiHeadAttention.pt
+New best model saved at best_model_multivariate_dilated2_log_True_True_skip_4_7_32__Projected_MultiHeadAttention.pt
+New best model saved at best_model_multivariate_dilated2_log_True_True_skip_4_7_32__Projected_MultiHeadAttention.pt
+New best model saved at best_model_multivariate_dilated2_log_True_True_skip_4_7_32__Projected_MultiHeadAttention.pt
+New best model saved at best_model_multivariate_dilated2_log_True_True_skip_4_7_32__Projected_MultiHeadAttention.pt
+New best model saved at best_model_multivariate_dilated2_log_True_True_skip_4_7_32__Projected_MultiHeadAttention.pt
+New best model saved at best_model_multivariate_dilated2_log_True_True_skip_4_7_32__Projected_MultiHeadAttention.pt
+New best model saved at best_model_multivariate_dilated2_log_True_True_skip_4_7_32__Projected_MultiHeadAttention.pt
+New best model saved at best_model_multivariate_dilated2_log_True_True_skip_4_7_32__Projected_MultiHeadAttention.pt
+New best model saved at best_model_multivariate_dilated2_log_True_True_skip_4_7_32__Projected_MultiHeadAttention.pt
+Epoch [20/30], Train Loss: 0.2929, Val Loss: 0.3130
+New best model saved at best_model_multivariate_dilated2_log_True_True_skip_4_7_32__Projected_MultiHeadAttention.pt
+New best model saved at best_model_multivariate_dilated2_log_True_True_skip_4_7_32__Projected_MultiHeadAttention.pt
+New best model saved at best_model_multivariate_dilated2_log_True_True_skip_4_7_32__Projected_MultiHeadAttention.pt
+Epoch [30/30], Train Loss: 0.2930, Val Loss: 0.3137
+Total Model Running Time: 823.62 seconds for configuration: Data_load_type = multivariate, TCN_type=dilated2, attention_type=log, dropout_enabled=True, skip_enabled=True, general_skip=skip,  nhead=4, kernel_size=7, step_size=32, pe_type = Projected
+Test Loss for configuration: TCN_type=dilated2, attention_type=log, dropout_enabled=True, skip_enabled=True, general_skip=skip,  nhead=4, kernel_size=7, step_size = 32, pe_type = Projected, Data Load Type=multivariate: 0.3647
+Running experiment with Data_load_type = multivariate, TCN_type=dilated2, attention_type=log, dropout_enabled=True, skip_enabled=True, general_skip=skip, nhead=4, kernel_size = 5, step_szie = 64
+New best model saved at best_model_multivariate_dilated2_log_True_True_skip_4_5_64__Projected_MultiHeadAttention.pt
+Epoch [10/30], Train Loss: 0.1954, Val Loss: 0.0000
+Early stopping triggered
+Total Model Running Time: 83.08 seconds for configuration: Data_load_type = multivariate, TCN_type=dilated2, attention_type=log, dropout_enabled=True, skip_enabled=True, general_skip=skip,  nhead=4, kernel_size=5, step_size=64, pe_type = Projected
+Test Loss for configuration: TCN_type=dilated2, attention_type=log, dropout_enabled=True, skip_enabled=True, general_skip=skip,  nhead=4, kernel_size=5, step_size = 64, pe_type = Projected, Data Load Type=multivariate: 0.3632
+Running experiment with Data_load_type = multivariate, TCN_type=dilated2, attention_type=log, dropout_enabled=True, skip_enabled=True, general_skip=skip, nhead=4, kernel_size = 7, step_szie = 64
+New best model saved at best_model_multivariate_dilated2_log_True_True_skip_4_7_64__Projected_MultiHeadAttention.pt
+Epoch [10/30], Train Loss: 0.2002, Val Loss: 0.0000
+Early stopping triggered
+Total Model Running Time: 84.26 seconds for configuration: Data_load_type = multivariate, TCN_type=dilated2, attention_type=log, dropout_enabled=True, skip_enabled=True, general_skip=skip,  nhead=4, kernel_size=7, step_size=64, pe_type = Projected
+Test Loss for configuration: TCN_type=dilated2, attention_type=log, dropout_enabled=True, skip_enabled=True, general_skip=skip,  nhead=4, kernel_size=7, step_size = 64, pe_type = Projected, Data Load Type=multivariate: 0.3632
+Running experiment with Data_load_type = multivariate, TCN_type=dilated2, attention_type=log, dropout_enabled=True, skip_enabled=True, general_skip=skip, nhead=8, kernel_size = 5, step_szie = 32
+New best model saved at best_model_multivariate_dilated2_log_True_True_skip_8_5_32__Projected_MultiHeadAttention.pt
+New best model saved at best_model_multivariate_dilated2_log_True_True_skip_8_5_32__Projected_MultiHeadAttention.pt
+New best model saved at best_model_multivariate_dilated2_log_True_True_skip_8_5_32__Projected_MultiHeadAttention.pt
+New best model saved at best_model_multivariate_dilated2_log_True_True_skip_8_5_32__Projected_MultiHeadAttention.pt
+New best model saved at best_model_multivariate_dilated2_log_True_True_skip_8_5_32__Projected_MultiHeadAttention.pt
+New best model saved at best_model_multivariate_dilated2_log_True_True_skip_8_5_32__Projected_MultiHeadAttention.pt
+New best model saved at best_model_multivariate_dilated2_log_True_True_skip_8_5_32__Projected_MultiHeadAttention.pt
+New best model saved at best_model_multivariate_dilated2_log_True_True_skip_8_5_32__Projected_MultiHeadAttention.pt
+Epoch [10/30], Train Loss: 0.2940, Val Loss: 0.3140
+New best model saved at best_model_multivariate_dilated2_log_True_True_skip_8_5_32__Projected_MultiHeadAttention.pt
+New best model saved at best_model_multivariate_dilated2_log_True_True_skip_8_5_32__Projected_MultiHeadAttention.pt
+New best model saved at best_model_multivariate_dilated2_log_True_True_skip_8_5_32__Projected_MultiHeadAttention.pt
+New best model saved at best_model_multivariate_dilated2_log_True_True_skip_8_5_32__Projected_MultiHeadAttention.pt
+New best model saved at best_model_multivariate_dilated2_log_True_True_skip_8_5_32__Projected_MultiHeadAttention.pt
+New best model saved at best_model_multivariate_dilated2_log_True_True_skip_8_5_32__Projected_MultiHeadAttention.pt
+New best model saved at best_model_multivariate_dilated2_log_True_True_skip_8_5_32__Projected_MultiHeadAttention.pt
+New best model saved at best_model_multivariate_dilated2_log_True_True_skip_8_5_32__Projected_MultiHeadAttention.pt
+New best model saved at best_model_multivariate_dilated2_log_True_True_skip_8_5_32__Projected_MultiHeadAttention.pt
+New best model saved at best_model_multivariate_dilated2_log_True_True_skip_8_5_32__Projected_MultiHeadAttention.pt
+Epoch [20/30], Train Loss: 0.2930, Val Loss: 0.3138
+New best model saved at best_model_multivariate_dilated2_log_True_True_skip_8_5_32__Projected_MultiHeadAttention.pt
+New best model saved at best_model_multivariate_dilated2_log_True_True_skip_8_5_32__Projected_MultiHeadAttention.pt
+New best model saved at best_model_multivariate_dilated2_log_True_True_skip_8_5_32__Projected_MultiHeadAttention.pt
+New best model saved at best_model_multivariate_dilated2_log_True_True_skip_8_5_32__Projected_MultiHeadAttention.pt
+New best model saved at best_model_multivariate_dilated2_log_True_True_skip_8_5_32__Projected_MultiHeadAttention.pt
+New best model saved at best_model_multivariate_dilated2_log_True_True_skip_8_5_32__Projected_MultiHeadAttention.pt
+New best model saved at best_model_multivariate_dilated2_log_True_True_skip_8_5_32__Projected_MultiHeadAttention.pt
+New best model saved at best_model_multivariate_dilated2_log_True_True_skip_8_5_32__Projected_MultiHeadAttention.pt
+Epoch [30/30], Train Loss: 0.2963, Val Loss: 0.3142
+Total Model Running Time: 2561.57 seconds for configuration: Data_load_type = multivariate, TCN_type=dilated2, attention_type=log, dropout_enabled=True, skip_enabled=True, general_skip=skip,  nhead=8, kernel_size=5, step_size=32, pe_type = Projected
+Test Loss for configuration: TCN_type=dilated2, attention_type=log, dropout_enabled=True, skip_enabled=True, general_skip=skip,  nhead=8, kernel_size=5, step_size = 32, pe_type = Projected, Data Load Type=multivariate: 0.3653
+Running experiment with Data_load_type = multivariate, TCN_type=dilated2, attention_type=log, dropout_enabled=True, skip_enabled=True, general_skip=skip, nhead=8, kernel_size = 7, step_szie = 32
+New best model saved at best_model_multivariate_dilated2_log_True_True_skip_8_7_32__Projected_MultiHeadAttention.pt
+New best model saved at best_model_multivariate_dilated2_log_True_True_skip_8_7_32__Projected_MultiHeadAttention.pt
+New best model saved at best_model_multivariate_dilated2_log_True_True_skip_8_7_32__Projected_MultiHeadAttention.pt
+New best model saved at best_model_multivariate_dilated2_log_True_True_skip_8_7_32__Projected_MultiHeadAttention.pt
+New best model saved at best_model_multivariate_dilated2_log_True_True_skip_8_7_32__Projected_MultiHeadAttention.pt
+Epoch [10/30], Train Loss: 0.2964, Val Loss: 0.3140
+New best model saved at best_model_multivariate_dilated2_log_True_True_skip_8_7_32__Projected_MultiHeadAttention.pt
+New best model saved at best_model_multivariate_dilated2_log_True_True_skip_8_7_32__Projected_MultiHeadAttention.pt
+New best model saved at best_model_multivariate_dilated2_log_True_True_skip_8_7_32__Projected_MultiHeadAttention.pt
+New best model saved at best_model_multivariate_dilated2_log_True_True_skip_8_7_32__Projected_MultiHeadAttention.pt
+New best model saved at best_model_multivariate_dilated2_log_True_True_skip_8_7_32__Projected_MultiHeadAttention.pt
+New best model saved at best_model_multivariate_dilated2_log_True_True_skip_8_7_32__Projected_MultiHeadAttention.pt
+New best model saved at best_model_multivariate_dilated2_log_True_True_skip_8_7_32__Projected_MultiHeadAttention.pt
+New best model saved at best_model_multivariate_dilated2_log_True_True_skip_8_7_32__Projected_MultiHeadAttention.pt
+New best model saved at best_model_multivariate_dilated2_log_True_True_skip_8_7_32__Projected_MultiHeadAttention.pt
+New best model saved at best_model_multivariate_dilated2_log_True_True_skip_8_7_32__Projected_MultiHeadAttention.pt
+Epoch [20/30], Train Loss: 0.2925, Val Loss: 0.3138
+New best model saved at best_model_multivariate_dilated2_log_True_True_skip_8_7_32__Projected_MultiHeadAttention.pt
+New best model saved at best_model_multivariate_dilated2_log_True_True_skip_8_7_32__Projected_MultiHeadAttention.pt
+New best model saved at best_model_multivariate_dilated2_log_True_True_skip_8_7_32__Projected_MultiHeadAttention.pt
+New best model saved at best_model_multivariate_dilated2_log_True_True_skip_8_7_32__Projected_MultiHeadAttention.pt
+New best model saved at best_model_multivariate_dilated2_log_True_True_skip_8_7_32__Projected_MultiHeadAttention.pt
+New best model saved at best_model_multivariate_dilated2_log_True_True_skip_8_7_32__Projected_MultiHeadAttention.pt
+New best model saved at best_model_multivariate_dilated2_log_True_True_skip_8_7_32__Projected_MultiHeadAttention.pt
+New best model saved at best_model_multivariate_dilated2_log_True_True_skip_8_7_32__Projected_MultiHeadAttention.pt
+New best model saved at best_model_multivariate_dilated2_log_True_True_skip_8_7_32__Projected_MultiHeadAttention.pt
+New best model saved at best_model_multivariate_dilated2_log_True_True_skip_8_7_32__Projected_MultiHeadAttention.pt
+Epoch [30/30], Train Loss: 0.2956, Val Loss: 0.3130
+New best model saved at best_model_multivariate_dilated2_log_True_True_skip_8_7_32__Projected_MultiHeadAttention.pt
+Total Model Running Time: 2591.33 seconds for configuration: Data_load_type = multivariate, TCN_type=dilated2, attention_type=log, dropout_enabled=True, skip_enabled=True, general_skip=skip,  nhead=8, kernel_size=7, step_size=32, pe_type = Projected
+Test Loss for configuration: TCN_type=dilated2, attention_type=log, dropout_enabled=True, skip_enabled=True, general_skip=skip,  nhead=8, kernel_size=7, step_size = 32, pe_type = Projected, Data Load Type=multivariate: 0.3648
+Running experiment with Data_load_type = multivariate, TCN_type=dilated2, attention_type=log, dropout_enabled=True, skip_enabled=True, general_skip=skip, nhead=8, kernel_size = 5, step_szie = 64
+New best model saved at best_model_multivariate_dilated2_log_True_True_skip_8_5_64__Projected_MultiHeadAttention.pt
+Epoch [10/30], Train Loss: 0.1971, Val Loss: 0.0000
+Early stopping triggered
+Total Model Running Time: 253.52 seconds for configuration: Data_load_type = multivariate, TCN_type=dilated2, attention_type=log, dropout_enabled=True, skip_enabled=True, general_skip=skip,  nhead=8, kernel_size=5, step_size=64, pe_type = Projected
+Test Loss for configuration: TCN_type=dilated2, attention_type=log, dropout_enabled=True, skip_enabled=True, general_skip=skip,  nhead=8, kernel_size=5, step_size = 64, pe_type = Projected, Data Load Type=multivariate: 0.3632
+Running experiment with Data_load_type = multivariate, TCN_type=dilated2, attention_type=log, dropout_enabled=True, skip_enabled=True, general_skip=skip, nhead=8, kernel_size = 7, step_szie = 64
+New best model saved at best_model_multivariate_dilated2_log_True_True_skip_8_7_64__Projected_MultiHeadAttention.pt
+Epoch [10/30], Train Loss: 0.1948, Val Loss: 0.0000
+Early stopping triggered
+Total Model Running Time: 254.95 seconds for configuration: Data_load_type = multivariate, TCN_type=dilated2, attention_type=log, dropout_enabled=True, skip_enabled=True, general_skip=skip,  nhead=8, kernel_size=7, step_size=64, pe_type = Projected
+Test Loss for configuration: TCN_type=dilated2, attention_type=log, dropout_enabled=True, skip_enabled=True, general_skip=skip,  nhead=8, kernel_size=7, step_size = 64, pe_type = Projected, Data Load Type=multivariate: 0.3632
