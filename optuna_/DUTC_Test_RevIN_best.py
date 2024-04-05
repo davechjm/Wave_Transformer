@@ -832,11 +832,13 @@ mt = 'zero'
 wt = 'haar'
 dilat = 3
 # Define the ranges for the hyperparameters
-learning_rates = np.logspace(-4, -2, 100)  # Learning rates between 1e-5 and 1e-1
-dropout_rates = np.linspace(0.0, 0.5, 100)  # Dropout rates between 0 and 0.5
-weight_decays = np.logspace(-5, -3, 100)  # Weight decays between 1e-5 and 1e-3
+learning_rates = np.logspace(-3, -2, 100)  # Learning rates between 1e-3 and 1e-2
+dropout_rates = np.linspace(0.0, 0.2, 100)  # Dropout rates between 0 and 0.5
+weight_decays = np.logspace(-4, -3, 100)  # Weight decays between 1e-4 and 1e-3
 indices = np.random.choice(range(100), size=100, replace=False)
 #0.1797
+
+count = 0
 
 for i in indices:
     lrs = learning_rates[i]
@@ -1000,7 +1002,8 @@ for i in indices:
             test_loss += loss.item() * inputs.size(0)
 
     test_loss /= len(test_loader.dataset)
-    print(f'The {i}th model done.')
+    print(f'The {count}th model done.')
+    count += 1
     print(f'Test Loss for configuration: , learning_rate = {lrs}, weight_decay = {wd}, dropout_rate = {dr}: {test_loss:.4f}')
 
 
