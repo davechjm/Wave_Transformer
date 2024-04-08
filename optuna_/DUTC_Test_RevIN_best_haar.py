@@ -358,7 +358,7 @@ class CausalTCNBlock(nn.Module): #Non Dilated Causal
         return x
         
 class DilatedTCNBlock(nn.Module):
-F-System    def __init__(self, in_channels, out_channels, kernel_size=3, dilation=1, dropout_rate=0.2, dropout_ = True, skip_ = True):
+    def __init__(self, in_channels, out_channels, kernel_size=3, dilation=1, dropout_rate=0.2, dropout_ = True, skip_ = True):
         super(DilatedTCNBlock, self).__init__()
         
         # Calculate padding based on kernel size and dilation to maintain input length
@@ -835,7 +835,7 @@ dilat = 3
 learning_rates = np.logspace(-3, -2, 100)  # Learning rates between 1e-3 and 1e-2
 dropout_rates = np.linspace(0.0, 0.2, 100)  # Dropout rates between 0 and 0.5
 weight_decays = np.logspace(-4, -3, 100)  # Weight decays between 1e-4 and 1e-3
-indices = np.random.choice(range(100), size=100, replace=False)
+indices = np.random.choice(range(100), size=3, replace=False)
 
 
 count = 0
@@ -844,6 +844,9 @@ for i in indices:
     lrs = learning_rates[i]
     dr = dropout_rates[i]
     wd = weight_decays[i]
+    #lrs =0.0052230056036904522
+    #dr = 0.10146011891748014
+    #wd = 1.0059977697794999e-04
                                             
     if data_load_type == 'univariate':
 
@@ -916,11 +919,11 @@ for i in indices:
     val_losses = []
 
     # Early stopping parameters
-    patience = 10
+    patience = 20
     best_val_loss = float('inf')
     patience_counter = 0
 
-    num_epochs = 30
+    num_epochs = 300
 
     # Start the timer
     start_time = time.time()

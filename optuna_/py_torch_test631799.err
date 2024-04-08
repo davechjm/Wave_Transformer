@@ -1,6 +1,0 @@
-/var/spool/slurm/d/job631799/slurm_script: line 9: cd: too many arguments
-  File "DUTC_Test_RevIN_best_haar.py", line 361
-    F-System    def __init__(self, in_channels, out_channels, kernel_size=3, dilation=1, dropout_rate=0.2, dropout_ = True, skip_ = True):
-    ^
-IndentationError: expected an indented block
-srun: error: gpu-011: task 0: Exited with exit code 1
