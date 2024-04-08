@@ -10,4 +10,4 @@ cd python /home/choi/Wave_Transformer/optuna_     # navigate to the directory if
 
 source activate pytorchenv
 #srun python vanila_transformer_dwt_.py        # python jobs require the srun command to work
-srun python DUTC_Test_RevIN_best.py
+srun python DUTC_Test_RevIN_best_db1.py

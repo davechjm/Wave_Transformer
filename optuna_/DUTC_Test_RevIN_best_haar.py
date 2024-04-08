@@ -358,7 +358,7 @@ class CausalTCNBlock(nn.Module): #Non Dilated Causal
         return x
         
 class DilatedTCNBlock(nn.Module):
-    def __init__(self, in_channels, out_channels, kernel_size=3, dilation=1, dropout_rate=0.2, dropout_ = True, skip_ = True):
+F-System    def __init__(self, in_channels, out_channels, kernel_size=3, dilation=1, dropout_rate=0.2, dropout_ = True, skip_ = True):
         super(DilatedTCNBlock, self).__init__()
         
         # Calculate padding based on kernel size and dilation to maintain input length
@@ -925,7 +925,7 @@ for i in indices:
     # Start the timer
     start_time = time.time()
 
-    best_model_path = f"best_model_{data_load_type}_{TCN_type}_{attention_type}_{num_encoder_size}_{skip_enabled}_{general_skip_type}_{pos_encoder_type}_{bs}_{decompose_layer}_{k_size}_{s_size}_{mlp_hidden}.pt"
+    best_model_path = f"best_model_haar_{data_load_type}_{TCN_type}_{attention_type}_{num_encoder_size}_{skip_enabled}_{general_skip_type}_{pos_encoder_type}_{bs}_{decompose_layer}_{k_size}_{s_size}_{mlp_hidden}.pt"
 
 
     for epoch in range(num_epochs):

@@ -924,7 +924,7 @@ for i in indices:
     # Start the timer
     start_time = time.time()
 
-    best_model_path = f"best_model_{data_load_type}_{TCN_type}_{attention_type}_{num_encoder_size}_{skip_enabled}_{general_skip_type}_{pos_encoder_type}_{bs}_{decompose_layer}_{k_size}_{s_size}_{mlp_hidden}.pt"
+    best_model_path = f"best_model_db1_{data_load_type}_{TCN_type}_{attention_type}_{num_encoder_size}_{skip_enabled}_{general_skip_type}_{pos_encoder_type}_{bs}_{decompose_layer}_{k_size}_{s_size}_{mlp_hidden}.pt"
 
 
     for epoch in range(num_epochs):
