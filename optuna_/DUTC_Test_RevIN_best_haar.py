@@ -824,8 +824,8 @@ num_encoder_size = 1
 pos_encoder_type = 'Projected'
 general_skip_type = 'skip'
 mlp_hidden = 128
-k_size = 3
-s_size = 16
+k_size = 5
+s_size = 8
 decompose_layer = 1
 bs = 64
 mt = 'zero'
@@ -836,7 +836,7 @@ learning_rates = np.logspace(-3, -2, 100)  # Learning rates between 1e-3 and 1e-
 dropout_rates = np.linspace(0.0, 0.2, 100)  # Dropout rates between 0 and 0.5
 weight_decays = np.logspace(-4, -3, 100)  # Weight decays between 1e-4 and 1e-3
 indices = np.random.choice(range(100), size=100, replace=False)
-#0.1797
+
 
 count = 0
 
