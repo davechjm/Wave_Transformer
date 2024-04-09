@@ -1,5 +1,5 @@
 #!/usr/bin/env bash
-#SBATCH --job-name=wave_t
+#SBATCH --job-name=wave_th
 #SBATCH --output=py_torch_test%j.log
 #SBATCH --error=py_torch_test%j.err
 #SBATCH --mail-user=choi@uni-hildesheim.de
