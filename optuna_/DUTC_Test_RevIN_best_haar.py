@@ -882,7 +882,7 @@ for i in indices:
         data_path = 'electricity.csv'
         # Size parameters
 
-        seq_len = 24*4*4
+        seq_len = 24*4 #24*4*4
         pred_len = 24*4
         #batch_size = bs
         # Initialize the custom dataset for training, validation, and testing
