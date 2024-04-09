@@ -1,0 +1,45 @@
+Epoch [10/300], Train Loss: 0.2738, Val Loss: 0.2587
+Epoch [20/300], Train Loss: 0.2523, Val Loss: 0.2497
+Epoch [30/300], Train Loss: 0.2419, Val Loss: 0.2402
+Epoch [40/300], Train Loss: 0.2304, Val Loss: 0.2299
+Epoch [50/300], Train Loss: 0.2131, Val Loss: 0.2187
+Epoch [60/300], Train Loss: 0.1848, Val Loss: 0.2030
+Epoch [70/300], Train Loss: 0.1642, Val Loss: 0.1959
+Epoch [80/300], Train Loss: 0.1565, Val Loss: 0.1907
+Epoch [90/300], Train Loss: 0.1471, Val Loss: 0.1905
+Epoch [100/300], Train Loss: 0.1423, Val Loss: 0.1895
+Epoch [110/300], Train Loss: 0.1370, Val Loss: 0.1878
+Epoch [120/300], Train Loss: 0.1352, Val Loss: 0.1945
+Epoch [130/300], Train Loss: 0.1321, Val Loss: 0.1904
+Early stopping triggered
+Total Model Running Time: 1916.56 seconds
+The 0th model done.
+Test Loss for configuration: , learning_rate = 0.0014174741629268048, weight_decay = 0.00014174741629268049, dropout_rate = 0.030303030303030304: 0.1792
+Epoch [10/300], Train Loss: 0.2788, Val Loss: 0.2661
+Epoch [20/300], Train Loss: 0.2562, Val Loss: 0.2499
+Epoch [30/300], Train Loss: 0.2410, Val Loss: 0.2350
+Epoch [40/300], Train Loss: 0.2289, Val Loss: 0.2254
+Epoch [50/300], Train Loss: 0.2051, Val Loss: 0.2141
+Epoch [60/300], Train Loss: 0.1778, Val Loss: 0.1959
+Epoch [70/300], Train Loss: 0.1623, Val Loss: 0.1903
+Epoch [80/300], Train Loss: 0.1525, Val Loss: 0.1876
+Epoch [90/300], Train Loss: 0.1437, Val Loss: 0.1873
+Epoch [100/300], Train Loss: 0.1380, Val Loss: 0.1855
+Epoch [110/300], Train Loss: 0.1344, Val Loss: 0.1861
+Early stopping triggered
+Total Model Running Time: 1623.77 seconds
+The 1th model done.
+Test Loss for configuration: , learning_rate = 0.0013848863713938732, weight_decay = 0.00013848863713938732, dropout_rate = 0.028282828282828285: 0.1774
+Epoch [10/300], Train Loss: 0.2702, Val Loss: 0.2505
+Epoch [20/300], Train Loss: 0.2286, Val Loss: 0.2118
+Epoch [30/300], Train Loss: 0.2248, Val Loss: 0.2120
+Epoch [40/300], Train Loss: 0.2187, Val Loss: 0.2043
+Epoch [50/300], Train Loss: 0.2213, Val Loss: 0.2045
+Epoch [60/300], Train Loss: 0.2166, Val Loss: 0.2071
+Epoch [70/300], Train Loss: 0.2155, Val Loss: 0.2021
+Epoch [80/300], Train Loss: 0.2151, Val Loss: 0.2012
+Epoch [90/300], Train Loss: 0.2134, Val Loss: 0.2017
+Early stopping triggered
+Total Model Running Time: 1275.34 seconds
+The 2th model done.
+Test Loss for configuration: , learning_rate = 0.006280291441834253, weight_decay = 0.0006280291441834253, dropout_rate = 0.1595959595959596: 0.1866
