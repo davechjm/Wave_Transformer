@@ -835,12 +835,16 @@ dilat = 3
 learning_rates = np.logspace(-3, -2, 100)  # Learning rates between 1e-3 and 1e-2
 dropout_rates = np.linspace(0.0, 0.2, 100)  # Dropout rates between 0 and 0.5
 weight_decays = np.logspace(-4, -3, 100)  # Weight decays between 1e-4 and 1e-3
-indices = np.random.choice(range(100), size=3, replace=False)
-
+indices = [0,1,2,3,4,5] #np.random.choice(range(100), size=3, replace=False)
+input_length = [24*4, 512]
 
 count = 0
 
 for i in indices:
+    if i < 3:
+        seq_length = input_length[0]
+    else:
+        seq_length = input_length[1]
     #lrs = learning_rates[i]
     #dr = dropout_rates[i]
     #wd = weight_decays[i]
@@ -855,7 +859,7 @@ for i in indices:
         data_path = 'electricity.csv'
 
         # Define the size configuration for your dataset
-        seq_len = 24 * 4 *4    # Length of input sequences
+        seq_len = seq_length #24 * 4 *4    # Length of input sequences
         label_len = 24 * 4      # Length of labels within the sequence to predict
         pred_len = 24 * 4       # Number of steps to predict into the future
 
@@ -882,7 +886,7 @@ for i in indices:
         data_path = 'electricity.csv'
         # Size parameters
 
-        seq_len = 24*4*4
+        seq_len = seq_length # 24*4*4
         pred_len = 24*4
         #batch_size = bs
         # Initialize the custom dataset for training, validation, and testing
@@ -928,7 +932,7 @@ for i in indices:
     # Start the timer
     start_time = time.time()
 
-    best_model_path = f"best_model_haar200_{data_load_type}_{TCN_type}_{attention_type}_{num_encoder_size}_{skip_enabled}_{general_skip_type}_{pos_encoder_type}_{bs}_{decompose_layer}_{k_size}_{s_size}_{mlp_hidden}.pt"
+    best_model_path = f"best_model_haar200_{data_load_type}_{i}_{TCN_type}_{attention_type}_{num_encoder_size}_{skip_enabled}_{general_skip_type}_{pos_encoder_type}_{bs}_{decompose_layer}_{k_size}_{s_size}_{mlp_hidden}.pt"
 
 
     for epoch in range(num_epochs):
