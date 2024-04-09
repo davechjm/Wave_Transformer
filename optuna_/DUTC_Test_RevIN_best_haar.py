@@ -835,7 +835,7 @@ dilat = 3
 learning_rates = np.logspace(-3, -2, 100)  # Learning rates between 1e-3 and 1e-2
 dropout_rates = np.linspace(0.0, 0.2, 100)  # Dropout rates between 0 and 0.5
 weight_decays = np.logspace(-4, -3, 100)  # Weight decays between 1e-4 and 1e-3
-indices = np.random.choice(range(100), size=3, replace=False)
+indices = np.random.choice(range(100), size=100, replace=False)
 
 
 count = 0
@@ -919,11 +919,11 @@ for i in indices:
     val_losses = []
 
     # Early stopping parameters
-    patience = 20
+    patience = 10
     best_val_loss = float('inf')
     patience_counter = 0
 
-    num_epochs = 300
+    num_epochs = 30
 
     # Start the timer
     start_time = time.time()
