@@ -811,7 +811,7 @@ class DWT_MLP_Model(nn.Module):
 
 
 # Assuming DWT_MLP_Model is defined elsewhere, along with the necessary imports
-seq_ = 24*4*4
+seq_ = 24*4
 pred_ = 24*4
 # Define hyperparameter combinations
 dropout_enabled = True
@@ -905,7 +905,7 @@ for i in indices:
     #print(f"Running experiment with Data_load_type = {data_load_type}, TCN_type={TCN_type}, attention_type={attention_type},dilations ={dilat}, wave_type = {wt}, mode_type = {mt},num_encoder_size = {num_encoder_size}, mlp_hidden_size = {mlp_hidden},skip_enabled={skip_enabled}, general_skip={general_skip_type}, Pos_Encoder_Type = {pos_encoder_type}, batch_size = {bs}, step_size = {s_size}, kernel_size = {k_size}, decompose_layer = {decompose_layer} ")
     dropout_rate = dr if dropout_enabled else 0.0
     # Adjust the model instantiation to include all hyperparameters
-    model = DWT_MLP_Model(input_channels=321+4, seq_length=seq_, pred_length = pred_,mlp_hidden_size=mlp_hidden, 
+    model = DWT_MLP_Model(input_channels=321+4, seq_length=seq_len, pred_length = pred_,mlp_hidden_size=mlp_hidden, 
                         output_channels=321+4, decompose_layers=decompose_layer, 
                         dropout=dropout_rate, dilation=dilat, 
                         mode=mt, wave=wt, kernel_size=k_size, 
@@ -989,7 +989,7 @@ for i in indices:
     end_time = time.time()
     total_time = end_time - start_time
     print(f'Total Model Running Time: {total_time:.2f} seconds')
-    best_model = DWT_MLP_Model(input_channels=321+4, seq_length=seq_, pred_length = pred_, mlp_hidden_size=mlp_hidden, 
+    best_model = DWT_MLP_Model(input_channels=321+4, seq_length=seq_len, pred_length = pred_, mlp_hidden_size=mlp_hidden, 
     output_channels=321+4, decompose_layers=decompose_layer, dropout=dropout_rate, dilation=dilat, 
     mode=mt, wave=wt, kernel_size=k_size, 
     attention_type=attention_type, TCN_type=TCN_type, 
