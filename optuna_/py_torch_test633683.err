@@ -1,0 +1,8 @@
+/var/spool/slurm/d/job633683/slurm_script: line 9: cd: too many arguments
+Traceback (most recent call last):
+  File "New3.py", line 841, in <module>
+    model = DWT_MLP_Model(input_channels=321+4, seq_length=sq, pred_length = pred_, patch_len = patch_lens, mlp_hidden_size=mlp_hidden, 
+  File "New3.py", line 712, in __init__
+    self.head_low = Flatten_Head(self.individual, self.n_vars, self.head_nf_low, pred_len//(2*decompose_layers),  head_dropout=self.dropout)
+NameError: name 'pred_len' is not defined
+srun: error: gpu-013: task 0: Exited with exit code 1

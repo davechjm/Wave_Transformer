@@ -1,0 +1,8 @@
+/var/spool/slurm/d/job633682/slurm_script: line 9: cd: too many arguments
+Traceback (most recent call last):
+  File "New2.py", line 851, in <module>
+    model = DWT_MLP_Model(input_channels=321+4, seq_length=sq, pred_length = pred_, patch_len = patch_lens, mlp_hidden_size=mlp_hidden, 
+  File "New2.py", line 695, in __init__
+    self.head_low = Flatten_Head(self.individual, self.n_vars, self.head_nf, self.low_len//decompose_layer,  head_dropout=self.dropout)
+TypeError: unsupported operand type(s) for //: 'int' and 'list'
+srun: error: gpu-013: task 0: Exited with exit code 1
