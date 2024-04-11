@@ -801,7 +801,7 @@ general_skip_type = 'skip'
 mlp_hidden = 128
 k_size = 5
 s_size = 8
-decompose_layer = [1,2]
+decompose_layer_list = [1,2]
 bs = 64
 mt = 'zero'
 wt = 'haar'
@@ -819,7 +819,7 @@ indices = np.random.choice(range(100), size=1, replace=False)
 count = 0
 
 for sq in seq_:
-    for dcls in decompose_layer:
+    for dcls in decompose_layer_list:
         lrs =0.0052230056036904522
         dr = 0.10146011891748014
         wd = 1.0059977697794999e-04

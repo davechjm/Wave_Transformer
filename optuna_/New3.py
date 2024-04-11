@@ -709,8 +709,8 @@ class DWT_MLP_Model(nn.Module):
              for dls in range(decompose_layers)])
         self.individual = False
         self.n_vars = input_channels
-        self.head_low = Flatten_Head(self.individual, self.n_vars, self.head_nf_low, pred_len//(2*decompose_layers),  head_dropout=self.dropout)
-        
+        self.head_low = Flatten_Head(self.individual, self.n_vars, self.head_nf_low, init_patch_num_low,  head_dropout=self.dropout)
+        #pred_len//(2*decompose_layers)
         self.head_high = nn.ModuleList(
             [Flatten_Head(self.individual, self.n_vars, self.head_nf_high_list[f_num],seq_head_len[f_num],  head_dropout=self.dropout) 
              for f_num in range(decompose_layers)])
@@ -750,9 +750,6 @@ class DWT_MLP_Model(nn.Module):
         else:
             pass
     
-            
-    
-
         #x_low = x_low.permute(0,1,3,2)
         x_low = self.transformer_low(x_low)
         x_low = self.head_low(x_low)
@@ -790,7 +787,7 @@ general_skip_type = 'skip'
 mlp_hidden = 128
 k_size = 5
 s_size = 8
-decompose_layer = [1,2]
+decompose_layer_list = [1,2]
 bs = 64
 mt = 'zero'
 wt = 'haar'
@@ -808,7 +805,7 @@ indices = np.random.choice(range(100), size=18, replace=False)
 count = 0
 
 for sq in seq_:
-    for dcls in decompose_layer:
+    for dcls in decompose_layer_list:
         #lrs = learning_rates[i]
         #dr = dropout_rates[i]
         #wd = weight_decays[i]
