@@ -1,5 +1,4 @@
 # %%
-# %%
 import time
 import torch
 import torch.nn as nn
@@ -207,7 +206,7 @@ class ProjectedPositionalEncoding(nn.Module):
         self.d_input = d_input
         self.d_model = d_model
         self.dropout = nn.Dropout(p=dropout)
-
+        print(d_input, d_model)
         # Projection layer: maps input dimension to model dimension
         self.projection = nn.Linear(d_input, d_model)
 
@@ -482,7 +481,10 @@ class TSTiEncoder(nn.Module):  #i means channel-independent
         
         # Input encoding
         q_len = patch_num
-        self.W_P = nn.Linear(patch_len, d_model)   #d_model     # Eq 1: projection of feature vectors onto a d-dim vector space
+        dl = decompose_layer
+        W_P_d = patch_len//2
+      
+        self.W_P = nn.Linear(W_P_d//dl, d_model)   #d_model     # Eq 1: projection of feature vectors onto a d-dim vector space
         self.seq_len = q_len
 
         # Positional encoding
@@ -498,17 +500,20 @@ class TSTiEncoder(nn.Module):  #i means channel-independent
         
     def forward(self, x) -> Tensor:                                              # x: [bs x nvars x patch_len x patch_num]
         
-        n_vars = x.shape[1]
-        
+        n_vars = x.shape[-1]
+        new_len = x.shape[1]
+        bs = 64
+        patch_num = x.shape[0]//bs
+        x = x.reshape(bs, patch_num, n_vars, new_len).permute(0, 2, 3, 1)
+        #Reshaped Transformer X torch.Size([64, 325, 8, 22])
         # Input encoding
-        x = x.permute(0,1,2,3)                                                   # x: [bs x nvars x patch_num x patch_len]
-       
+        x = x.permute(0,1,3,2)                                                   # x: [bs x nvars x patch_num x patch_len]
      
         x = self.W_P(x)                                                          # x: [bs x nvars x patch_num x d_model]
-       
+  
         # After Projection torch.Size([64, 325, 22, 325])
         u = torch.reshape(x, (x.shape[0]*x.shape[1],x.shape[2],x.shape[3]))      # u: [bs * nvars x patch_num x d_model]
-    
+
         u = self.dropout(u + self.W_pos)                                         # u: [bs * nvars x patch_num x d_model]
 
         # Encoder
@@ -620,23 +625,7 @@ class Flatten_Head(nn.Module):
             x = self.linear(x)
             x = self.dropout(x)
         return x
-    
-class ReduceDimension(nn.Module):
-    def __init__(self, d_model):
-        super(ReduceDimension, self).__init__()
-        # Initialize the reduction layer
-        self.reduction_layer = nn.Linear(d_model, 1)
 
-    def forward(self, x):
-        bs, nvars, patch_num, d_model = x.shape
-        # Flatten x to apply the linear layer
-        x_flat = x.view(-1, d_model)
-        # Apply the reduction layer
-      
-        x_reduced_flat = self.reduction_layer(x_flat)
-        # Reshape back to the original dimensions minus the reduced one
-        x_reduced = x_reduced_flat.view(bs, nvars, patch_num)
-        return x_reduced   
 
 # %%
 #stride, padding_patch, patch_length
@@ -671,118 +660,79 @@ class DWT_MLP_Model(nn.Module):
         if self.padding_patch: # can be modified to general case
             self.padding_patch_layer = nn.ReplicationPad1d((0, self.stride)) 
             patch_num += 1
-        
+        else:
+            pass
         # Assuming kernel_size can be used to derive kernel_set for illustration
         self.tcn_low = DilatedTCNBlock(input_channels, output_channels, dilation=self.dilation,kernel_size= self.kernel_size, dropout_rate= self.dropout, dropout_ = self.dropout_TF, skip_ = self.skip_TF)
         self.tcn_high_list = nn.ModuleList([DilatedTCNBlock(input_channels, output_channels, dropout_rate= self.dropout, kernel_size= self.kernel_size, dilation= self.dilation) for _ in range(decompose_layers)])
 
-        
+        self.pos_encoder = ProjectedPositionalEncoding(input_channels, d_model, max_len = 5000)
         if self.Revin:
             self.revin_layer = RevIN(input_channels, affine=True, subtract_last=False)
 
-        self.reduce = ReduceDimension(d_model)
-        self.transformer = TSTiEncoder(input_channels, patch_num = patch_num, patch_len = patch_len, max_seq_len = 5000, n_layers = num_encoder_layers, d_model = d_model, n_heads = self.n_head, decompose_layer = decompose_layers)
-        self.head_nf = d_model * patch_num
-    
+        encoder_layers_low = [EncoderLayer( d_model, d_ff=mlp_hidden_size, dropout=self.dropout, activation="relu") for _ in range(num_encoder_layers)]
+        self.transformer_low = Encoder(encoder_layers_low, norm_layer=nn.LayerNorm(d_model))
+        
         # Transformer Encoders for high-frequency components, using custom Encoder
         self.transformer_high_list = nn.ModuleList(
-            [TSTiEncoder(input_channels, patch_num = patch_num, patch_len = patch_len, max_seq_len = 5000, n_layers = num_encoder_layers, d_model = d_model, n_heads = self.n_head, decompose_layer = 1+ dls) 
-             for dls in range(decompose_layers)])
-        self.individual = False
-        self.n_vars = input_channels
-        #self.low_len = pred_len//2
-        self.low_len = patch_len//2
-        self.head_low = Flatten_Head(self.individual, self.n_vars, self.head_nf, self.low_len//decompose_layers,  head_dropout=self.dropout)
-        self.head_high = nn.ModuleList(
-            [Flatten_Head(self.individual, self.n_vars, self.head_nf,self.low_len//(f_num+1),  head_dropout=self.dropout) 
-             for f_num in range(decompose_layers)])
-        self.head = Flatten_Head(self.individual, self.n_vars, self.head_nf, self.pred_len, head_dropout = 0)
+            [Encoder([EncoderLayer(d_model, d_ff=mlp_hidden_size, dropout=self.dropout, activation="relu") for _ in range(num_encoder_layers)]) 
+             for _ in range(decompose_layers)])
         
-        
-        
-        
-    def forward(self, x):
+    
        
+    def forward(self, x):
+        
         #(64, 96, 325)
+        #x = x.permute(0, 2, 1)  # Adjust dimensions for DWT
         if self.Revin:
             x = self.revin_layer(x, 'norm')
-            x = x.permute(0,2,1)
-        else:
-            x = x.permute(0,2,1)
-       
-        # do patching
-        if self.padding_patch:
-            z = self.padding_patch_layer(x)
-            z = z.unfold(dimension=-1, size=self.patch_len, step=self.stride)  # z: [bs x nvars x patch_num x patch_len]
-            z = z.permute(0,1,3,2) # z: [bs x nvars x patch_len x patch_num]
-            x = z.clone() 
-   
+            x = x.permute(0,2,1)# Assuming z has shape [bs x nvars x patch_len x patch_num]
         
-        else:
-            Flatten_Head(self.individual, self.n_vars, self.head_nf, target_window, head_dropout=head_dropout)
-        # Assuming z has shape [bs x nvars x patch_len x patch_num]
-        bs, nvars, patch_len, patch_num = x.shape
-      
-
-        # Reshape z to merge the batch size and patch number dimensions, preparing for DWT
-        # New shape: [bs*patch_num x nvars x patch_len]
-        x = x.permute(0, 3, 1, 2).reshape(bs*patch_num, nvars, patch_len)
-      
         x_low, x_highs = self.dwt_forward(x)
-     
         x_low_tcn = self.tcn_low(x_low)
-        x_low_combined = x_low_tcn.clone()
+        x_low_combined = x_low_tcn
         
         if self.general_skip == 'skip':
             x_low_combined = x_low + x_low_combined
         else:
             x_low_combined = x_low_combined
-    
+            
+        x_low_combined = x_low_combined.permute(0,2,1)
+            
+        x_low_combined = self.pos_encoder(x_low_combined)
+        x_low_combined,_ = self.transformer_low(x_low_combined) # Adjusted for custom encoder
+        x_low_combined = x_low_combined.permute(0,2,1)
+        x_low_combined = x_low + x_low_combined
         
         # Process high-frequency components
         x_highs_processed = []
         for i, x_high in enumerate(x_highs):
-            
             x_high_tcn = self.tcn_high_list[i](x_high)
-            x_high_combined = x_high_tcn.clone()
-            
-           
+            x_high_combined = x_high_tcn
+
             if self.general_skip == 'skip':
-                
                 x_high_combined = x_high + x_high_combined
             else:
                 x_high_combined = x_high_combined
-                
-            x_highs_processed.append(x_high_combined)
+  
+              
+            x_high_combined = x_high_combined.permute(0,2,1)
+            x_high_combined = self.pos_encoder(x_high_combined)
+            x_high_combined,_ = self.transformer_high_list[i](x_high_combined)  # Adjusted for custom encoder
+            x_high_combined = x_high.permute(0,2,1) + x_high_combined
+            x_highs_processed.append(x_high_combined.permute(0,2,1))
         
-        
-        
-        
-        dwt_x = self.dwt_inverse((x_low_combined, x_highs_processed))
-    
-        
-        z = x + dwt_x
-        #Before Transformation  torch.Size([1408, 325, 16])
-        z = z.reshape(bs, nvars, patch_len, patch_num)
-        # Before Transformation  torch.Size([64, 325, 16, 22])
-        # [bs x nvars x d_model x patch_num]
-        z = z.permute(0,1,3,2)     
-       
-        z = self.transformer(z)
-      
-        z = self.head(z)
-        pred_out = z.clone()
-        
-    
+        # Reconstruct the signal and adjust dimensions
+        pred_out = self.dwt_inverse((x_low_combined, x_highs_processed)).permute(0, 2, 1)
         if self.Revin:
-            pred_out = pred_out.permute(0,2,1)
             pred_out = self.revin_layer(pred_out, 'denorm')
         else:
             pred_out = pred_out
         
         pred_out = pred_out[:, :, :-4] # Do not make predictions for meta features
         pred_out = pred_out[:, -self.pred_len:, :]
-
+        
+        
 
         return pred_out
 
@@ -790,7 +740,7 @@ class DWT_MLP_Model(nn.Module):
 
 
 # Assuming DWT_MLP_Model is defined elsewhere, along with the necessary imports
-seq_ = [24*4, 24*4*4, 512]
+seq_ = [24*4, 24*4*4,512]
 pred_ = 24*4
 # Define hyperparameter combinations
 dropout_enabled = True
@@ -801,7 +751,7 @@ general_skip_type = 'skip'
 mlp_hidden = 128
 k_size = 5
 s_size = 8
-decompose_layer_list = [1,2]
+decompose_layer = 2
 bs = 64
 mt = 'zero'
 wt = 'haar'
@@ -813,149 +763,150 @@ pp = True
 learning_rates = np.logspace(-3, -2, 100)  # Learning rates between 1e-3 and 1e-2
 dropout_rates = np.linspace(0.0, 0.2, 100)  # Dropout rates between 0 and 0.5
 weight_decays = np.logspace(-4, -3, 100)  # Weight decays between 1e-4 and 1e-3
-indices = np.random.choice(range(100), size=1, replace=False)
+indices = np.random.choice(range(100), size=9, replace=False)
 
 
 count = 0
 
-for sq in seq_:
-    for dcls in decompose_layer_list:
-        lrs =0.0052230056036904522
-        dr = 0.10146011891748014
-        wd = 1.0059977697794999e-04
-                                            
-        # Specify the file path
-        root_path = '/home/choi/Wave_Transformer/optuna_/electricity/'
-        data_path = 'electricity.csv'
-        # Size parameters
+for i in indices:
+    #lrs = learning_rates[i]
+    #dr = dropout_rates[i]
+    #wd = weight_decays[i]
+    lrs =0.0052230056036904522
+    dr = 0.10146011891748014
+    wd = 1.0059977697794999e-04
+    if i < 3:
+        seq_length = seq_[0]
+    elif i >=3 and i <6:
+        seq_length = seq_[1]
+    else:
+        seq_length = seq_[2]          
+    # Specify the file path
+    root_path = '/home/choi/Wave_Transformer/optuna_/electricity/'
+    data_path = 'electricity.csv'
+    # Size parameters
 
-        seq_len = 24*4 #24*4*4
-        pred_len = 24*4
-        #batch_size = bs
-        # Initialize the custom dataset for training, validation, and testing
-        train_dataset = Dataset_Custom(root_path=root_path, features= 'M', flag='train', data_path=data_path, step_size =s_size)
-        val_dataset = Dataset_Custom(root_path=root_path, features= 'M',flag='val', data_path=data_path,step_size = s_size)
-        test_dataset = Dataset_Custom(root_path=root_path, features= 'M',flag='test', data_path=data_path,step_size = s_size)
+    seq_len = 24*4 #24*4*4
+    pred_len = 24*4
+    #batch_size = bs
+    # Initialize the custom dataset for training, validation, and testing
+    train_dataset = Dataset_Custom(root_path=root_path, features= 'M', flag='train', data_path=data_path, step_size =s_size)
+    val_dataset = Dataset_Custom(root_path=root_path, features= 'M',flag='val', data_path=data_path,step_size = s_size)
+    test_dataset = Dataset_Custom(root_path=root_path, features= 'M',flag='test', data_path=data_path,step_size = s_size)
 
-        # Optionally, initialize the dataset for prediction (if needed)
-        #pred_dataset = Dataset_Pred(root_path=root_path, flag='pred', size=size, data_path=data_path, inverse=True)
+    # Optionally, initialize the dataset for prediction (if needed)
+    #pred_dataset = Dataset_Pred(root_path=root_path, flag='pred', size=size, data_path=data_path, inverse=True)
 
-        # Example on how to create DataLoaders for PyTorch training (adjust batch_size as needed)
-        batch_size = bs
-        train_loader = DataLoader(train_dataset, batch_size=batch_size, shuffle=True, drop_last = True)
-        val_loader = DataLoader(val_dataset, batch_size=batch_size, shuffle=False, drop_last = True)
-        test_loader = DataLoader(test_dataset, batch_size=batch_size, shuffle=False, drop_last = False)
-        #print(f"Running experiment with dilations ={dilat}, wave_type = {wt}, mode_type = {mt},num_encoder_size = {num_encoder_size}, mlp_hidden_size = {mlp_hidden},skip_enabled={skip_enabled}, general_skip={general_skip_type}, batch_size = {bs}, step_size = {s_size}, kernel_size = {k_size}, decompose_layer = {decompose_layer} ")
-        dropout_rate = dr if dropout_enabled else 0.0
-        # Adjust the model instantiation to include all hyperparameters
-        model = DWT_MLP_Model(input_channels=321+4, seq_length=sq, pred_length = pred_, patch_len = patch_lens, mlp_hidden_size=mlp_hidden, 
-                            output_channels=321+4, stride = strides, padding_patch= pp, decompose_layers=dcls, 
-                            dropout=dropout_rate, dilation=dilat, 
-                            mode=mt, wave=wt, kernel_size=k_size,
-                            num_encoder_layers=num_encoder_size, nhead=5, 
-                            dropout_=dropout_enabled,
-                            skip_=True, general_skip_=general_skip_type, Revin_=revin_type)
+    # Example on how to create DataLoaders for PyTorch training (adjust batch_size as needed)
+    batch_size = bs
+    train_loader = DataLoader(train_dataset, batch_size=batch_size, shuffle=True, drop_last = True)
+    val_loader = DataLoader(val_dataset, batch_size=batch_size, shuffle=False, drop_last = True)
+    test_loader = DataLoader(test_dataset, batch_size=batch_size, shuffle=False, drop_last = False)
+    #print(f"Running experiment with dilations ={dilat}, wave_type = {wt}, mode_type = {mt},num_encoder_size = {num_encoder_size}, mlp_hidden_size = {mlp_hidden},skip_enabled={skip_enabled}, general_skip={general_skip_type}, batch_size = {bs}, step_size = {s_size}, kernel_size = {k_size}, decompose_layer = {decompose_layer} ")
+    dropout_rate = dr if dropout_enabled else 0.0
+    # Adjust the model instantiation to include all hyperparameters
+    model = DWT_MLP_Model(input_channels=321+4, seq_length=seq_length, pred_length = pred_, patch_len = patch_lens, mlp_hidden_size=mlp_hidden, 
+                        output_channels=321+4, stride = strides, padding_patch= pp, decompose_layers=decompose_layer, 
+                        dropout=dropout_rate, dilation=dilat, 
+                        mode=mt, wave=wt, kernel_size=k_size,
+                        num_encoder_layers=num_encoder_size, nhead=5, 
+                        dropout_=dropout_enabled,
+                        skip_=True, general_skip_=general_skip_type, Revin_=revin_type)
 
-        # Define criterion and optimizer
-        criterion = nn.MSELoss()
-        optimizer = optim.Adam(model.parameters(), lr=lrs, 
-                            weight_decay=wd)
+    # Define criterion and optimizer
+    criterion = nn.MSELoss()
+    optimizer = optim.Adam(model.parameters(), lr=lrs, 
+                        weight_decay=wd)
 
-        train_losses = []
-        val_losses = []
+    train_losses = []
+    val_losses = []
 
-        # Early stopping parameters
-        patience = 10
-        best_val_loss = float('inf')
-        patience_counter = 0
+    # Early stopping parameters
+    patience = 10
+    best_val_loss = float('inf')
+    patience_counter = 0
 
-        num_epochs = 30
+    num_epochs = 1
 
-        # Start the timer
-        start_time = time.time()
+    # Start the timer
+    start_time = time.time()
 
-        best_model_path = f"best_model_{count}_{sq}_{num_encoder_size}_{skip_enabled}_{general_skip_type}_{bs}_{dcls}_{k_size}_{s_size}_{mlp_hidden}.pt"
+    best_model_path = f"best_model_haar_{count}_{seq_length}_{num_encoder_size}_{skip_enabled}_{general_skip_type}_{bs}_{decompose_layer}_{k_size}_{s_size}_{mlp_hidden}.pt"
 
 
-        for epoch in range(num_epochs):
-            model.train()
+    for epoch in range(num_epochs):
+        model.train()
 
-            train_loss = 0.0
+        train_loss = 0.0
 
-            for seq_x, seq_y, seq_x_mark, seq_y_mark in train_loader:
-            
-                inputs = torch.cat((seq_x, seq_x_mark), dim=-1)
-    
-                targets = torch.cat((seq_y, seq_y_mark), dim=-1)
+        for seq_x, seq_y, seq_x_mark, seq_y_mark in train_loader:
+         
+            inputs = torch.cat((seq_x, seq_x_mark), dim=-1)
+  
+            targets = torch.cat((seq_y, seq_y_mark), dim=-1)
 
-                optimizer.zero_grad()
-                outputs = model(inputs)
-            
-                loss = criterion(outputs, targets[:, :, :-4])  # Assuming specific output handling
-                loss.backward()
-                optimizer.step()
+            optimizer.zero_grad()
+            outputs = model(inputs)
+            loss = criterion(outputs, targets[:, :, :-4])  # Assuming specific output handling
+            loss.backward()
+            optimizer.step()
 
-                train_loss += loss.item() * inputs.size(0)
+            train_loss += loss.item() * inputs.size(0)
 
-            train_loss /= len(train_loader.dataset)
-            train_losses.append(train_loss)
+        train_loss /= len(train_loader.dataset)
+        train_losses.append(train_loss)
 
-            # Validation phase
-            model.eval()
-            val_loss = 0.0
-            with torch.no_grad():
-                for seq_x, seq_y, seq_x_mark, seq_y_mark in val_loader:
-                    inputs = torch.cat((seq_x, seq_x_mark), dim=-1)
-                    targets = torch.cat((seq_y, seq_y_mark), dim=-1)
-                    outputs = model(inputs)
-                    loss = criterion(outputs, targets[:, :, :-4])  # Same output handling assumption
-                    val_loss += loss.item() * inputs.size(0)
-
-            val_loss /= len(val_loader.dataset)
-            val_losses.append(val_loss)
-
-            if (epoch + 1) % 10 == 0:
-                print(f'Epoch [{epoch+1}/{num_epochs}], Train Loss: {train_loss:.4f}, Val Loss: {val_loss:.4f}')
-
-            if val_loss < best_val_loss:
-                best_val_loss = val_loss
-                patience_counter = 0
-                torch.save(model.state_dict(), best_model_path)
-                #print(f"New best model saved at {best_model_path}")
-            else:
-                patience_counter += 1
-
-            if patience_counter >= patience:
-                print("Early stopping triggered")
-                break
-
-        end_time = time.time()
-        total_time = end_time - start_time
-        print(f'Total Model Running Time: {total_time:.2f} seconds')
-        best_model = DWT_MLP_Model(input_channels=321+4, seq_length=sq, pred_length = pred_,  patch_len = patch_lens,  mlp_hidden_size=mlp_hidden, 
-        output_channels=321+4, stride = strides, padding_patch= pp, decompose_layers=dcls, dropout=dropout_rate, dilation=dilat, 
-        mode=mt, wave=wt, kernel_size=k_size,
-        num_encoder_layers=num_encoder_size, nhead=5, 
-        dropout_=dropout_enabled,
-        skip_=True, general_skip_=general_skip_type, Revin_=revin_type)
-        best_model.load_state_dict(torch.load(best_model_path))
-        # Evaluation on test data
-        best_model.eval()
-        test_loss = 0.0
+        # Validation phase
+        model.eval()
+        val_loss = 0.0
         with torch.no_grad():
-            for seq_x, seq_y, seq_x_mark, seq_y_mark in test_loader:
+            for seq_x, seq_y, seq_x_mark, seq_y_mark in val_loader:
                 inputs = torch.cat((seq_x, seq_x_mark), dim=-1)
                 targets = torch.cat((seq_y, seq_y_mark), dim=-1)
-                outputs = best_model(inputs)
-                loss = criterion(outputs, targets[:, :, :-4])  # Assuming specific output handling
-                test_loss += loss.item() * inputs.size(0)
+                outputs = model(inputs)
+                loss = criterion(outputs, targets[:, :, :-4])  # Same output handling assumption
+                val_loss += loss.item() * inputs.size(0)
 
-        test_loss /= len(test_loader.dataset)
-        print(f'The {count}th model done.')
-        count += 1
-        print(f'Test Loss for configuration: , seq_len : {sq}, decompose_layer : {dcls}, count: {count}: {test_loss:.4f}')
+        val_loss /= len(val_loader.dataset)
+        val_losses.append(val_loss)
 
-# %%
+        if (epoch + 1) % 10 == 0:
+            print(f'Epoch [{epoch+1}/{num_epochs}], Train Loss: {train_loss:.4f}, Val Loss: {val_loss:.4f}')
 
+        if val_loss < best_val_loss:
+            best_val_loss = val_loss
+            patience_counter = 0
+            torch.save(model.state_dict(), best_model_path)
+            #print(f"New best model saved at {best_model_path}")
+        else:
+            patience_counter += 1
 
+        if patience_counter >= patience:
+            print("Early stopping triggered")
+            break
 
+    end_time = time.time()
+    total_time = end_time - start_time
+    print(f'Total Model Running Time: {total_time:.2f} seconds')
+    best_model = DWT_MLP_Model(input_channels=321+4, seq_length=seq_length, pred_length = pred_,  patch_len = patch_lens,  mlp_hidden_size=mlp_hidden, 
+    output_channels=321+4, stride = strides, padding_patch= pp, decompose_layers=decompose_layer, dropout=dropout_rate, dilation=dilat, 
+    mode=mt, wave=wt, kernel_size=k_size,
+    num_encoder_layers=num_encoder_size, nhead=5, 
+    dropout_=dropout_enabled,
+    skip_=True, general_skip_=general_skip_type, Revin_=revin_type)
+    best_model.load_state_dict(torch.load(best_model_path))
+    # Evaluation on test data
+    best_model.eval()
+    test_loss = 0.0
+    with torch.no_grad():
+        for seq_x, seq_y, seq_x_mark, seq_y_mark in test_loader:
+            inputs = torch.cat((seq_x, seq_x_mark), dim=-1)
+            targets = torch.cat((seq_y, seq_y_mark), dim=-1)
+            outputs = best_model(inputs)
+            loss = criterion(outputs, targets[:, :, :-4])  # Assuming specific output handling
+            test_loss += loss.item() * inputs.size(0)
+
+    test_loss /= len(test_loader.dataset)
+    print(f'The {count}th model done.')
+    count += 1
+    print(f'Test Loss for configuration: , learning_rate = {lrs}, weight_decay = {wd}, dropout_rate = {dr}: {test_loss:.4f}')

@@ -482,7 +482,6 @@ class TSTiEncoder(nn.Module):  #i means channel-independent
         
         # Input encoding
         q_len = patch_num
-        print('q_len',q_len, 'patch_num', patch_num, 'patch_len', patch_len)
       
         self.W_P = nn.Linear(patch_len, d_model)  # Eq 1: projection of feature vectors onto a d-dim vector space
         self.seq_len = q_len
@@ -697,7 +696,7 @@ class DWT_MLP_Model(nn.Module):
 
             self.padding_patch_layer_high_list = nn.ModuleList([nn.ReplicationPad1d((0,self.stride)) for _ in range(decompose_layers)])
             
-        self.transformer_low = TSTiEncoder(input_channels, patch_num = patch_num_low, patch_len = patch_len, max_seq_len = 5000, n_layers = num_encoder_layers, d_model = d_model, n_heads = self.n_head, decompose_layer = decompose_layer)
+        self.transformer_low = TSTiEncoder(input_channels, patch_num = patch_num_low, patch_len = patch_len, max_seq_len = 5000, n_layers = num_encoder_layers, d_model = d_model, n_heads = self.n_head, decompose_layer = decompose_layers)
         self.head_nf_low = d_model * patch_num_low
         self.head_nf_high_list = []
         for hnl in range(decompose_layers):
@@ -856,7 +855,7 @@ for sq in seq_:
         best_val_loss = float('inf')
         patience_counter = 0
 
-        num_epochs = 1
+        num_epochs = 30
 
         # Start the timer
         start_time = time.time()

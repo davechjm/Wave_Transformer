@@ -1,8 +1,0 @@
-/var/spool/slurm/d/job633687/slurm_script: line 9: cd: too many arguments
-Traceback (most recent call last):
-  File "New2.py", line 851, in <module>
-    model = DWT_MLP_Model(input_channels=321+4, seq_length=sq, pred_length = pred_, patch_len = patch_lens, mlp_hidden_size=mlp_hidden, 
-  File "New2.py", line 684, in __init__
-    self.transformer = TSTiEncoder(input_channels, patch_num = patch_num, patch_len = patch_len, max_seq_len = 5000, n_layers = num_encoder_layers, d_model = d_model, n_heads = self.n_head, decompose_layer = decompose_layer)
-NameError: name 'decompose_layer' is not defined
-srun: error: gpu-017: task 0: Exited with exit code 1
