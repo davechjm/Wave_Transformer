@@ -1,5 +1,5 @@
 #!/usr/bin/env bash
-#SBATCH --job-name=wave_neu2
+#SBATCH --job-name=wave_neu4
 #SBATCH --output=py_torch_test%j.log
 #SBATCH --error=py_torch_test%j.err
 #SBATCH --mail-user=choi@uni-hildesheim.de
@@ -10,4 +10,4 @@ cd python /home/choi/Wave_Transformer/optuna_     # navigate to the directory if
 
 source activate pytorchenv
 #srun python vanila_transformer_dwt_.py        # python jobs require the srun command to work
-srun python New2.py
+srun python New4.py

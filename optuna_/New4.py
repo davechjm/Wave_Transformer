@@ -826,7 +826,7 @@ for i in indices:
     best_val_loss = float('inf')
     patience_counter = 0
 
-    num_epochs = 1
+    num_epochs = 30
 
     # Start the timer
     start_time = time.time()

@@ -1,0 +1,14 @@
+/var/spool/slurm/d/job633750/slurm_script: line 9: cd: too many arguments
+Traceback (most recent call last):
+  File "New3.py", line 878, in <module>
+    outputs = model(inputs)
+  File "/home/choi/conda/anaconda3/envs/pytorchenv/lib/python3.8/site-packages/torch/nn/modules/module.py", line 1501, in _call_impl
+    return forward_call(*args, **kwargs)
+  File "New3.py", line 753, in forward
+    x_low = self.transformer_low(x_low)
+  File "/home/choi/conda/anaconda3/envs/pytorchenv/lib/python3.8/site-packages/torch/nn/modules/module.py", line 1501, in _call_impl
+    return forward_call(*args, **kwargs)
+  File "New3.py", line 513, in forward
+    u = self.dropout(u + self.W_pos)                                         # u: [bs * nvars x patch_num x d_model]
+RuntimeError: The size of tensor a (13) must match the size of tensor b (49) at non-singleton dimension 1
+srun: error: gpu-012: task 0: Exited with exit code 1

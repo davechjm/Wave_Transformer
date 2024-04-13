@@ -1,0 +1,12 @@
+Epoch [10/30], Train Loss: 0.2895, Val Loss: 0.2382
+Epoch [20/30], Train Loss: 0.2738, Val Loss: 0.2283
+Epoch [30/30], Train Loss: 0.2647, Val Loss: 0.2163
+Total Model Running Time: 18192.27 seconds
+The 0th model done.
+Test Loss for configuration: , seq_len : 96, decompose_layer : 1, count: 1: 0.2554
+Epoch [10/30], Train Loss: 0.2687, Val Loss: 0.2212
+Epoch [20/30], Train Loss: 0.2622, Val Loss: 0.2185
+Epoch [30/30], Train Loss: 0.2539, Val Loss: 0.1953
+Total Model Running Time: 19470.68 seconds
+The 1th model done.
+Test Loss for configuration: , seq_len : 96, decompose_layer : 2, count: 2: 0.2295
