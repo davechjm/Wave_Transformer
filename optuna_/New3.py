@@ -1,5 +1,6 @@
 # %%
 # %%
+# %%
 import time
 import torch
 import torch.nn as nn
@@ -36,7 +37,8 @@ import optuna
 
 from RevIN import RevIN
 
-
+# DWT BEFORE PATCHING (NO TCN YET)
+# NOW WITH TCN : DWT -> TCN -> Patching -> Transformer
 # %%
 class Dataset_Custom(Dataset):
     def __init__(self, root_path, flag='train', size=None,
@@ -728,7 +730,19 @@ class DWT_MLP_Model(nn.Module):
             x = x.permute(0,2,1)
  
         x_low, x_highs = self.dwt_forward(x)
-      
+       
+        x_low_tcn = self.tcn_low(x_low)
+        x_low = x_low + x_low_tcn
+        
+        x_high_tcn_list = []
+        for i, x_high in enumerate(x_highs):
+            x_high_tcn = self.tcn_high_list[i](x_high)
+            x_high_combined = x_high_tcn
+            x_high_combined = x_high + x_high_combined
+            x_high_tcn_list.append(x_high_combined)
+       
+        x_highs = x_high_tcn_list
+        
         
         # do patching
         if self.padding_patch:
@@ -748,12 +762,13 @@ class DWT_MLP_Model(nn.Module):
         
         else:
             pass
-    
+        #x_low = self.tcn_low(x_low)
         #x_low = x_low.permute(0,1,3,2)
         x_low = self.transformer_low(x_low)
         x_low = self.head_low(x_low)
         x_transformed_list = []
         for xhls in range(len(x_highs_list)):
+            #x_highs_list[xhls] = self.tcn_high_list[xhls](x_highs_list[xhls])
             x_transformed_list.append(self.head_high[xhls](self.transformer_high_list[xhls](x_highs_list[xhls])))
    
      
@@ -786,7 +801,7 @@ general_skip_type = 'skip'
 mlp_hidden = 128
 k_size = 5
 s_size = 8
-decompose_layer_list = [1,2]
+decompose_layer_list = [1]
 bs = 64
 mt = 'zero'
 wt = 'haar'
@@ -798,7 +813,7 @@ pp = True
 learning_rates = np.logspace(-3, -2, 100)  # Learning rates between 1e-3 and 1e-2
 dropout_rates = np.linspace(0.0, 0.2, 100)  # Dropout rates between 0 and 0.5
 weight_decays = np.logspace(-4, -3, 100)  # Weight decays between 1e-4 and 1e-3
-indices = np.random.choice(range(100), size=18, replace=False)
+indices = [0,1,2]
 
 
 count = 0
@@ -939,9 +954,12 @@ for sq in seq_:
         test_loss /= len(test_loader.dataset)
         print(f'The {count}th model done.')
         count += 1
-        print(f'Test Loss for configuration: , seq_len : {sq}, decompose_layer : {dcls}, count: {count}: {test_loss:.4f}')
+        print(f'Test Loss for configuration NEW3: , seq_len : {sq}, decompose_layer : {dcls}, count: {count}: {test_loss:.4f}')
 
 # %%
+
+
+
 
 
 

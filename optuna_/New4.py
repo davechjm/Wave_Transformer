@@ -1,4 +1,5 @@
 # %%
+# %%
 import time
 import torch
 import torch.nn as nn
@@ -35,7 +36,8 @@ import optuna
 
 from RevIN import RevIN
 
-
+# NO PATCHING BUT WITH MULTIHEADATTENTION AND CUSTOM POS ENCODIGNG
+# NO PATCH BUT WITH MULTIHEADATTENTION AND PATCHTST POS ENCODING (NEW)
 # %%
 class Dataset_Custom(Dataset):
     def __init__(self, root_path, flag='train', size=None,
@@ -222,7 +224,8 @@ class ProjectedPositionalEncoding(nn.Module):
 
 
 class EncoderLayer(nn.Module):
-    def __init__(self, d_model,n_head = 8, d_ff=None, dropout=0.1, activation="relu",d_k = None, d_v = None, res_attention = False):
+    def __init__(self, d_model, q_len,n_head = 8, d_ff=None, dropout=0.1, activation="relu",d_k = None, d_v = None,
+                 res_attention = False, pe = 'zeros', learn_pe = True):
         super(EncoderLayer, self).__init__()
         d_ff = d_ff or 4 * d_model
         d_k = d_model //n_head if d_k is None else d_k
@@ -235,8 +238,13 @@ class EncoderLayer(nn.Module):
         self.norm2 = nn.LayerNorm(d_model)
         self.dropout = nn.Dropout(dropout)
         self.activation = F.relu if activation == "relu" else F.gelu
+        self.W_P = nn.Linear(d_model, d_model) 
+        self.W_pos = positional_encoding(pe, learn_pe, q_len, d_model)
 
     def forward(self, x):
+        x = self.W_P(x)
+
+        x = self.dropout( x + self.W_pos)
         new_x, attn = self.attention(
             x, x, x
         )
@@ -255,6 +263,9 @@ class Encoder(nn.Module):
         self.attn_layers = nn.ModuleList(attn_layers)
         self.conv_layers = nn.ModuleList(conv_layers) if conv_layers is not None else None
         self.norm = norm_layer
+        
+        #self.W_P = nn.Linear(d_model, d_model) 
+        #self.W_pos = positional_encoding(pe, learn_pe, q_len, d_model)
 
     def forward(self, x, attn_mask=None):
         # x [B, L, D]
@@ -530,11 +541,14 @@ class TSTEncoderLayer(nn.Module):
         assert not d_model%n_heads, f"d_model ({d_model}) must be divisible by n_heads ({n_heads})"
         d_k = d_model // n_heads if d_k is None else d_k
         d_v = d_model // n_heads if d_v is None else d_v
-
+        pe = 'zeros'
+        learn_pe = True
         # Multi-Head attention
         self.res_attention = res_attention
         self.self_attn = _MultiheadAttention(d_model, n_heads, d_k, d_v, attn_dropout=attn_dropout, proj_dropout=dropout, res_attention=res_attention)
-
+        #self.W_P = nn.Linear(d_model, d_model) 
+        #self.W_pos = positional_encoding(pe, learn_pe, q_len, d_model)
+        
         # Add & Norm
         self.dropout_attn = nn.Dropout(dropout)
         if "batch" in norm.lower():
@@ -666,17 +680,17 @@ class DWT_MLP_Model(nn.Module):
         self.tcn_low = DilatedTCNBlock(input_channels, output_channels, dilation=self.dilation,kernel_size= self.kernel_size, dropout_rate= self.dropout, dropout_ = self.dropout_TF, skip_ = self.skip_TF)
         self.tcn_high_list = nn.ModuleList([DilatedTCNBlock(input_channels, output_channels, dropout_rate= self.dropout, kernel_size= self.kernel_size, dilation= self.dilation) for _ in range(decompose_layers)])
 
-        self.pos_encoder = ProjectedPositionalEncoding(input_channels, d_model, max_len = 5000)
+        #self.pos_encoder = ProjectedPositionalEncoding(input_channels, d_model, max_len = 5000)
         if self.Revin:
             self.revin_layer = RevIN(input_channels, affine=True, subtract_last=False)
 
-        encoder_layers_low = [EncoderLayer( d_model, d_ff=mlp_hidden_size, dropout=self.dropout, activation="relu") for _ in range(num_encoder_layers)]
+        encoder_layers_low = [EncoderLayer( d_model, self.seq_len//(2*decompose_layers), d_ff=mlp_hidden_size, dropout=self.dropout, activation="relu", pe = 'zeros', learn_pe = True) for _ in range(num_encoder_layers)]
         self.transformer_low = Encoder(encoder_layers_low, norm_layer=nn.LayerNorm(d_model))
         
         # Transformer Encoders for high-frequency components, using custom Encoder
         self.transformer_high_list = nn.ModuleList(
-            [Encoder([EncoderLayer(d_model, d_ff=mlp_hidden_size, dropout=self.dropout, activation="relu") for _ in range(num_encoder_layers)]) 
-             for _ in range(decompose_layers)])
+            [Encoder([EncoderLayer(d_model, self.seq_len//(decompose_layers*(k_+1)), d_ff=mlp_hidden_size, dropout=self.dropout, activation="relu", pe = 'zeros',learn_pe = True) for _ in range(num_encoder_layers)]) 
+             for k_ in range(decompose_layers)])
         
     
        
@@ -698,8 +712,8 @@ class DWT_MLP_Model(nn.Module):
             x_low_combined = x_low_combined
             
         x_low_combined = x_low_combined.permute(0,2,1)
-            
-        x_low_combined = self.pos_encoder(x_low_combined)
+       
+        #x_low_combined = self.pos_encoder(x_low_combined)
         x_low_combined,_ = self.transformer_low(x_low_combined) # Adjusted for custom encoder
         x_low_combined = x_low_combined.permute(0,2,1)
         x_low_combined = x_low + x_low_combined
@@ -717,7 +731,7 @@ class DWT_MLP_Model(nn.Module):
   
               
             x_high_combined = x_high_combined.permute(0,2,1)
-            x_high_combined = self.pos_encoder(x_high_combined)
+            #x_high_combined = self.pos_encoder(x_high_combined)
             x_high_combined,_ = self.transformer_high_list[i](x_high_combined)  # Adjusted for custom encoder
             x_high_combined = x_high.permute(0,2,1) + x_high_combined
             x_highs_processed.append(x_high_combined.permute(0,2,1))
@@ -763,7 +777,7 @@ pp = True
 learning_rates = np.logspace(-3, -2, 100)  # Learning rates between 1e-3 and 1e-2
 dropout_rates = np.linspace(0.0, 0.2, 100)  # Dropout rates between 0 and 0.5
 weight_decays = np.logspace(-4, -3, 100)  # Weight decays between 1e-4 and 1e-3
-indices = np.random.choice(range(100), size=9, replace=False)
+indices = [0,1,2,3,4,5,6,7,8]
 
 
 count = 0
@@ -909,4 +923,7 @@ for i in indices:
     test_loss /= len(test_loader.dataset)
     print(f'The {count}th model done.')
     count += 1
-    print(f'Test Loss for configuration: , learning_rate = {lrs}, weight_decay = {wd}, dropout_rate = {dr}: {test_loss:.4f}')
+    print(f'Test Loss for configuration NEW4: , seq_: {seq_length}: {test_loss:.4f}')
+
+
+

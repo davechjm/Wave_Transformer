@@ -1,5 +1,7 @@
 # %%
 # %%
+
+# WAVELET WITH TCN -> Then Patch
 import time
 import torch
 import torch.nn as nn
@@ -621,23 +623,6 @@ class Flatten_Head(nn.Module):
             x = self.dropout(x)
         return x
     
-class ReduceDimension(nn.Module):
-    def __init__(self, d_model):
-        super(ReduceDimension, self).__init__()
-        # Initialize the reduction layer
-        self.reduction_layer = nn.Linear(d_model, 1)
-
-    def forward(self, x):
-        bs, nvars, patch_num, d_model = x.shape
-        # Flatten x to apply the linear layer
-        x_flat = x.view(-1, d_model)
-        # Apply the reduction layer
-      
-        x_reduced_flat = self.reduction_layer(x_flat)
-        # Reshape back to the original dimensions minus the reduced one
-        x_reduced = x_reduced_flat.view(bs, nvars, patch_num)
-        return x_reduced   
-
 # %%
 #stride, padding_patch, patch_length
 class DWT_MLP_Model(nn.Module):
@@ -680,7 +665,6 @@ class DWT_MLP_Model(nn.Module):
         if self.Revin:
             self.revin_layer = RevIN(input_channels, affine=True, subtract_last=False)
 
-        self.reduce = ReduceDimension(d_model)
         self.transformer = TSTiEncoder(input_channels, patch_num = patch_num, patch_len = patch_len, max_seq_len = 5000, n_layers = num_encoder_layers, d_model = d_model, n_heads = self.n_head, decompose_layer = decompose_layers)
         self.head_nf = d_model * patch_num
     
