@@ -1,4 +1,0 @@
-/var/spool/slurm/d/job637036/slurm_script: line 9: cd: too many arguments
-/var/spool/slurm/d/job637036/slurm_script: line 11: activate: No such file or directory
-/home/choi/conda/anaconda3/envs/pytorchenv/bin/python: can't open file 'NEU_Multihead.py': [Errno 2] No such file or directory
-srun: error: gpu-017: task 0: Exited with exit code 2

@@ -1,3 +1,5 @@
+
+# %%
 import time
 import torch
 import torch.nn as nn
@@ -336,7 +338,7 @@ class DWT_MLP_Model(nn.Module):
         self.skip_TF = skip_
         self.pos_encoder_type = pos_encoder_type_
         if d_model is None:
-            d_model = output_channels
+            d_model = input_channels
 
        
         # Assuming kernel_size can be used to derive kernel_set for illustration
@@ -403,7 +405,7 @@ class DWT_MLP_Model(nn.Module):
         pred_out = self.dwt_inverse((x_low_combined, x_highs_processed)).permute(0, 2, 1)
         pred_out = self.revin_layer(pred_out, 'denorm')
         
-        pred_out = pred_out[:, :, :-4] # Do not make predictions for meta features
+        pred_out = pred_out# Do not make predictions for meta features
         pred_out = pred_out[:, -self.pred_len:, :]
 
 
@@ -418,6 +420,7 @@ pred_ = 24*4
 # Define hyperparameter combinations
 dropout_enabled = True
 skip_enabled = True
+data_load_type = 'multivariate'
 num_encoder_size = 1
 pos_encoder_type = 'Projected'
 mlp_hidden = 128
@@ -448,32 +451,61 @@ for i in indices:
     lrs =0.0052230056036904522
     dr = 0.10146011891748014
     wd = 1.0059977697794999e-04
+                                            
+    if data_load_type == 'univariate':
+
+        # Define the root path where your dataset is located and the name of your dataset file
+        root_path = '/home/choi/Wave_Transformer/optuna_/electricity/'
+        data_path = 'electricity.csv'
+
+        # Define the size configuration for your dataset
+        seq_len = seq_length #24 * 4 *4    # Length of input sequences
+        label_len = 24 * 4      # Length of labels within the sequence to predict
+        pred_len = 24 * 4       # Number of steps to predict into the future
+
+        size = [seq_len, label_len, pred_len]
+
+        # Initialize the custom dataset for training, validation, and testing
+        train_dataset = Dataset_Custom(root_path=root_path, features= 'S', flag='train',  data_path=data_path, step_size = s_size)
+        val_dataset = Dataset_Custom(root_path=root_path, features= 'S',flag='val', data_path=data_path,step_size = s_size)
+        test_dataset = Dataset_Custom(root_path=root_path, features= 'S',flag='test',  data_path=data_path,step_size = s_size)
+
+        # Optionally, initialize the dataset for prediction (if needed)
+        #pred_dataset = Dataset_Pred(root_path=root_path, flag='pred', size=size, data_path=data_path, inverse=True)
+
+        # Example on how to create DataLoaders for PyTorch training (adjust batch_size as needed)
+        batch_size = bs
+        train_loader = DataLoader(train_dataset, batch_size=batch_size, shuffle=True, drop_last = True)
+        val_loader = DataLoader(val_dataset, batch_size=batch_size, shuffle=False, drop_last = True)
+        test_loader = DataLoader(test_dataset, batch_size=batch_size, shuffle=False, drop_last = False)
         
-    # Specify the file path
-    root_path = '/home/choi/Wave_Transformer/optuna_/electricity/'
-    data_path = 'electricity.csv'
-    # Size parameters
+    else:
+        
+        # Specify the file path
+        root_path = '/home/choi/Wave_Transformer/optuna_/electricity/'
+        data_path = 'electricity.csv'
+        # Size parameters
 
-    seq_len = seq_length # 24*4*4
-    pred_len = 24*4
-    #batch_size = bs
-    # Initialize the custom dataset for training, validation, and testing
-    train_dataset = Dataset_Custom(root_path=root_path, features= 'M', flag='train', data_path=data_path, step_size =s_size)
-    val_dataset = Dataset_Custom(root_path=root_path, features= 'M',flag='val', data_path=data_path,step_size = s_size)
-    test_dataset = Dataset_Custom(root_path=root_path, features= 'M',flag='test', data_path=data_path,step_size = s_size)
+        seq_len = seq_length # 24*4*4
+        pred_len = 24*4
+        #batch_size = bs
+        # Initialize the custom dataset for training, validation, and testing
+        train_dataset = Dataset_Custom(root_path=root_path, features= 'M', flag='train', data_path=data_path, step_size =s_size)
+        val_dataset = Dataset_Custom(root_path=root_path, features= 'M',flag='val', data_path=data_path,step_size = s_size)
+        test_dataset = Dataset_Custom(root_path=root_path, features= 'M',flag='test', data_path=data_path,step_size = s_size)
 
-    # Optionally, initialize the dataset for prediction (if needed)
-    #pred_dataset = Dataset_Pred(root_path=root_path, flag='pred', size=size, data_path=data_path, inverse=True)
+        # Optionally, initialize the dataset for prediction (if needed)
+        #pred_dataset = Dataset_Pred(root_path=root_path, flag='pred', size=size, data_path=data_path, inverse=True)
 
-    # Example on how to create DataLoaders for PyTorch training (adjust batch_size as needed)
-    batch_size = bs
-    train_loader = DataLoader(train_dataset, batch_size=batch_size, shuffle=True, drop_last = True)
-    val_loader = DataLoader(val_dataset, batch_size=batch_size, shuffle=False, drop_last = True)
-    test_loader = DataLoader(test_dataset, batch_size=batch_size, shuffle=False, drop_last = False)
+        # Example on how to create DataLoaders for PyTorch training (adjust batch_size as needed)
+        batch_size = bs
+        train_loader = DataLoader(train_dataset, batch_size=batch_size, shuffle=True, drop_last = True)
+        val_loader = DataLoader(val_dataset, batch_size=batch_size, shuffle=False, drop_last = True)
+        test_loader = DataLoader(test_dataset, batch_size=batch_size, shuffle=False, drop_last = False)
     dropout_rate = dr if dropout_enabled else 0.0
     # Adjust the model instantiation to include all hyperparameters
-    model = DWT_MLP_Model(input_channels=321, seq_length=seq_len, pred_length = pred_,mlp_hidden_size=mlp_hidden, 
-                        output_channels=321, decompose_layers=decompose_layer, 
+    model = DWT_MLP_Model(input_channels=1, seq_length=seq_len, pred_length = pred_,mlp_hidden_size=mlp_hidden, 
+                        output_channels=1, decompose_layers=decompose_layer, 
                         dropout=dropout_rate, dilation=dilat, 
                         mode=mt, wave=wt, kernel_size=k_size, 
                         num_encoder_layers=num_encoder_size, nhead=8, 
@@ -489,16 +521,16 @@ for i in indices:
     val_losses = []
 
     # Early stopping parameters
-    patience = 10
+    patience = 20
     best_val_loss = float('inf')
     patience_counter = 0
 
-    num_epochs = 50
+    num_epochs = 300
 
     # Start the timer
     start_time = time.time()
 
-    best_model_path = f"best_model_haar200_{i}_{num_encoder_size}_{skip_enabled}_{pos_encoder_type}_{bs}_{decompose_layer}_{k_size}_{s_size}_{mlp_hidden}.pt"
+    best_model_path = f"best_model_haar200_{data_load_type}_{i}_{num_encoder_size}_{skip_enabled}_{pos_encoder_type}_{bs}_{decompose_layer}_{k_size}_{s_size}_{mlp_hidden}.pt"
 
 
     for epoch in range(num_epochs):
@@ -516,11 +548,14 @@ for i in indices:
                 
                 optimizer.zero_grad()
                 outputs = model(inputs)  # Model must be adjusted to handle input shape [batch, seq_len, 1]
+                print('outputs shape', outputs.shape)
                 all_outputs.append(outputs)
 
             # Concatenate the outputs along the feature dimension
             concat_outputs = torch.cat(all_outputs, dim=-1)  # Assuming the model output shape matches [batch, seq_len, 1]
-
+            print(concat_outputs.shape)
+            print(seq_y.shape)
+            
             # Calculate loss
             loss = criterion(concat_outputs, seq_y)
             loss.backward()
@@ -571,8 +606,8 @@ for i in indices:
     end_time = time.time()
     total_time = end_time - start_time
     print(f'Total Model Running Time: {total_time:.2f} seconds')
-    best_model = DWT_MLP_Model(input_channels=321, seq_length=seq_len, pred_length = pred_, mlp_hidden_size=mlp_hidden, 
-    output_channels=321, decompose_layers=decompose_layer, dropout=dropout_rate, dilation=dilat, 
+    best_model = DWT_MLP_Model(input_channels=1, seq_length=seq_len, pred_length = pred_, mlp_hidden_size=mlp_hidden, 
+    output_channels=1, decompose_layers=decompose_layer, dropout=dropout_rate, dilation=dilat, 
     mode=mt, wave=wt, kernel_size=k_size, 
     num_encoder_layers=num_encoder_size, nhead=8, 
     dropout_=dropout_enabled,
@@ -602,4 +637,10 @@ for i in indices:
     test_loss /= len(test_loader.dataset)
     print(f'The {count}th model done.')
     count += 1
-    print(f'Test Loss for configuration for Neu_Univariate: , {i}_{num_encoder_size}_{skip_enabled}_{pos_encoder_type}_{bs}_{decompose_layer}_{k_size}_{s_size}_{mlp_hidden}: {test_loss:.4f}')
+    print(f'Test Loss for configuration: , learning_rate = {lrs}, weight_decay = {wd}, dropout_rate = {dr}: {test_loss:.4f}')
+
+
+# %%
+
+
+
