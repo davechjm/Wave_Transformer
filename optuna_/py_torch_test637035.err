@@ -1,0 +1,17 @@
+/var/spool/slurm/d/job637035/slurm_script: line 9: cd: too many arguments
+/var/spool/slurm/d/job637035/slurm_script: line 11: activate: No such file or directory
+Traceback (most recent call last):
+  File "NEU.py", line 525, in <module>
+    loss = criterion(concat_outputs, seq_y)
+  File "/home/choi/conda/anaconda3/envs/pytorchenv/lib/python3.8/site-packages/torch/nn/modules/module.py", line 1511, in _wrapped_call_impl
+    return self._call_impl(*args, **kwargs)
+  File "/home/choi/conda/anaconda3/envs/pytorchenv/lib/python3.8/site-packages/torch/nn/modules/module.py", line 1520, in _call_impl
+    return forward_call(*args, **kwargs)
+  File "/home/choi/conda/anaconda3/envs/pytorchenv/lib/python3.8/site-packages/torch/nn/modules/loss.py", line 535, in forward
+    return F.mse_loss(input, target, reduction=self.reduction)
+  File "/home/choi/conda/anaconda3/envs/pytorchenv/lib/python3.8/site-packages/torch/nn/functional.py", line 3338, in mse_loss
+    expanded_input, expanded_target = torch.broadcast_tensors(input, target)
+  File "/home/choi/conda/anaconda3/envs/pytorchenv/lib/python3.8/site-packages/torch/functional.py", line 76, in broadcast_tensors
+    return _VF.broadcast_tensors(tensors)  # type: ignore[attr-defined]
+RuntimeError: The size of tensor a (101757) must match the size of tensor b (321) at non-singleton dimension 2
+srun: error: gpu-017: task 0: Exited with exit code 1
