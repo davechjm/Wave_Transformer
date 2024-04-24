@@ -521,11 +521,11 @@ for i in indices:
     val_losses = []
 
     # Early stopping parameters
-    patience = 20
+    patience = 10
     best_val_loss = float('inf')
     patience_counter = 0
 
-    num_epochs = 300
+    num_epochs = 50
 
     # Start the timer
     start_time = time.time()
@@ -535,7 +535,7 @@ for i in indices:
 
     for epoch in range(num_epochs):
         model.train()
-
+        num_samples = 0
         train_loss = 0.0
 
         for seq_x, seq_y, seq_x_mark, seq_y_mark in train_loader:
@@ -548,26 +548,27 @@ for i in indices:
                 
                 optimizer.zero_grad()
                 outputs = model(inputs)  # Model must be adjusted to handle input shape [batch, seq_len, 1]
-                print('outputs shape', outputs.shape)
+                
                 all_outputs.append(outputs)
 
             # Concatenate the outputs along the feature dimension
             concat_outputs = torch.cat(all_outputs, dim=-1)  # Assuming the model output shape matches [batch, seq_len, 1]
-            print(concat_outputs.shape)
-            print(seq_y.shape)
+           
             
             # Calculate loss
             loss = criterion(concat_outputs, seq_y)
             loss.backward()
             optimizer.step()
 
-            train_loss += loss.item() * seq_x.size(0)
+            train_loss += loss.item() * bs
+            num_samples += bs
 
-        train_loss /= len(train_loader.dataset)
+        train_loss /= num_samples
         train_losses.append(train_loss)
 
         # Validation phase
         model.eval()
+        val_num_samples = 0.0
         val_loss = 0.0
         with torch.no_grad():
             for seq_x, seq_y, seq_x_mark, seq_y_mark in val_loader:
@@ -583,9 +584,10 @@ for i in indices:
                 concat_outputs = torch.cat(all_outputs, dim=-1)
                 
                 loss = criterion(concat_outputs, seq_y)
-                val_loss += loss.item() * seq_x.size(0)
+                val_loss += loss.item() * bs
+                num_samples += bs
 
-        val_loss /= len(val_loader.dataset)
+        val_loss /= num_samples
         val_losses.append(val_loss)
 
         if (epoch + 1) % 10 == 0:
@@ -616,6 +618,7 @@ for i in indices:
     # Evaluation on test data
     best_model.eval()
     test_loss = 0.0
+    test_num_samples = 0
     with torch.no_grad():
         for seq_x, seq_y, seq_x_mark, seq_y_mark in test_loader:
             batch_size, seq_len, num_features = seq_x.shape
@@ -632,9 +635,10 @@ for i in indices:
             
             # Compute loss on the concatenated outputs
             loss = criterion(concat_outputs, seq_y)
-            test_loss += loss.item() * inputs.size(0)
+            test_loss += loss.item() * bs
+            test_num_samples += bs
 
-    test_loss /= len(test_loader.dataset)
+    test_loss /= test_num_samples
     print(f'The {count}th model done.')
     count += 1
     print(f'Test Loss for configuration: , learning_rate = {lrs}, weight_decay = {wd}, dropout_rate = {dr}: {test_loss:.4f}')
