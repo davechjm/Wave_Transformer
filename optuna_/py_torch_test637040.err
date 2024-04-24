@@ -1,4 +1,0 @@
-/var/spool/slurm/d/job637040/slurm_script: line 9: cd: too many arguments
-srun: Job step aborted: Waiting up to 32 seconds for job step to finish.
-slurmstepd: error: *** STEP 637040.0 ON gpu-120 CANCELLED AT 2024-04-24T09:24:27 ***
-slurmstepd: error: *** JOB 637040 ON gpu-120 CANCELLED AT 2024-04-24T09:24:27 ***
