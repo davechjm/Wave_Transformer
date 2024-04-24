@@ -1,0 +1,19 @@
+Epoch [10/50], Train Loss: 0.3679, Val Loss: 0.3492
+Epoch [20/50], Train Loss: 0.3679, Val Loss: 0.3495
+Early stopping triggered
+Total Model Running Time: 671.04 seconds
+The 0th model done.
+Test Loss for configuration for Neu_Multihead: , 0_1_True_Projected_64_1_5_8_None: 0.3258
+Epoch [10/50], Train Loss: 0.3651, Val Loss: 0.3501
+Epoch [20/50], Train Loss: 0.3479, Val Loss: 0.3062
+Epoch [30/50], Train Loss: 0.3669, Val Loss: 0.3487
+Early stopping triggered
+Total Model Running Time: 1211.85 seconds
+The 1th model done.
+Test Loss for configuration for Neu_Multihead: , 1_1_True_Projected_64_1_5_8_None: 0.2813
+Epoch [10/50], Train Loss: 0.3665, Val Loss: 0.3465
+Epoch [20/50], Train Loss: 0.3674, Val Loss: 0.3497
+Early stopping triggered
+Total Model Running Time: 641.43 seconds
+The 2th model done.
+Test Loss for configuration for Neu_Multihead: , 2_1_True_Projected_64_1_5_8_None: 0.3250

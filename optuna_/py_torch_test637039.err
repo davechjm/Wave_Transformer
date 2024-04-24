@@ -1,0 +1,12 @@
+/var/spool/slurm/d/job637039/slurm_script: line 9: cd: too many arguments
+Traceback (most recent call last):
+  File "NEU_MultiHead.py", line 539, in <module>
+    outputs = model(inputs)
+  File "/home/choi/conda/anaconda3/envs/pytorchenv/lib/python3.8/site-packages/torch/nn/modules/module.py", line 1511, in _wrapped_call_impl
+    return self._call_impl(*args, **kwargs)
+  File "/home/choi/conda/anaconda3/envs/pytorchenv/lib/python3.8/site-packages/torch/nn/modules/module.py", line 1520, in _call_impl
+    return forward_call(*args, **kwargs)
+  File "NEU_MultiHead.py", line 401, in forward
+    x_low_combined = self.pos_dropout(x_low_combined + self.W_pos_low)
+RuntimeError: The size of tensor a (48) must match the size of tensor b (256) at non-singleton dimension 1
+srun: error: gpu-013: task 0: Exited with exit code 1
