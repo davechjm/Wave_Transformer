@@ -1,6 +1,4 @@
-# %%
-
-# %%
+from __future__ import division
 import time
 import torch
 import torch.nn as nn
@@ -11,7 +9,6 @@ from torch_scatter import scatter_add, scatter_max
 from pytorch_wavelets import DWT1DForward, DWT1DInverse
 import warnings
 
-from __future__ import division
 import numbers
 
 from torch.nn import Parameter
@@ -985,8 +982,3 @@ for i in indices:
     
 
 # %%
-
-# %%
-
-
-
