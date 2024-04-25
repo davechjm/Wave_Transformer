@@ -1,0 +1,6 @@
+/var/spool/slurm/d/job637320/slurm_script: line 9: cd: too many arguments
+  File "WaveForM_trend_res.py", line 14
+    from __future__ import division
+    ^
+SyntaxError: from __future__ imports must occur at the beginning of the file
+srun: error: gpu-015: task 0: Exited with exit code 1
