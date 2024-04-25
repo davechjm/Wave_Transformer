@@ -1,3 +1,4 @@
+# %%
 
 # %%
 import time
@@ -396,9 +397,8 @@ class DWT_MLP_Model(nn.Module):
             [Encoder([EncoderLayer(self.attention, d_model, d_ff=mlp_hidden_size, dropout=self.dropout, activation="relu") for _ in range(num_encoder_layers)]) 
              for _ in range(decompose_layers)])
         
-        self.flatten_head_low = Flatten_Head(True, d_model,self.pred_len//(2*decompose_layers) , self.pred_len//(2*decompose_layers))
+        self.flatten_head= Flatten_Head(True, d_model,self.pred_len , self.pred_len)
         
-        self.flatten_head_list = [Flatten_Head( True, d_model,self.pred_len//(2*decompose_layers*k), self.pred_len//(2*decompose_layers*k))for k in range(1,num_encoder_layers+1)]
         
 
     def forward(self, x):
@@ -420,7 +420,7 @@ class DWT_MLP_Model(nn.Module):
         x_low_combined, _ = self.transformer_low(x_low_combined) # Adjusted for custom encoder
         x_low_combined = x_low_combined.permute(0,2,1)
         x_low_combined = x_low + x_low_combined
-        x_low_combined = self.flatten_head_low(x_low_combined)
+        #x_low_combined = self.flatten_head_low(x_low_combined)
         
         # Process high-frequency components
         x_highs_processed = []
@@ -435,13 +435,14 @@ class DWT_MLP_Model(nn.Module):
             x_high_combined = self.pos_encoder(x_high_combined)
             x_high_combined, _ = self.transformer_high_list[i](x_high_combined)  # Adjusted for custom encoder
             x_high_combined = x_high.permute(0,2,1) + x_high_combined
-            x_high_combined = self.flatten_head_list[i](x_high_combined.permute(0,2,1))
-            x_highs_processed.append(x_high_combined)
+            #x_high_combined = self.flatten_head_list[i](x_high_combined.permute(0,2,1))
+            x_highs_processed.append(x_high_combined.permute(0,2,1))
 
             
      
         # Reconstruct the signal and adjust dimensions
-        pred_out = self.dwt_inverse((x_low_combined, x_highs_processed)).permute(0, 2, 1)
+        pred_out = self.dwt_inverse((x_low_combined, x_highs_processed))
+        pred_out = self.flatten_head(pred_out).permute(0,2,1)
         pred_out = self.revin_layer(pred_out, 'denorm')
         
         pred_out = pred_out# Do not make predictions for meta features
@@ -617,3 +618,9 @@ for i in indices:
     print(f'Test Loss for configuration: li={i}, num_encoder_size={num_encoder_size}, skip_enabled={skip_enabled}, '
       f'pos_encoder_type={pos_encoder_type}, batch_size={bs}, decompose_layer={decompose_layer}, '
       f'kernel_size={k_size}, stride_size={s_size}, mlp_hidden={mlp_hidden}: {test_loss:.4f}')
+
+
+# %%
+
+
+
