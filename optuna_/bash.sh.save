@@ -1,5 +1,5 @@
 #!/usr/bin/env bash
-#SBATCH --job-name=wave_
+#SBATCH --job-name=Univ_inv
 #SBATCH --output=py_torch_test%j.log
 #SBATCH --error=py_torch_test%j.err
 #SBATCH --mail-user=choi@uni-hildesheim.de
@@ -9,5 +9,4 @@
 cd python /home/choi/Wave_Transformer/optuna_     # navigate to the directory if necessary      
 
 source activate pytorchenv
-#srun python vanila_transformer_dwt_.py        # python jobs require the srun command to work
-srun python Neu_trend_res.py
+#srun python vanila_transformer_dwt_.py        # python jobs require the srun command to worksrun python Neu_Univariate_Inv.py
