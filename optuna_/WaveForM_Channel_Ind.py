@@ -1,3 +1,4 @@
+# %%
 from __future__ import division
 import time
 import torch
@@ -26,6 +27,7 @@ from sklearn.preprocessing import StandardScaler
 from sklearn.model_selection import train_test_split
 import math
 import pandas as pd
+from scipy.stats import pearsonr
 
 from torch.nn import Linear, Parameter
 from torch_geometric.nn.conv import MessagePassing
@@ -40,6 +42,34 @@ import torch.nn.init as init
 import optuna
 
 from RevIN import RevIN
+
+def load_dataset(root_path, data_path, drop_columns='date'):
+    """
+    Load dataset from a CSV file, drop specified columns, and apply standard scaling.
+
+    Args:
+    root_path (str): Directory path where the data file is located.
+    data_path (str): Name of the data file.
+    drop_columns (list of str): Columns to be dropped from the dataset.
+
+    Returns:
+    numpy.ndarray: Scaled dataset as a NumPy array.
+    """
+    # Combine the root path and the data path
+    full_path = os.path.join(root_path, data_path)
+    
+    # Read the data from CSV file
+    data = pd.read_csv(full_path)
+    
+    # Drop specified columns if provided
+    if drop_columns:
+        data.drop(columns=drop_columns, inplace=True, errors='ignore')
+    
+    # Apply StandardScaler to normalize the data
+    scaler = StandardScaler()
+    scaled_data = scaler.fit_transform(data.values)  # Assuming data to be normalized is numeric
+
+    return scaled_data
 
     
 class Dataset_Custom(Dataset):
@@ -772,48 +802,72 @@ class series_decomp(nn.Module):
         moving_mean = self.moving_avg(x)
         res = x - moving_mean
         return res, moving_mean
+
+
+# Define a function to extract correlated features for each feature
+def extract_correlated_features(autocorrelation_matrix, num_correlated_features=6):
+    num_features = autocorrelation_matrix.shape[0]
+    correlated_features = {}
+    for i in range(num_features):
+        # Find indices of the top correlated features
+        correlated_indices = np.argsort(autocorrelation_matrix[i])[::-1][:num_correlated_features]
+        correlated_features[i] = correlated_indices
+    return correlated_features   
+
+def compute_autocorrelation(seq_x):
+    num_features = seq_x.shape[1]  # seq_x is now [seq_len, num_channels]
+    autocorrelation_matrix = np.zeros((num_features, num_features))
     
+    for i in range(num_features):
+        for j in range(num_features):
+            if i == j:
+                autocorrelation_matrix[i, j] = 1.0  # Auto-correlation is always 1
+            else:
+                # Compute the absolute value of Pearson correlation coefficient
+                autocorrelation_matrix[i, j] = np.abs(pearsonr(seq_x[:, i], seq_x[:, j])[0])
+    
+    return autocorrelation_matrix
 
 class Model(nn.Module):
-    def __init__(self, seq_len, pred_len, n_points, dropout, wavelet_j, wavelet, subgraph_size, node_dim, n_gnn_layer):
+    def __init__(self, seq_len, pred_len, n_points, dropout, wavelet_j, wavelet, subgraph_size, node_dim, n_gnn_layer, correlated_groups):
         super(Model, self).__init__()
-        
-        # Initialize the backbone Model
-        self.backbone_res = Model_(
-            seq_len=seq_len,
-            pred_len=pred_len,
-            n_points=n_points,
-            dropout=dropout,
-            wavelet_j=wavelet_j,
-            wavelet=wavelet,
-            subgraph_size=subgraph_size,
-            node_dim=node_dim,
-            n_gnn_layer=n_gnn_layer
-        )
-        
-        self.backbone_trend = Model_(
-            seq_len=seq_len,
-            pred_len=pred_len,
-            n_points=n_points,
-            dropout=dropout,
-            wavelet_j=wavelet_j,
-            wavelet=wavelet,
-            subgraph_size=subgraph_size,
-            node_dim=node_dim,
-            n_gnn_layer=n_gnn_layer
-        )
-        
-   
-        self.series_decomp = series_decomp(kernel_size=25)
+        self.channels = n_points
+        self.correlated_groups = correlated_groups  # Pass the correlated groups as a parameter
+        self.backbone_modules = nn.ModuleDict({
+            str(i): Model_(
+                seq_len=seq_len,
+                pred_len=pred_len,
+                n_points=len(group),
+                dropout=dropout,
+                wavelet_j=wavelet_j,
+                wavelet=wavelet,
+                subgraph_size=subgraph_size,
+                node_dim=node_dim,
+                n_gnn_layer=n_gnn_layer
+            )
+            for i, group in enumerate(correlated_groups.values())
+        })
+        self.pred_len = pred_len
+
     def forward(self, x):
-        res, trend = self.series_decomp(x)
-        # Pass input through the backbone model
-        pred_out_res = self.backbone_res(res)
-        pred_out_trend = self.backbone_trend(trend)
-        output = pred_out_res + pred_out_trend
+        output = torch.zeros([x.size(0), self.pred_len, x.size(2)], dtype=x.dtype)
+        # Dictionary to collect predictions for averaging
+        predictions = {i: [] for i in range(x.size(2))}
+        
+        for idx, group in enumerate(self.correlated_groups.values()):
+            # Extracting the specific features for this group
+            group_data = x[:, :, group]
+            pred = self.backbone_modules[str(idx)](group_data)
+            for i, feature_index in enumerate(group):
+                predictions[feature_index].append(pred[:, :, i:i+1])
+
+        # Averaging predictions for each feature
+        for i in range(x.size(2)):
+            if predictions[i]:
+                # Stack predictions and take the mean across the predictions for each feature
+                output[:, :, i:i+1] = torch.mean(torch.stack(predictions[i], dim=0), dim=0)
         
         return output
-
     
     
 def test(model, test_loader, criterion, device):
@@ -910,7 +964,7 @@ node_dim = 40
 n_gnn_layer = 3
 s_size = 5
 indices = [0,1,2,3,4,5] #np.random.choice(range(100), size=3, replace=False)
-input_length = [512]
+input_length = [24*4,512]
 
 
 
@@ -925,6 +979,11 @@ for i in indices:
     data_path = 'electricity.csv'
     # Size parameters
 
+    total_x = load_dataset(root_path, data_path, drop_columns=['date'])
+    
+    # Compute autocorrelation matrix
+    autocorrelation_matrix = compute_autocorrelation(total_x)
+    correlated_features = extract_correlated_features(autocorrelation_matrix)
     seq_len = seq_length # 24*4*4
     pred_len = 24*4
     #batch_size = bs
@@ -952,7 +1011,8 @@ for i in indices:
     wavelet=wavelet, 
     subgraph_size=supbraph_size, 
     node_dim=node_dim, 
-    n_gnn_layer=n_gnn_layer
+    n_gnn_layer=n_gnn_layer,
+    correlated_groups=correlated_features
 )
 
     optimizer = torch.optim.Adam(model.parameters(), lr=0.0001, weight_decay=0.0001)
@@ -975,7 +1035,7 @@ for i in indices:
             break
         
     test_loss = test(model, test_loader, criterion, device)
-    print(f'Test Loss: {test_loss:.4f}')
+    print(f'Test Loss WaveForM Channel Ind: {test_loss:.4f}')
 
 
         
@@ -983,3 +1043,5 @@ for i in indices:
     
 
 # %%
+
+
