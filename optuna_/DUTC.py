@@ -901,7 +901,7 @@ for i in indices:
         batch_size = bs
         train_loader = DataLoader(train_dataset, batch_size=batch_size, shuffle=True, drop_last = True)
         val_loader = DataLoader(val_dataset, batch_size=batch_size, shuffle=False, drop_last = True)
-        test_loader = DataLoader(test_dataset, batch_size=batch_size, shuffle=False, drop_last = True)
+        test_loader = DataLoader(test_dataset, batch_size=batch_size, shuffle=False, drop_last = False)
     #print(f"Running experiment with Data_load_type = {data_load_type}, TCN_type={TCN_type}, attention_type={attention_type},dilations ={dilat}, wave_type = {wt}, mode_type = {mt},num_encoder_size = {num_encoder_size}, mlp_hidden_size = {mlp_hidden},skip_enabled={skip_enabled}, general_skip={general_skip_type}, Pos_Encoder_Type = {pos_encoder_type}, batch_size = {bs}, step_size = {s_size}, kernel_size = {k_size}, decompose_layer = {decompose_layer} ")
     dropout_rate = dr if dropout_enabled else 0.0
     # Adjust the model instantiation to include all hyperparameters

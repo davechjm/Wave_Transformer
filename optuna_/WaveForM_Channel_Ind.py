@@ -874,10 +874,10 @@ def test(model, test_loader, criterion, device):
     total_loss = 0
     with torch.no_grad():
         for seq_x, seq_y, seq_x_mark, seq_y_mark in test_loader:
-            seq_x, seq_y = seq_x.to(device).clone(), seq_y.to(device).clone(),
-            outputs = model(seq_x)
+            test_x, seq_y = seq_x.to(device).clone(), seq_y.to(device).clone(),
+            outputs = model(test_x)
             loss = criterion(outputs, seq_y)
-            total_loss += loss.item() * seq_x.size(0)
+            total_loss += loss.item() * test_x.size(0)
     return total_loss / len(test_loader.dataset)
 
 
@@ -885,13 +885,13 @@ def train(model, train_loader, optimizer, criterion, device):
     model.train()
     total_loss = 0
     for seq_x, seq_y, seq_x_mark, seq_y_mark in train_loader:
-        seq_x, seq_y = seq_x.to(device).clone(), seq_y.to(device).clone(),
+        train_x, seq_y = seq_x.to(device).clone(), seq_y.to(device).clone(),
         optimizer.zero_grad()
-        outputs = model(seq_x)
+        outputs = model(train_x)
         loss = criterion(outputs, seq_y)
         loss.backward()
         optimizer.step()
-        total_loss += loss.item() * seq_x.size(0)
+        total_loss += loss.item() * train_x.size(0)
     return total_loss / len(train_loader.dataset)
 
 def validate(model, val_loader, criterion, device):
@@ -899,10 +899,10 @@ def validate(model, val_loader, criterion, device):
     total_loss = 0
     with torch.no_grad():
         for seq_x, seq_y, seq_x_mark, seq_y_mark in val_loader:
-            seq_x, seq_y = seq_x.to(device).clone(), seq_y.to(device).clone(),
-            outputs = model(seq_x)
+            val_x, seq_y = seq_x.to(device).clone(), seq_y.to(device).clone(),
+            outputs = model(val_x)
             loss = criterion(outputs, seq_y)
-            total_loss += loss.item() * seq_x.size(0)
+            total_loss += loss.item() * val_x.size(0)
     return total_loss / len(val_loader.dataset)
 
 
