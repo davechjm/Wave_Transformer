@@ -1,0 +1,14 @@
+/var/spool/slurm/d/job638182/slurm_script: line 9: cd: too many arguments
+Traceback (most recent call last):
+  File "WaveForM_Channel_Ind.py", line 1026, in <module>
+    train_loss = train(model, train_loader, optimizer, criterion, device)
+  File "WaveForM_Channel_Ind.py", line 891, in train
+    outputs = model(seq_x)
+  File "/home/choi/conda/anaconda3/envs/pytorchenv/lib/python3.8/site-packages/torch/nn/modules/module.py", line 1511, in _wrapped_call_impl
+    return self._call_impl(*args, **kwargs)
+  File "/home/choi/conda/anaconda3/envs/pytorchenv/lib/python3.8/site-packages/torch/nn/modules/module.py", line 1520, in _call_impl
+    return forward_call(*args, **kwargs)
+  File "WaveForM_Channel_Ind.py", line 858, in forward
+    group_data = x[:, :, group]
+ValueError: At least one stride in the given numpy array is negative, and tensors with negative strides are not currently supported. (You can probably work around this by making a copy of your array  with array.copy().) 
+srun: error: gpu-102: task 0: Exited with exit code 1
