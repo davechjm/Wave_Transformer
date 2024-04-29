@@ -1,0 +1,39 @@
+Epoch [10/50], Train Loss: 0.1986, Val Loss: 0.2022
+Epoch [20/50], Train Loss: 0.1933, Val Loss: 0.2043
+Early stopping triggered
+Total Model Running Time: 407.30 seconds
+The 0th model done.
+Test Loss for configuration Normal Neu: li=0, num_encoder_size=1, skip_enabled=True, pos_encoder_type=Projected, batch_size=8, decompose_layer=1, kernel_size=5, stride_size=8, mlp_hidden=128: 0.2184
+Epoch [10/50], Train Loss: 0.1983, Val Loss: 0.2067
+Epoch [20/50], Train Loss: 0.1923, Val Loss: 0.1987
+Epoch [30/50], Train Loss: 0.1897, Val Loss: 0.1994
+Epoch [40/50], Train Loss: 0.1890, Val Loss: 0.1990
+Early stopping triggered
+Total Model Running Time: 798.99 seconds
+The 1th model done.
+Test Loss for configuration Normal Neu: li=1, num_encoder_size=1, skip_enabled=True, pos_encoder_type=Projected, batch_size=8, decompose_layer=1, kernel_size=5, stride_size=8, mlp_hidden=128: 0.2142
+Epoch [10/50], Train Loss: 0.1970, Val Loss: 0.2031
+Epoch [20/50], Train Loss: 0.1920, Val Loss: 0.2011
+Early stopping triggered
+Total Model Running Time: 449.93 seconds
+The 2th model done.
+Test Loss for configuration Normal Neu: li=2, num_encoder_size=1, skip_enabled=True, pos_encoder_type=Projected, batch_size=8, decompose_layer=1, kernel_size=5, stride_size=8, mlp_hidden=128: 0.2179
+Epoch [10/50], Train Loss: 0.1973, Val Loss: 0.2085
+Epoch [20/50], Train Loss: 0.1926, Val Loss: 0.2022
+Early stopping triggered
+Total Model Running Time: 450.88 seconds
+The 3th model done.
+Test Loss for configuration Normal Neu: li=3, num_encoder_size=1, skip_enabled=True, pos_encoder_type=Projected, batch_size=8, decompose_layer=1, kernel_size=5, stride_size=8, mlp_hidden=128: 0.2155
+Epoch [10/50], Train Loss: 0.1963, Val Loss: 0.2018
+Epoch [20/50], Train Loss: 0.1915, Val Loss: 0.2007
+Early stopping triggered
+Total Model Running Time: 379.98 seconds
+The 4th model done.
+Test Loss for configuration Normal Neu: li=4, num_encoder_size=1, skip_enabled=True, pos_encoder_type=Projected, batch_size=8, decompose_layer=1, kernel_size=5, stride_size=8, mlp_hidden=128: 0.2145
+Epoch [10/50], Train Loss: 0.1993, Val Loss: 0.2023
+Epoch [20/50], Train Loss: 0.1926, Val Loss: 0.2037
+Epoch [30/50], Train Loss: 0.1906, Val Loss: 0.1989
+Early stopping triggered
+Total Model Running Time: 673.13 seconds
+The 5th model done.
+Test Loss for configuration Normal Neu: li=5, num_encoder_size=1, skip_enabled=True, pos_encoder_type=Projected, batch_size=8, decompose_layer=1, kernel_size=5, stride_size=8, mlp_hidden=128: 0.2159
