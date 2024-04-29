@@ -1,4 +1,3 @@
-# %%
 from __future__ import division
 import time
 import torch
@@ -805,7 +804,7 @@ class series_decomp(nn.Module):
 
 
 # Define a function to extract correlated features for each feature
-def extract_correlated_features(autocorrelation_matrix, num_correlated_features=6):
+def extract_correlated_features(autocorrelation_matrix, num_correlated_features=10):
     num_features = autocorrelation_matrix.shape[0]
     correlated_features = {}
     for i in range(num_features):
@@ -1035,13 +1034,4 @@ for i in indices:
             break
         
     test_loss = test(model, test_loader, criterion, device)
-    print(f'Test Loss WaveForM Channel Ind: {test_loss:.4f}')
-
-
-        
-      
-    
-
-# %%
-
-
+    print(f'Test Loss: {test_loss:.4f}')
