@@ -874,7 +874,7 @@ def test(model, test_loader, criterion, device):
     total_loss = 0
     with torch.no_grad():
         for seq_x, seq_y, seq_x_mark, seq_y_mark in test_loader:
-            seq_x, seq_y = seq_x.to(device), seq_y.to(device)
+            seq_x, seq_y = seq_x.to(device).clone(),, seq_y.to(device).clone(),
             outputs = model(seq_x)
             loss = criterion(outputs, seq_y)
             total_loss += loss.item() * seq_x.size(0)
@@ -885,8 +885,7 @@ def train(model, train_loader, optimizer, criterion, device):
     model.train()
     total_loss = 0
     for seq_x, seq_y, seq_x_mark, seq_y_mark in train_loader:
-        seq_x, seq_y = seq_x.to(device), seq_y.to(device)
-        print(seq_x.shape)
+        seq_x, seq_y = seq_x.to(device).clone(),, seq_y.to(device).clone(),
         optimizer.zero_grad()
         outputs = model(seq_x)
         loss = criterion(outputs, seq_y)
@@ -900,7 +899,7 @@ def validate(model, val_loader, criterion, device):
     total_loss = 0
     with torch.no_grad():
         for seq_x, seq_y, seq_x_mark, seq_y_mark in val_loader:
-            seq_x, seq_y = seq_x.to(device), seq_y.to(device)
+            seq_x, seq_y = seq_x.to(device).clone(), seq_y.to(device).clone(),
             outputs = model(seq_x)
             loss = criterion(outputs, seq_y)
             total_loss += loss.item() * seq_x.size(0)
@@ -1035,3 +1034,10 @@ for i in indices:
         
     test_loss = test(model, test_loader, criterion, device)
     print(f'Test Loss: {test_loss:.4f}')
+
+
+        
+      
+    
+
+# %%
