@@ -1,7 +1,0 @@
-/var/spool/slurm/d/job640715/slurm_script: line 9: cd: too many arguments
-/var/spool/slurm/d/job640715/slurm_script: line 11: activate: No such file or directory
-  File "WaveForM_Channel_Ind.py", line 858
-    if isinstance(group, list):
-                              ^
-TabError: inconsistent use of tabs and spaces in indentation
-srun: error: gpu-011: task 0: Exited with exit code 1

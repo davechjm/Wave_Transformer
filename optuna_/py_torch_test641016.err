@@ -1,0 +1,16 @@
+/var/spool/slurm/d/job641016/slurm_script: line 9: cd: too many arguments
+Traceback (most recent call last):
+  File "WaveForM_Channel_Ind.py", line 1047, in <module>
+    train_loss = train(model, train_loader, optimizer, criterion, device)
+  File "WaveForM_Channel_Ind.py", line 913, in train
+    loss = criterion(outputs, seq_y)
+  File "/home/choi/conda/anaconda3/envs/pytorchenv/lib/python3.8/site-packages/torch/nn/modules/module.py", line 1511, in _wrapped_call_impl
+    return self._call_impl(*args, **kwargs)
+  File "/home/choi/conda/anaconda3/envs/pytorchenv/lib/python3.8/site-packages/torch/nn/modules/module.py", line 1520, in _call_impl
+    return forward_call(*args, **kwargs)
+  File "/home/choi/conda/anaconda3/envs/pytorchenv/lib/python3.8/site-packages/torch/nn/modules/loss.py", line 535, in forward
+    return F.mse_loss(input, target, reduction=self.reduction)
+  File "/home/choi/conda/anaconda3/envs/pytorchenv/lib/python3.8/site-packages/torch/nn/functional.py", line 3339, in mse_loss
+    return torch._C._nn.mse_loss(expanded_input, expanded_target, _Reduction.get_enum(reduction))
+RuntimeError: Expected all tensors to be on the same device, but found at least two devices, cuda:0 and cpu!
+srun: error: gpu-023: task 0: Exited with exit code 1
