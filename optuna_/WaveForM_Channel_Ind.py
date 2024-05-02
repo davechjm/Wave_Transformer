@@ -1,6 +1,7 @@
 from __future__ import division
 import time
 import torch
+print("PyTorch version:", torch.__version__)
 import torch.nn as nn
 import torch.optim as optim
 import torch.nn.functional as F
@@ -849,22 +850,40 @@ class Model(nn.Module):
         self.pred_len = pred_len
 
     def forward(self, x):
-        output = torch.zeros([x.size(0), self.pred_len, x.size(2)], dtype=x.dtype)
+        x_ = x.clone()
+        output = torch.zeros([x_.size(0), self.pred_len, x_.size(2)], dtype=x_.dtype)
         # Dictionary to collect predictions for averaging
-        predictions = {i: [] for i in range(x.size(2))}
+        predictions = {i: [] for i in range(x_.size(2))}
         
         for idx, group in enumerate(self.correlated_groups.values()):
             # Extracting the specific features for this group
-	    if isinstance(group, list):
-   		 group = torch.tensor(group, dtype=torch.long, device=x.device)
-	    print(group)
-            group_data = x[:, :, group].clone()
+            # Convert group to a tensor properly, ensuring it's a contiguous copy if it's a NumPy array
+            if isinstance(group, np.ndarray):
+                group_tensor = torch.tensor(group.copy(), dtype=torch.long, device=x.device)
+            else:
+                group_tensor = torch.tensor(group, dtype=torch.long, device=x.device)
+
+      
+            group = np.sort(group).copy()
+            group_tensor = torch.tensor(group, dtype=torch.long, device=x_.device)
+            try:
+                group_data = x_[:, :, group_tensor]
+            except Exception as e:
+                print("Failed during indexing:")
+                print("Group tensor:", group_tensor)
+                print("Original indices:", group)
+                print("Tensor shape:", x.shape)
+                print("Tensor stride:", x.stride())
+                print("Is contiguous:", x.is_contiguous())
+                raise e  # Re-raise the exception to see the traceback with added context
+
+            
             pred = self.backbone_modules[str(idx)](group_data)
             for i, feature_index in enumerate(group):
                 predictions[feature_index].append(pred[:, :, i:i+1])
 
         # Averaging predictions for each feature
-        for i in range(x.size(2)):
+        for i in range(x_.size(2)):
             if predictions[i]:
                 # Stack predictions and take the mean across the predictions for each feature
                 output[:, :, i:i+1] = torch.mean(torch.stack(predictions[i], dim=0), dim=0)
@@ -877,10 +896,10 @@ def test(model, test_loader, criterion, device):
     total_loss = 0
     with torch.no_grad():
         for seq_x, seq_y, seq_x_mark, seq_y_mark in test_loader:
-            seq_x, seq_y = seq_x.to(device), seq_y.to(device)
-            outputs = model(seq_x)
+            input_x, seq_y = seq_x.to(device), seq_y.to(device)
+            outputs = model(input_x)
             loss = criterion(outputs, seq_y)
-            total_loss += loss.item() * seq_x.size(0)
+            total_loss += loss.item() * input_x.size(0)
     return total_loss / len(test_loader.dataset)
 
 
@@ -888,13 +907,13 @@ def train(model, train_loader, optimizer, criterion, device):
     model.train()
     total_loss = 0
     for seq_x, seq_y, seq_x_mark, seq_y_mark in train_loader:
-        seq_x, seq_y = seq_x.to(device), seq_y.to(device)
+        input_x, seq_y = seq_x.to(device), seq_y.to(device)
         optimizer.zero_grad()
-        outputs = model(seq_x)
+        outputs = model(input_x)
         loss = criterion(outputs, seq_y)
         loss.backward()
         optimizer.step()
-        total_loss += loss.item() * seq_x.size(0)
+        total_loss += loss.item() * input_x.size(0)
     return total_loss / len(train_loader.dataset)
 
 def validate(model, val_loader, criterion, device):
@@ -902,10 +921,10 @@ def validate(model, val_loader, criterion, device):
     total_loss = 0
     with torch.no_grad():
         for seq_x, seq_y, seq_x_mark, seq_y_mark in val_loader:
-            seq_x, seq_y = seq_x.to(device), seq_y.to(device)
-            outputs = model(seq_x)
+            input_x, seq_y = seq_x.to(device), seq_y.to(device)
+            outputs = model(input_x)
             loss = criterion(outputs, seq_y)
-            total_loss += loss.item() * seq_x.size(0)
+            total_loss += loss.item() * input_x.size(0)
     return total_loss / len(val_loader.dataset)
 
 
@@ -997,7 +1016,7 @@ for i in indices:
     #pred_dataset = Dataset_Pred(root_path=root_path, flag='pred', size=size, data_path=data_path, inverse=True)
 
     # Example on how to create DataLoaders for PyTorch training (adjust batch_size as needed)
-    batch_size = 8
+    batch_size = 4
     train_loader = DataLoader(train_dataset, batch_size=batch_size, shuffle=True, drop_last = True)
     val_loader = DataLoader(val_dataset, batch_size=batch_size, shuffle=False, drop_last = True)
     test_loader = DataLoader(test_dataset, batch_size=batch_size, shuffle=False, drop_last = False)
