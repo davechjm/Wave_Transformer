@@ -859,9 +859,9 @@ class Model(nn.Module):
             # Extracting the specific features for this group
             # Convert group to a tensor properly, ensuring it's a contiguous copy if it's a NumPy array
             if isinstance(group, np.ndarray):
-                group_tensor = torch.tensor(group.copy(), dtype=torch.long, device=x.device)
+                group_tensor = torch.tensor(group.copy(), dtype=torch.long, device=x_.device)
             else:
-                group_tensor = torch.tensor(group, dtype=torch.long, device=x.device)
+                group_tensor = torch.tensor(group, dtype=torch.long, device=x_.device)
 
       
             group = np.sort(group).copy()
