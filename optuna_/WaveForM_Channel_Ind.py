@@ -855,6 +855,9 @@ class Model(nn.Module):
         
         for idx, group in enumerate(self.correlated_groups.values()):
             # Extracting the specific features for this group
+	    if isinstance(group, list):
+   		 group = torch.tensor(group, dtype=torch.long, device=x.device)
+	    print(group)
             group_data = x[:, :, group].clone()
             pred = self.backbone_modules[str(idx)](group_data)
             for i, feature_index in enumerate(group):
