@@ -855,7 +855,7 @@ class Model(nn.Module):
         
         for idx, group in enumerate(self.correlated_groups.values()):
             # Extracting the specific features for this group
-            group_data = x[:, :, group]
+            group_data = x[:, :, group].clone()
             pred = self.backbone_modules[str(idx)](group_data)
             for i, feature_index in enumerate(group):
                 predictions[feature_index].append(pred[:, :, i:i+1])
@@ -874,10 +874,10 @@ def test(model, test_loader, criterion, device):
     total_loss = 0
     with torch.no_grad():
         for seq_x, seq_y, seq_x_mark, seq_y_mark in test_loader:
-            test_x, seq_y = seq_x.to(device).clone(), seq_y.to(device).clone(),
-            outputs = model(test_x)
+            seq_x, seq_y = seq_x.to(device), seq_y.to(device)
+            outputs = model(seq_x)
             loss = criterion(outputs, seq_y)
-            total_loss += loss.item() * test_x.size(0)
+            total_loss += loss.item() * seq_x.size(0)
     return total_loss / len(test_loader.dataset)
 
 
@@ -885,13 +885,13 @@ def train(model, train_loader, optimizer, criterion, device):
     model.train()
     total_loss = 0
     for seq_x, seq_y, seq_x_mark, seq_y_mark in train_loader:
-        train_x, seq_y = seq_x.to(device).clone(), seq_y.to(device).clone(),
+        seq_x, seq_y = seq_x.to(device), seq_y.to(device)
         optimizer.zero_grad()
-        outputs = model(train_x)
+        outputs = model(seq_x)
         loss = criterion(outputs, seq_y)
         loss.backward()
         optimizer.step()
-        total_loss += loss.item() * train_x.size(0)
+        total_loss += loss.item() * seq_x.size(0)
     return total_loss / len(train_loader.dataset)
 
 def validate(model, val_loader, criterion, device):
@@ -899,10 +899,10 @@ def validate(model, val_loader, criterion, device):
     total_loss = 0
     with torch.no_grad():
         for seq_x, seq_y, seq_x_mark, seq_y_mark in val_loader:
-            val_x, seq_y = seq_x.to(device).clone(), seq_y.to(device).clone(),
-            outputs = model(val_x)
+            seq_x, seq_y = seq_x.to(device), seq_y.to(device)
+            outputs = model(seq_x)
             loss = criterion(outputs, seq_y)
-            total_loss += loss.item() * val_x.size(0)
+            total_loss += loss.item() * seq_x.size(0)
     return total_loss / len(val_loader.dataset)
 
 
@@ -1034,10 +1034,3 @@ for i in indices:
         
     test_loss = test(model, test_loader, criterion, device)
     print(f'Test Loss: {test_loss:.4f}')
-
-
-        
-      
-    
-
-# %%
