@@ -1,6 +1,4 @@
-# %%
-
-# %%
+from __future__ import division
 import time
 import torch
 import torch.nn as nn
@@ -10,6 +8,10 @@ from torch_geometric.nn import GCNConv, GATConv
 from torch_scatter import scatter_add, scatter_max
 from pytorch_wavelets import DWT1DForward, DWT1DInverse
 import warnings
+
+import numbers
+
+from torch.nn import Parameter
 
 # Ignore all warnings
 warnings.filterwarnings("ignore")
@@ -24,6 +26,7 @@ from sklearn.preprocessing import StandardScaler
 from sklearn.model_selection import train_test_split
 import math
 import pandas as pd
+from scipy.stats import pearsonr
 
 from torch.nn import Linear, Parameter
 from torch_geometric.nn.conv import MessagePassing
@@ -32,10 +35,40 @@ from torch_geometric.utils import add_self_loops, remove_self_loops, softmax
 from torch.utils.data import random_split
 from torch.nn import InstanceNorm1d
 from torch import Tensor
+from torch.autograd import Variable
+import torch.nn.init as init
 
 import optuna
 
 from RevIN import RevIN
+
+def load_dataset(root_path, data_path, drop_columns='date'):
+    """
+    Load dataset from a CSV file, drop specified columns, and apply standard scaling.
+
+    Args:
+    root_path (str): Directory path where the data file is located.
+    data_path (str): Name of the data file.
+    drop_columns (list of str): Columns to be dropped from the dataset.
+
+    Returns:
+    numpy.ndarray: Scaled dataset as a NumPy array.
+    """
+    # Combine the root path and the data path
+    full_path = os.path.join(root_path, data_path)
+    
+    # Read the data from CSV file
+    data = pd.read_csv(full_path)
+    
+    # Drop specified columns if provided
+    if drop_columns:
+        data.drop(columns=drop_columns, inplace=True, errors='ignore')
+    
+    # Apply StandardScaler to normalize the data
+    scaler = StandardScaler()
+    scaled_data = scaler.fit_transform(data.values)  # Assuming data to be normalized is numeric
+
+    return scaled_data
 
     
 class Dataset_Custom(Dataset):
@@ -82,14 +115,9 @@ class Dataset_Custom(Dataset):
         if self.features == 'M' or self.features == 'MS':
             pass
         elif self.features == 'S':
-            cols_data = df_raw.columns[1:]  # Assuming the first column is 'date' and should be excluded
-            self.feature_datasets = {}
-            for col in cols_data:
-                feature_data = df_raw[[col]]
-                if self.scale:
-                    self.scaler.fit(feature_data)
-                    feature_data = self.scaler.transform(feature_data)
-                self.feature_datasets[col] = feature_data
+            cols_data = df_raw.columns[1:]
+            df_data = df_raw[cols_data]
+        
         
         if self.scale:
             train_data = df_data.iloc[border1s[0]:border2s[0]].values
@@ -134,223 +162,613 @@ class Dataset_Custom(Dataset):
     def inverse_transform(self, data):
         return self.scaler.inverse_transform(data)
 
-# %%
 
 
-def sparse_attention(self, q, k, v, key_padding_mask=None, attn_mask=None):
-    bs, n_heads, seq_len, d_k = q.size()
-    attn_scores = torch.matmul(q, k.transpose(-2, -1)) / np.sqrt(d_k)
-
-    # Correct handling of top-k + log-space indices
-    topk_scores, topk_indices = attn_scores.topk(self.k_neighbors, dim=-1)
-
-    # Ensure proper dimensionality for combined indices
-    log_space_indices = torch.logspace(0, np.log10(seq_len-1), steps=self.k_neighbors, base=10).long()
-    log_space_indices = log_space_indices[None, None, :].expand(bs, n_heads, -1)  # Expand dims to match
-    combined_indices = torch.cat((topk_indices, log_space_indices), dim=-1)
-    combined_indices = combined_indices.unique(sorted=True)
-
-    # Filtering needs to adjust to correct tensor shapes
-    attn_scores_filtered = torch.full_like(attn_scores, float('-inf'))
-    attn_scores_filtered.scatter_(-1, combined_indices.unsqueeze(-1).expand(-1, -1, -1, seq_len), attn_scores.gather(-1, combined_indices.unsqueeze(-1).expand(-1, -1, -1, seq_len)))
-
-    if attn_mask is not None:
-        attn_scores_filtered = attn_scores_filtered.masked_fill(attn_mask == 0, float('-inf'))
-    
-    attn_weights = F.softmax(attn_scores_filtered, dim=-1)
-    attn_weights = self.attn_dropout(attn_weights)
-
-    output = torch.matmul(attn_weights, v)
-
-    return output, attn_weights
-
-class DilatedTCNBlock(nn.Module):
-    def __init__(self, in_channels, out_channels, kernel_size=3, dilation=1, dropout_rate=0.2, dropout_=True, skip_=True):
-        super(DilatedTCNBlock, self).__init__()
-        
-        # Calculate padding based on kernel size and dilation to maintain input length
-        padding = (dilation * (kernel_size - 1)) // 2
-        
-        # First convolutional layer
-        self.conv1 = nn.Conv1d(in_channels, out_channels, kernel_size, padding=padding, dilation=dilation)
-        self.norm1 = InstanceNorm1d(out_channels)
-        self.relu1 = nn.ReLU()
-        self.dropout1 = nn.Dropout(dropout_rate) if dropout_ else nn.Identity()
-
-        # Second convolutional layer
-        self.conv2 = nn.Conv1d(out_channels, out_channels, kernel_size, padding=padding, dilation=dilation)
-        self.norm2 = InstanceNorm1d(out_channels)
-        self.relu2 = nn.ReLU()
-        self.dropout2 = nn.Dropout(dropout_rate) if dropout_ else nn.Identity()
-
-        self.skip_ = skip_
-
-    def forward(self, x):
-        x_original = x.clone()
-        
-        # First conv -> norm -> relu -> dropout
-        x = self.conv1(x)
-        x = self.norm1(x)
-        x = self.relu1(x)
-        x = self.dropout1(x)
-        
-        # Second conv -> norm -> relu -> dropout
-        x = self.conv2(x)
-        x = self.norm2(x)
-        x = self.relu2(x)
-        x = self.dropout2(x)
-        
-        if self.skip_:
-            x = x + x_original
-        
-        return x
-
-# %%
-# Take the new Positinal Encoding and Project layer from PatchTST
-class PositionalEncoding(nn.Module):
-
-    def __init__(self, d_model, dropout=0.1, max_len=5000):
-        super(PositionalEncoding, self).__init__()
-        self.dropout = nn.Dropout(p=dropout)
-
-        pe = torch.zeros(max_len, d_model)
-        position = torch.arange(0, max_len, dtype=torch.float).unsqueeze(1)
-        div_term = torch.exp(torch.arange(0, d_model, 2).float() * (-math.log(10000.0) / d_model))
-        pe[:, 0::2] = torch.sin(position * div_term)
-        if d_model%2 != 0:
-            pe[:, 1::2] = torch.cos(position * div_term)[:,0:-1]
-        else:
-            pe[:, 1::2] = torch.cos(position * div_term)
-        pe = pe.unsqueeze(0).transpose(0, 1)
-        self.register_buffer('pe', pe)
-
-    def forward(self, x):
-        x = x + self.pe[:x.size(0), :]
-        return self.dropout(x)
-    
-
-
-class ProjectedPositionalEncoding(nn.Module):
-    def __init__(self, d_input, d_model, dropout=0.1, max_len=5000):
-        super(ProjectedPositionalEncoding, self).__init__()
-        self.d_input = d_input
-        self.d_model = d_model
-        self.dropout = nn.Dropout(p=dropout)
-
-        # Projection layer: maps input dimension to model dimension
-        self.projection = nn.Linear(d_input, d_model)
-
-        self.positionalencoding = PositionalEncoding(d_model,dropout, max_len = 5000)
-
-    def forward(self, x):
-        # Apply linear projection
-        x_projected = self.projection(x)
-        # Add positional encoding
-        x_pe = x_projected + self.positionalencoding(x)
-        return x_pe
-
-
-class EncoderLayer(nn.Module):
-    def __init__(self, attention, d_model,d_ff=None, dropout=0.1, activation="relu"):
-        super(EncoderLayer, self).__init__()
-        d_ff = d_ff or 4 * d_model
-        self.attention = attention
-        self.conv1 = nn.Conv1d(in_channels=d_model, out_channels=d_ff, kernel_size=1)
-        self.conv2 = nn.Conv1d(in_channels=d_ff, out_channels=d_model, kernel_size=1)
-        self.norm1 = nn.LayerNorm(d_model)
-        self.norm2 = nn.LayerNorm(d_model)
-        self.dropout = nn.Dropout(dropout)
-        self.activation = F.relu if activation == "relu" else F.gelu
-
-    def forward(self, x):
-        new_x, attn = self.attention(
-            x, x, x
+class Linear(nn.Module):
+    def __init__(self, c_in: int, c_out: int, bias: bool = True):
+        super(Linear, self).__init__()
+        self._mlp = torch.nn.Conv2d(
+            c_in, c_out, kernel_size=(1, 1), padding=(0, 0), stride=(1, 1), bias=bias
         )
-        x = x + self.dropout(new_x)
 
-        y = x = self.norm1(x)
-        y = self.dropout(self.activation(self.conv1(y.transpose(-1, 1))))
-        y = self.dropout(self.conv2(y).transpose(-1, 1))
+        self._reset_parameters()
 
-        return self.norm2(x + y), attn
+    def _reset_parameters(self):
+        for p in self.parameters():
+            if p.dim() > 1:
+                nn.init.xavier_uniform_(p)
+            else:
+                nn.init.uniform_(p)
 
-
-class Encoder(nn.Module):
-    def __init__(self, attn_layers, conv_layers=None, norm_layer=None):
-        super(Encoder, self).__init__()
-        self.attn_layers = nn.ModuleList(attn_layers)
-        self.conv_layers = nn.ModuleList(conv_layers) if conv_layers is not None else None
-        self.norm = norm_layer
-
-    def forward(self, x, attn_mask=None):
-        # x [B, L, D]
-        attns = []
-        if self.conv_layers is not None:
-            for attn_layer, conv_layer in zip(self.attn_layers, self.conv_layers):
-                x, attn = attn_layer(x, attn_mask=attn_mask)
-                x = conv_layer(x)
-                attns.append(attn)
-            x, attn = self.attn_layers[-1](x)
-            attns.append(attn)
-        else:
-            for attn_layer in self.attn_layers:
-                x, attn = attn_layer(x)
-                attns.append(attn)
-
-        if self.norm is not None:
-            x = self.norm(x)
-
-        return x, attns
+    def forward(self, X: torch.FloatTensor) -> torch.FloatTensor:
+        return self._mlp(X)
 
 
-# %%
-def attention(query, key, value, mask=None, dropout=None):
-    d_k = query.size(-1)
-    scores = torch.matmul(query, key.transpose(-2, -1)) / math.sqrt(d_k)
+class MixProp(nn.Module):
+    def __init__(self, c_in: int, c_out: int, gdep: int, dropout: float, alpha: float):
+        super(MixProp, self).__init__()
+        self._mlp = Linear((gdep + 1) * c_in, c_out)
+        self._gdep = gdep
+        self._dropout = dropout
+        self._alpha = alpha
 
-    if mask is not None:
-        scores = scores.masked_fill(mask == 0, float('-inf'))
+        self._reset_parameters()
 
-    p_attn = torch.softmax(scores, dim=-1)
+    def _reset_parameters(self):
+        for p in self.parameters():
+            if p.dim() > 1:
+                nn.init.xavier_uniform_(p)
+            else:
+                nn.init.uniform_(p)
 
-    if dropout is not None:
-        p_attn = dropout(p_attn)
-
-    return torch.matmul(p_attn, value), p_attn
-
-class Flatten_Head(nn.Module):
-    def __init__(self, individual, n_vars, nf, target_window, head_dropout=0):
-        super().__init__()
-        
-        self.individual = individual
-        self.n_vars = n_vars
-        
-        if self.individual:
-            # Using ModuleList to store layers for each variable
-            self.linears = nn.ModuleList()
-            self.dropouts = nn.ModuleList()
-            for i in range(self.n_vars):
-                self.linears.append(nn.Linear(nf, target_window))
-                self.dropouts.append(nn.Dropout(head_dropout))
-        else:
-            # Single linear and dropout for all variables
-            self.linear = nn.Linear(nf * target_window, target_window)  # Adjusting input features
-            self.dropout = nn.Dropout(head_dropout)
+    def forward(self, X: torch.FloatTensor, A: torch.FloatTensor) -> torch.FloatTensor:
+        A = A + torch.eye(A.size(0)).to(X.device)
+        d = A.sum(1)
+        H = X
+        H_0 = X
+        A = A / d.view(-1, 1)
+        for _ in range(self._gdep):
             
-    def forward(self, x):  # x: [bs x d_model x target_window]
-        if self.individual:
-            x_out = []
-            for i in range(self.n_vars):
-                z = x[:, i, :]    # Select the data for the i-th variable: [bs x target_window]
-                z = self.linears[i](z)  # z: [bs x target_window]
-                z = self.dropouts[i](z)
-                x_out.append(z)
-            x = torch.stack(x_out, dim=1)  # x: [bs x n_vars x target_window]
+            H = self._alpha * X + (1 - self._alpha) * torch.einsum(
+                "ncwl,vw->ncvl", (H, A)
+            )
+            H_0 = torch.cat((H_0, H), dim=1)
+        H_0 = self._mlp(H_0)
+        return H_0
+
+
+class DilatedInception(nn.Module):
+    def __init__(self, c_in: int, c_out: int, kernel_set: list, dilation_factor: int):
+        super(DilatedInception, self).__init__()
+        self._time_conv = nn.ModuleList()
+        self._kernel_set = kernel_set
+        c_out = int(c_out / len(self._kernel_set))
+        for kern in self._kernel_set:
+            self._time_conv.append(
+                nn.Conv2d(c_in, c_out, (1, kern), dilation=(1, dilation_factor))
+            )
+        self._reset_parameters()
+
+    def _reset_parameters(self):
+        for p in self.parameters():
+            if p.dim() > 1:
+                nn.init.xavier_uniform_(p)
+            else:
+                nn.init.uniform_(p)
+
+    def forward(self, X_in: torch.FloatTensor) -> torch.FloatTensor:
+        
+        X = []
+        for i in range(len(self._kernel_set)):
+            X.append(self._time_conv[i](X_in))
+        
+        for i in range(len(self._kernel_set)):
+            X[i] = X[i][..., -X[-1].size(3) :]
+        
+        
+        Y = [0 ,0 ,0, 0]
+        for i in range(len(self._kernel_set)):
+            Y[i] = X[i].permute(0, 2, 1, 3)
+        
+        Y = torch.cat(Y, dim=2)
+        
+        X = Y.permute(0, 2, 1, 3)
+        return  X
+
+
+
+class LayerNormalization(nn.Module):
+    __constants__ = ["normalized_shape", "weight", "bias", "eps", "elementwise_affine"]
+
+    def __init__(
+        self, normalized_shape: int, eps: float = 1e-5, elementwise_affine: bool = True
+    ):
+        super(LayerNormalization, self).__init__()
+        self._normalized_shape = tuple(normalized_shape)
+        self._eps = eps
+        self._elementwise_affine = elementwise_affine
+        if self._elementwise_affine:
+            self._weight = nn.Parameter(torch.Tensor(*normalized_shape))
+            self._bias = nn.Parameter(torch.Tensor(*normalized_shape))
         else:
-            x = x.view(x.size(0), -1)  # Flatten x to [bs x (d_model * target_window)]
-            x = self.linear(x)
-            x = self.dropout(x)
-        return x
+            self.register_parameter("_weight", None)
+            self.register_parameter("_bias", None)
+        self._reset_parameters()
+
+    def _reset_parameters(self):
+        if self._elementwise_affine:
+            init.ones_(self._weight)
+            init.zeros_(self._bias)
+
+    def forward(self, X: torch.FloatTensor, idx: torch.LongTensor) -> torch.FloatTensor:
+        if self._elementwise_affine:
+            return F.layer_norm(
+                X,
+                tuple(X.shape[1:]),
+                self._weight[:, idx, :],
+                self._bias[:, idx, :],
+                self._eps,
+            )
+        else:
+            return F.layer_norm(
+                X, tuple(X.shape[1:]), self._weight, self._bias, self._eps
+            )
+
+
+class GPModuleLayer(nn.Module):
+
+    def __init__(
+        self,
+        dilation_exponential: int,
+        rf_size_i: int,
+        kernel_size: int,
+        j: int,
+        residual_channels: int,
+        conv_channels: int,
+        skip_channels: int,
+        kernel_set: list,
+        new_dilation: int,
+        layer_norm_affline: bool,
+        gcn_true: bool,
+        seq_length: int,
+        receptive_field: int,
+        dropout: float,
+        gcn_depth: int,
+        num_nodes: int,
+        propalpha: float,
+    ):
+        super(GPModuleLayer, self).__init__()
+        self._dropout = dropout
+        self._gcn_true = gcn_true
+        
+        if dilation_exponential > 1:
+            rf_size_j = int(
+                rf_size_i
+                + (kernel_size - 1)
+                * (dilation_exponential ** j - 1)
+                / (dilation_exponential - 1)
+            )
+        else:
+            rf_size_j = rf_size_i + j * (kernel_size - 1)
+        
+        self._filter_conv = DilatedInception(
+            residual_channels,
+            conv_channels,
+            kernel_set=kernel_set,
+            dilation_factor=new_dilation,
+        )
+        
+        self._gate_conv = DilatedInception(
+            residual_channels,
+            conv_channels,
+            kernel_set=kernel_set,
+            dilation_factor=new_dilation,
+        )
+
+        self._residual_conv = nn.Conv2d(
+            in_channels=conv_channels,
+            out_channels=residual_channels,
+            kernel_size=(1, 1),
+        )
+
+        if seq_length > receptive_field:
+            self._skip_conv = nn.Conv2d(
+                in_channels=conv_channels,
+                out_channels=skip_channels,
+                kernel_size=(1, seq_length - rf_size_j + 1),
+            )
+        else:
+            self._skip_conv = nn.Conv2d(
+                in_channels=conv_channels,
+                out_channels=skip_channels,
+                kernel_size=(1, receptive_field - rf_size_j + 1),
+            )
+
+        if gcn_true:
+            self._mixprop_conv1 = MixProp(
+                conv_channels, residual_channels, gcn_depth, dropout, propalpha
+            )
+
+            self._mixprop_conv2 = MixProp(
+                conv_channels, residual_channels, gcn_depth, dropout, propalpha
+            )
+
+        if seq_length > receptive_field:
+            self._normalization = LayerNormalization(
+                (residual_channels, num_nodes, seq_length - rf_size_j + 1),
+                elementwise_affine=layer_norm_affline,
+            )
+
+        else:
+            self._normalization = LayerNormalization(
+                (residual_channels, num_nodes, receptive_field - rf_size_j + 1),
+                elementwise_affine=layer_norm_affline,
+            )
+        self._reset_parameters()
+
+    def _reset_parameters(self):
+        for p in self.parameters():
+            if p.dim() > 1:
+                nn.init.xavier_uniform_(p)
+            else:
+                nn.init.uniform_(p)
+
+    def forward(
+        self,
+        X: torch.FloatTensor,
+        X_skip: torch.FloatTensor,
+        A_tilde: Optional[torch.FloatTensor],
+        idx: torch.LongTensor,
+        training: bool,
+    ) -> torch.FloatTensor:
+        
+        X_residual = X
+        X_filter = self._filter_conv(X)
+        X_filter = torch.tanh(X_filter)
+        X_gate = self._gate_conv(X)
+        X_gate = torch.sigmoid(X_gate)
+        X = X_filter * X_gate
+        X = F.dropout(X, self._dropout, training=training)
+        X_skip = self._skip_conv(X) + X_skip
+        if self._gcn_true:
+            X = self._mixprop_conv1(X, A_tilde) + self._mixprop_conv2(
+                X, A_tilde.transpose(1, 0)
+            )
+        else:
+            X = self._residual_conv(X)
+
+        X = X + X_residual[:, :, :, -X.size(3) :]
+        X = self._normalization(X, idx)
+        return X, X_skip
+
+
+class GPModule(nn.Module):
+    
+    def __init__(
+        self,
+        gcn_true: bool,
+        build_adj: bool,
+        gcn_depth: int,
+        num_nodes: int,
+        kernel_set: list,
+        kernel_size: int,
+        dropout: float,
+        dilation_exponential: int,
+        conv_channels: int,
+        residual_channels: int,
+        skip_channels: int,
+        end_channels: int,
+        seq_length: int,
+        in_dim: int,
+        out_dim: int,
+        layers: int,
+        propalpha: float,
+        layer_norm_affline: bool,
+        graph_constructor,
+        xd: Optional[int] = None,
+    ):
+        super(GPModule, self).__init__()
+        
+        self._gcn_true = gcn_true
+        self._build_adj_true = build_adj
+        self._num_nodes = num_nodes
+        self._dropout = dropout
+        self._seq_length = seq_length
+        self._layers = layers
+        self._idx = torch.arange(self._num_nodes)
+        
+        self._gp_layers = nn.ModuleList()
+        
+        self._graph_constructor = graph_constructor
+        
+        self._set_receptive_field(dilation_exponential, kernel_size, layers)
+        
+        new_dilation = 1
+        for j in range(1, layers + 1):
+            self._gp_layers.append(
+                GPModuleLayer(
+                    dilation_exponential=dilation_exponential,
+                    rf_size_i=1,
+                    kernel_size=kernel_size,
+                    j=j,
+                    residual_channels=residual_channels,
+                    conv_channels=conv_channels,
+                    skip_channels=skip_channels,
+                    kernel_set=kernel_set,
+                    new_dilation=new_dilation,
+                    layer_norm_affline=layer_norm_affline,
+                    gcn_true=gcn_true,
+                    seq_length=seq_length,
+                    receptive_field=self._receptive_field,
+                    dropout=dropout,
+                    gcn_depth=gcn_depth,
+                    num_nodes=num_nodes,
+                    propalpha=propalpha,
+                )
+            )
+            
+            new_dilation *= dilation_exponential
+        
+        self._setup_conv(
+            in_dim, skip_channels, end_channels, residual_channels, out_dim
+        )
+        
+        self._reset_parameters()
+        
+    def _setup_conv(
+        self, in_dim, skip_channels, end_channels, residual_channels, out_dim
+    ):
+    
+        self._start_conv = nn.Conv2d(
+            in_channels=in_dim, out_channels=residual_channels, kernel_size=(1, 1)
+        )
+        
+        if self._seq_length > self._receptive_field:
+            
+            self._skip_conv_0 = nn.Conv2d(
+                in_channels=in_dim,
+                out_channels=skip_channels,
+                kernel_size=(1, self._seq_length),
+                bias=True,
+            )
+            
+            self._skip_conv_E = nn.Conv2d(
+                in_channels=residual_channels,
+                out_channels=skip_channels,
+                kernel_size=(1, self._seq_length - self._receptive_field + 1),
+                bias=True,
+            )
+            
+        else:
+            self._skip_conv_0 = nn.Conv2d(
+                in_channels=in_dim,
+                out_channels=skip_channels,
+                kernel_size=(1, self._receptive_field),
+                bias=True,
+            )
+            
+            self._skip_conv_E = nn.Conv2d(
+                in_channels=residual_channels,
+                out_channels=skip_channels,
+                kernel_size=(1, 1),
+                bias=True,
+            )
+        
+        self._end_conv_1 = nn.Conv2d(
+            in_channels=skip_channels,
+            out_channels=end_channels,
+            kernel_size=(1, 1),
+            bias=True,
+        )
+        
+        self._end_conv_2 = nn.Conv2d(
+            in_channels=end_channels,
+            out_channels=out_dim,
+            kernel_size=(1, 1),
+            bias=True,
+        )
+    
+    def _reset_parameters(self):
+        for p in self.parameters():
+            if p.dim() > 1:
+                nn.init.xavier_uniform_(p)
+            else:
+                nn.init.uniform_(p)
+    
+    def _set_receptive_field(self, dilation_exponential, kernel_size, layers):
+        if dilation_exponential > 1:
+            self._receptive_field = int(
+                1
+                + (kernel_size - 1)
+                * (dilation_exponential ** layers - 1)
+                / (dilation_exponential - 1)
+            )
+        else:
+            self._receptive_field = layers * (kernel_size - 1) + 1
+    
+    def forward(
+        self,
+        context: torch.FloatTensor,
+        A_tilde: Optional[torch.FloatTensor] = None,
+        idx: Optional[torch.LongTensor] = None,
+        FE: Optional[torch.FloatTensor] = None,
+    ) -> torch.FloatTensor:
+        
+        X_in = context.permute(0, 3, 2, 1)
+        
+        seq_len = X_in.size(3)
+        assert (
+            seq_len == self._seq_length
+        ), "Input sequence length not equal to preset sequence length."
+        
+        if self._seq_length < self._receptive_field:
+            X_in = nn.functional.pad(
+                X_in, (self._receptive_field - self._seq_length, 0, 0, 0)
+            )
+        
+        if self._gcn_true:
+            if self._build_adj_true:
+                if idx is None:
+                    A_tilde = self._graph_constructor(self._idx.to(X_in.device), FE=FE)
+                else:
+                    A_tilde = self._graph_constructor(idx, FE=FE)
+        
+        X = self._start_conv(X_in)
+        X_skip = self._skip_conv_0(
+            F.dropout(X_in, self._dropout, training=self.training)
+        )
+        if idx is None:
+            for gp in self._gp_layers:
+                
+                X, X_skip = gp(X, X_skip, A_tilde, self._idx.to(X_in.device), self.training)
+        else:
+            for gp in self._gp_layers:
+                X, X_skip = gp(X, X_skip, A_tilde, idx, self.training)
+        
+        X_skip = self._skip_conv_E(X) + X_skip
+        X = F.relu(X_skip)
+        X = F.relu(self._end_conv_1(X))
+        X = self._end_conv_2(X)
+        
+        return X
+    
+    
+    
+    def load_my_state_dict(self, state_dict):
+        own_state = self.state_dict()
+        for name, param in state_dict.items():
+            if isinstance(param, Parameter):
+                param = param.data
+            try:
+                own_state[name].copy_(param)
+            except:
+                print(name)
+                print(param.shape)
+
+
+class GraphConstructor(nn.Module):
+    def __init__(
+        self, nnodes: int, k: int, dim: int, alpha: float, xd: Optional[int] = None
+    ):
+        super(GraphConstructor, self).__init__()
+        if xd is not None:
+            self._static_feature_dim = xd
+            self._linear1 = nn.Linear(xd, dim)
+            self._linear2 = nn.Linear(xd, dim)
+        else:
+            self._embedding1 = nn.Embedding(nnodes, dim)
+            self._embedding2 = nn.Embedding(nnodes, dim)
+            self._linear1 = nn.Linear(dim, dim)
+            self._linear2 = nn.Linear(dim, dim)
+        
+        self._k = k
+        self._alpha = alpha
+        
+        self._reset_parameters()
+        
+    def _reset_parameters(self):
+        for p in self.parameters():
+            if p.dim() > 1:
+                nn.init.xavier_uniform_(p)
+            else:
+                nn.init.uniform_(p)
+
+    def forward(
+        self, idx: torch.LongTensor, FE: Optional[torch.FloatTensor] = None
+    ) -> torch.FloatTensor:
+        
+        if FE is None:
+            nodevec1 = self._embedding1(idx)
+            nodevec2 = self._embedding2(idx)
+        else:
+            assert FE.shape[1] == self._static_feature_dim
+            nodevec1 = FE[idx, :]
+            nodevec2 = nodevec1 
+        
+        nodevec1 = torch.tanh(self._alpha * self._linear1(nodevec1))
+        nodevec2 = torch.tanh(self._alpha * self._linear2(nodevec2))
+    
+        a = torch.mm(nodevec1, nodevec2.transpose(1, 0)) - torch.mm(
+            nodevec2, nodevec1.transpose(1, 0)
+        )
+        A = F.relu(torch.tanh(self._alpha * a))
+        mask = torch.zeros(idx.size(0), idx.size(0)).to(A.device)
+        mask.fill_(float("0"))
+        
+        s1, t1 = A.topk(self._k, 1)
+        mask.scatter_(1, t1, s1.fill_(1))
+        A = A * mask
+        return A
+
+class Model_(nn.Module):
+    def __init__(self, seq_len, pred_len, n_points, dropout, wavelet_j, wavelet, subgraph_size, node_dim, n_gnn_layer):
+        super(Model_, self).__init__()
+        self.seq_len = seq_len # Sequence Length
+        self.pred_len = pred_len # Pred Length
+        self.points = n_points # Num Features
+        self.dropout = dropout #dropout rate
+        
+        decompose_layer = wavelet_j # the number of wavelet decompose layer
+        wave = wavelet # wavelet function e.g.) 'haar'
+        
+        mode = 'symmetric' 
+        self.dwt = DWT1DForward(wave=wave, J=decompose_layer, mode=mode)  
+        self.idwt = DWT1DInverse(wave=wave)
+        
+        
+        tmp1 = torch.randn(1, 1, self.seq_len)
+        tmp1_yl, tmp1_yh = self.dwt(tmp1)
+        tmp1_coefs = [tmp1_yl] + tmp1_yh
+        
+        tmp2 = torch.randn(1, 1, self.seq_len + self.pred_len)
+        tmp2_yl, tmp2_yh = self.dwt(tmp2)
+        tmp2_coefs = [tmp2_yl] + tmp2_yh
+        assert decompose_layer + 1 == len(tmp1_coefs) == len(tmp2_coefs)
+        
+        self._graph_constructor = GraphConstructor(
+            nnodes=self.points,
+            k=subgraph_size, # topk
+            dim=node_dim, # node_dim in graph
+            alpha=3.0
+        )
+        
+        
+        self.nets = nn.ModuleList()
+        for i in range(decompose_layer + 1):
+            self.nets.append(
+                GPModule(
+                    gcn_true = True,
+                    build_adj = True,
+                    gcn_depth=2,
+                    num_nodes=self.points,
+                    kernel_set=[2, 3, 6, 7],
+                    kernel_size=7,
+                    dropout=self.dropout,
+                    conv_channels=32,
+                    residual_channels=32,
+                    skip_channels=64,
+                    end_channels=128,
+                    seq_length=(tmp1_coefs[i].shape[-1]),
+                    in_dim=1,
+                    out_dim=(tmp2_coefs[i].shape[-1]) - (tmp1_coefs[i].shape[-1]),
+                    layers=n_gnn_layer, # the nubmer of layers of gnn
+                    propalpha=0.05,
+                    dilation_exponential=2,
+                    graph_constructor=self._graph_constructor,
+                    layer_norm_affline=True,
+                )
+            )
+    
+    
+    def model(self, coefs):
+        new_coefs = []
+        for coef, net in zip(coefs, self.nets):
+            new_coef = net(coef.permute(0,2,1).unsqueeze(-1))
+            new_coefs.append(new_coef.squeeze().permute(0,2,1))
+        
+        return new_coefs
+        
+    
+    
+    def forward(self, x_enc):
+        in_dwt = x_enc.permute(0,2,1)
+        
+        yl, yhs = self.dwt(in_dwt)
+        coefs = [yl] + yhs
+        
+        
+        coefs_new = self.model(coefs)
+        
+        coefs_idwt = []
+        for i in range(len(coefs_new)):
+            coefs_idwt.append(torch.cat((coefs[i], coefs_new[i]), 2))
+        
+        
+        out = self.idwt((coefs_idwt[0], coefs_idwt[1:]))
+        pred_out = out.permute(0, 2, 1)
+        
+        
+        return pred_out[:, -self.pred_len:, :]
 
 class moving_avg(nn.Module):
     """
@@ -383,184 +801,192 @@ class series_decomp(nn.Module):
         moving_mean = self.moving_avg(x)
         res = x - moving_mean
         return res, moving_mean
+
+
+# Define a function to extract correlated features for each feature
+def extract_correlated_features(autocorrelation_matrix, num_correlated_features=10):
+    num_features = autocorrelation_matrix.shape[0]
+    correlated_features = {}
+    for i in range(num_features):
+        # Find indices of the top correlated features
+        correlated_indices = np.argsort(autocorrelation_matrix[i])[::-1][:num_correlated_features]
+        correlated_features[i] = correlated_indices
+    return correlated_features   
+
+def compute_autocorrelation(seq_x):
+    num_features = seq_x.shape[1]  # seq_x is now [seq_len, num_channels]
+    autocorrelation_matrix = np.zeros((num_features, num_features))
     
-
-# %%
-# What removed: TCN_type, attention_type, general_skip, RevIN
-class DWT_MLP_Model(nn.Module):
-    def __init__(self, input_channels, seq_length, pred_length ,mlp_hidden_size, output_channels, decompose_layers=3, wave='haar', mode='symmetric', nhead=8, d_model=None, num_encoder_layers=3, dropout=0.1, dilation = 2, kernel_size = 3, dropout_ = True, skip_ = True,  pos_encoder_type_ = 'Projected'):
-        super(DWT_MLP_Model, self).__init__()
-        self.dwt_forward = DWT1DForward(J=decompose_layers, wave=wave, mode=mode)
-        self.dwt_inverse = DWT1DInverse(wave=wave, mode=mode)
-        self.seq_len = seq_length
-        self.pred_len = pred_length
-        self.dropout = dropout
-        self.dilation = dilation
-        self.kernel_size = kernel_size
-        self.num_decoder_layers = num_encoder_layers
-        self.dropout_TF = dropout_
-        self.skip_TF = skip_
-        self.pos_encoder_type = pos_encoder_type_
-        if d_model is None:
-            d_model = input_channels
-
-       
-        # Assuming kernel_size can be used to derive kernel_set for illustration
-        self.tcn_low = DilatedTCNBlock(input_channels, output_channels, dilation=self.dilation,kernel_size= self.kernel_size, dropout_rate= self.dropout, dropout_ = self.dropout_TF, skip_ = self.skip_TF)
-        self.tcn_high_list = nn.ModuleList([DilatedTCNBlock(input_channels, output_channels, dropout_rate= self.dropout, kernel_size= self.kernel_size, dilation= self.dilation) for _ in range(decompose_layers)])
-
-        
-        self.revin_layer = RevIN(input_channels)
-        
-        # Positional Encoding
-        if  self.pos_encoder_type == 'Projected':  
-            self.pos_encoder = ProjectedPositionalEncoding(input_channels, d_model, max_len=5000)
-        else:
-            self.pos_encoder = PositionalEncoding(d_model, max_len = 5000)
-        # Custom Transformer Encoder setup
-      
-        self.attention = attention  # Assuming attention is defined elsewhere
-        encoder_layers_low = [EncoderLayer(self.attention, d_model, d_ff=mlp_hidden_size, dropout=self.dropout, activation="relu") for _ in range(num_encoder_layers)]
-        self.transformer_low = Encoder(encoder_layers_low, norm_layer=nn.LayerNorm(d_model))
-
-        # Transformer Encoders for high-frequency components, using custom Encoder
-        self.transformer_high_list = nn.ModuleList(
-            [Encoder([EncoderLayer(self.attention, d_model, d_ff=mlp_hidden_size, dropout=self.dropout, activation="relu") for _ in range(num_encoder_layers)]) 
-             for _ in range(decompose_layers)])
-        
-        
-
-    def forward(self, x):
-        #x = x.permute(0, 2, 1)  # Adjust dimensions for DWT
-        x = self.revin_layer(x, 'norm')
-
-        x = x.permute(0,2,1)
-
-
-        x_low, x_highs = self.dwt_forward(x)
-        x_low_tcn = self.tcn_low(x_low)
-        x_low_combined = x_low_tcn
-        
-        x_low_combined = x_low + x_low_combined
-      
-                
-        x_low_combined = x_low_combined.permute(0,2,1)
+    for i in range(num_features):
+        for j in range(num_features):
+            if i == j:
+                autocorrelation_matrix[i, j] = 1.0  # Auto-correlation is always 1
+            else:
+                # Compute the absolute value of Pearson correlation coefficient
+                autocorrelation_matrix[i, j] = np.abs(pearsonr(seq_x[:, i], seq_x[:, j])[0])
     
-        x_low_combined = self.pos_encoder(x_low_combined)
-        x_low_combined, _ = self.transformer_low(x_low_combined) # Adjusted for custom encoder
-        x_low_combined = x_low_combined.permute(0,2,1)
-        x_low_combined = x_low + x_low_combined
+    return autocorrelation_matrix
 
-        
-        # Process high-frequency components
-        x_highs_processed = []
-        for i, x_high in enumerate(x_highs):
-            x_high_tcn = self.tcn_high_list[i](x_high)
-            x_high_combined = x_high_tcn
-          
-            x_high_combined = x_high + x_high_combined
-          
-            x_high_combined = x_high_combined.permute(0,2,1)
-         
-            x_high_combined = self.pos_encoder(x_high_combined)
-            x_high_combined, _ = self.transformer_high_list[i](x_high_combined)  # Adjusted for custom encoder
-            x_high_combined = x_high.permute(0,2,1) + x_high_combined
-            x_highs_processed.append(x_high_combined.permute(0,2,1))
-
-            
-     
-        # Reconstruct the signal and adjust dimensions
-        pred_out = self.dwt_inverse((x_low_combined, x_highs_processed)).permute(0, 2, 1)
-        pred_out = self.revin_layer(pred_out, 'denorm')
-        
-        pred_out = pred_out# Do not make predictions for meta features
-        pred_out = pred_out[:, -self.pred_len:, :]
-
-        return pred_out
-    
 class Model(nn.Module):
-    def __init__(self, input_channels, seq_length, pred_length, mlp_hidden_size, output_channels, decompose_layers=3, wave='haar', mode='symmetric', nhead=8, d_model=None, num_encoder_layers=3, dropout=0.1, dilation=2, kernel_size=3, dropout_=True, skip_=True, pos_encoder_type_='Projected', final_output_channels=None):
+    def __init__(self, seq_len, pred_len, n_points, dropout, wavelet_j, wavelet, subgraph_size, node_dim, n_gnn_layer, correlated_groups):
         super(Model, self).__init__()
-        
-        self.input_channels = input_channels
-        self.pred_len = pred_length
-        self.channels = 321
-        self.series_decompose = series_decomp(kernel_size =25)
-        # Initialize the backbone model with the specified parameters
-        
-        self.backbone_module = nn.ModuleList()
-        for i in range(self.channels):
-            self.backbone_module.append(DWT_MLP_Model(1, seq_length, pred_length, mlp_hidden_size, 1, decompose_layers, wave, mode, nhead, d_model, num_encoder_layers, dropout, dilation, kernel_size, dropout_, skip_, pos_encoder_type_))
-            
-        
-       
-    
+        self.channels = n_points
+        self.correlated_groups = correlated_groups  # Pass the correlated groups as a parameter
+        self.backbone_modules = nn.ModuleDict({
+            str(i): Model_(
+                seq_len=seq_len,
+                pred_len=pred_len,
+                n_points=len(group),
+                dropout=dropout,
+                wavelet_j=wavelet_j,
+                wavelet=wavelet,
+                subgraph_size=subgraph_size,
+                node_dim=node_dim,
+                n_gnn_layer=n_gnn_layer
+            )
+            for i, group in enumerate(correlated_groups.values())
+        })
+        self.pred_len = pred_len
+
     def forward(self, x):
-        #res,trend = self.series_decompose(x)
-        # Pass input through the backbone model
-        #res = self.backbone_res(res)
-        #trend = self.backbone_trend(trend)
-        #x = res+trend
+        output = torch.zeros([x.size(0), self.pred_len, x.size(2)], dtype=x.dtype)
+        # Dictionary to collect predictions for averaging
+        predictions = {i: [] for i in range(x.size(2))}
         
-        outputs = torch.zeros([x.size(0),self.pred_len,x.size(2)],dtype=x.dtype)
-        for i in range(self.channels):
+        for idx, group in enumerate(self.correlated_groups.values()):
+            # Extracting the specific features for this group
+            group_data = x[:, :, group].clone()
+            pred = self.backbone_modules[str(idx)](group_data)
+            for i, feature_index in enumerate(group):
+                predictions[feature_index].append(pred[:, :, i:i+1])
+
+        # Averaging predictions for each feature
+        for i in range(x.size(2)):
+            if predictions[i]:
+                # Stack predictions and take the mean across the predictions for each feature
+                output[:, :, i:i+1] = torch.mean(torch.stack(predictions[i], dim=0), dim=0)
+        
+        return output
     
-            outputs[:,:,i:i+1]  = self.backbone_module[i](x[:,:,i].unsqueeze(-1))
-        
-        # Further processing and pass through the final layer
-        #x = x.reshape(x.shape[0], x.shape[1], -1)  # Flatten if necessary
-        #output = self.final_layer(x)
-        
-        return outputs
+    
+def test(model, test_loader, criterion, device):
+    model.eval()
+    total_loss = 0
+    with torch.no_grad():
+        for seq_x, seq_y, seq_x_mark, seq_y_mark in test_loader:
+            seq_x, seq_y = seq_x.to(device), seq_y.to(device)
+            outputs = model(seq_x)
+            loss = criterion(outputs, seq_y)
+            total_loss += loss.item() * seq_x.size(0)
+    return total_loss / len(test_loader.dataset)
 
 
+def train(model, train_loader, optimizer, criterion, device):
+    model.train()
+    total_loss = 0
+    for seq_x, seq_y, seq_x_mark, seq_y_mark in train_loader:
+        seq_x, seq_y = seq_x.to(device), seq_y.to(device)
+        optimizer.zero_grad()
+        outputs = model(seq_x)
+        loss = criterion(outputs, seq_y)
+        loss.backward()
+        optimizer.step()
+        total_loss += loss.item() * seq_x.size(0)
+    return total_loss / len(train_loader.dataset)
 
+def validate(model, val_loader, criterion, device):
+    model.eval()
+    total_loss = 0
+    with torch.no_grad():
+        for seq_x, seq_y, seq_x_mark, seq_y_mark in val_loader:
+            seq_x, seq_y = seq_x.to(device), seq_y.to(device)
+            outputs = model(seq_x)
+            loss = criterion(outputs, seq_y)
+            total_loss += loss.item() * seq_x.size(0)
+    return total_loss / len(val_loader.dataset)
+
+
+class EarlyStopping:
+    def __init__(self, patience=7, verbose=False, delta=0):
+        """
+        Args:
+            patience (int): How long to wait after last time validation loss improved.
+                            Default: 7
+            verbose (bool): If True, prints a message for each validation loss improvement. 
+                            Default: False
+            delta (float): Minimum change in the monitored quantity to qualify as an improvement.
+                           Default: 0
+        """
+        self.patience = patience
+        self.verbose = verbose
+        self.delta = delta
+        self.best_score = None
+        self.counter = 0
+        self.early_stop = False
+        self.val_loss_min = float('inf')
+
+    def __call__(self, val_loss):
+        score = -val_loss
+
+        if self.best_score is None:
+            self.best_score = score
+            self.save_checkpoint(val_loss)
+        elif score < self.best_score + self.delta:
+            self.counter += 1
+            print(f'EarlyStopping counter: {self.counter} out of {self.patience}')
+            if self.counter >= self.patience:
+                self.early_stop = True
+        else:
+            self.best_score = score
+            self.save_checkpoint(val_loss)
+            self.counter = 0
+
+    def save_checkpoint(self, val_loss):
+        '''Saves model when validation loss decrease.'''
+        if self.verbose:
+            print(f'Validation loss decreased ({self.val_loss_min:.6f} --> {val_loss:.6f}).  Saving model ...')
+        self.val_loss_min = val_loss
+
+
+    
+# seq_len, pred_len, n_points, dropout, wavelet_j, wavelet, subgraph_size, node_dim, n_gnn_layer
+# Assuming DWT_MLP_Model is defined elsewhere, along with the necessary imports
 seq_ = 24*4
 pred_ = 24*4
-# Define hyperparameter combinations
-dropout_enabled = True
-skip_enabled = True
-num_encoder_size = 1
-pos_encoder_type = 'Projected'
-mlp_hidden = 128
-k_size = 5
-s_size = 8
-decompose_layer = 1
-bs = 8
-mt = 'zero'
-wt = 'haar'
-dilat = 3
-# Define the ranges for the hyperparameters
-learning_rates = np.logspace(-3, -2, 100)  # Learning rates between 1e-3 and 1e-2
-dropout_rates = np.linspace(0.0, 0.2, 100)  # Dropout rates between 0 and 0.5
-weight_decays = np.logspace(-4, -3, 100)  # Weight decays between 1e-4 and 1e-3
+n_points = 321
+wavelet_j = 2
+wavelet = 'haar'
+dropout_rate = 0.05
+supbraph_size = 6
+node_dim = 40
+n_gnn_layer = 3
+s_size = 5
 indices = [0,1,2,3,4,5] #np.random.choice(range(100), size=3, replace=False)
-input_length = [24*4, 512]
+input_length = [24*4,512]
 
-count = 0
+
 
 for i in indices:
     if i < 3:
         seq_length = input_length[0]
     else:
         seq_length = input_length[1]
-    #lrs = learning_rates[i]
-    #dr = dropout_rates[i]
-    #wd = weight_decays[i]
-    lrs =0.0052230056036904522
-    dr = 0.10146011891748014
-    wd = 1.0059977697794999e-04
-                                              
+        
     # Specify the file path
     root_path = '/home/choi/Wave_Transformer/optuna_/electricity/'
     data_path = 'electricity.csv'
     # Size parameters
 
+    total_x = load_dataset(root_path, data_path, drop_columns=['date'])
+    
+    # Compute autocorrelation matrix
+    autocorrelation_matrix = compute_autocorrelation(total_x)
+    correlated_features = extract_correlated_features(autocorrelation_matrix)
     seq_len = seq_length # 24*4*4
     pred_len = 24*4
     #batch_size = bs
     # Initialize the custom dataset for training, validation, and testing
-    train_dataset = Dataset_Custom(root_path=root_path, features= 'M', flag='train', data_path=data_path, step_size =s_size)
+    train_dataset = Dataset_Custom(root_path=root_path, features= 'M', flag='train', data_path=data_path, step_size =s_size, size = [seq_len, pred_len])
     val_dataset = Dataset_Custom(root_path=root_path, features= 'M',flag='val', data_path=data_path,step_size = s_size)
     test_dataset = Dataset_Custom(root_path=root_path, features= 'M',flag='test', data_path=data_path,step_size = s_size)
 
@@ -568,125 +994,43 @@ for i in indices:
     #pred_dataset = Dataset_Pred(root_path=root_path, flag='pred', size=size, data_path=data_path, inverse=True)
 
     # Example on how to create DataLoaders for PyTorch training (adjust batch_size as needed)
-    batch_size = bs
+    batch_size = 8
     train_loader = DataLoader(train_dataset, batch_size=batch_size, shuffle=True, drop_last = True)
     val_loader = DataLoader(val_dataset, batch_size=batch_size, shuffle=False, drop_last = True)
     test_loader = DataLoader(test_dataset, batch_size=batch_size, shuffle=False, drop_last = False)
-    dropout_rate = dr if dropout_enabled else 0.0
-    # Adjust the model instantiation to include all hyperparameters
-    model = Model(input_channels=1, seq_length=seq_len, pred_length = pred_,mlp_hidden_size=mlp_hidden, 
-                        output_channels=1, decompose_layers=decompose_layer, 
-                        dropout=dropout_rate, dilation=dilat, 
-                        mode=mt, wave=wt, kernel_size=k_size, 
-                        num_encoder_layers=num_encoder_size, nhead=8, 
-                        dropout_=dropout_enabled,
-                        skip_=True, pos_encoder_type_ = pos_encoder_type)
+    dropout_rate = dropout_rate
     
+    model = Model(
+    seq_len=seq_len, 
+    pred_len=pred_len, 
+    n_points=n_points, 
+    dropout=dropout_rate, 
+    wavelet_j=wavelet_j, 
+    wavelet=wavelet, 
+    subgraph_size=supbraph_size, 
+    node_dim=node_dim, 
+    n_gnn_layer=n_gnn_layer,
+    correlated_groups=correlated_features
+)
 
-
-    # Define criterion and optimizer
+    optimizer = torch.optim.Adam(model.parameters(), lr=0.0001, weight_decay=0.0001)
     criterion = nn.MSELoss()
-    optimizer = optim.Adam(model.parameters(), lr=lrs, 
-                        weight_decay=wd)
-
-    train_losses = []
-    val_losses = []
-
-    # Early stopping parameters
-    patience = 10
-    best_val_loss = float('inf')
-    patience_counter = 0
-
-    num_epochs = 50
-
-    # Start the timer
-    start_time = time.time()
-
-    best_model_path = f"best_model_haar200_{i}_{num_encoder_size}_{skip_enabled}_{pos_encoder_type}_{bs}_{decompose_layer}_{k_size}_{s_size}_{mlp_hidden}.pt"
-
-
+    
+    # Assuming you have a device (GPU/CPU) setup
+    device = torch.device("cuda" if torch.cuda.is_available() else "cpu")
+    model.to(device)
+    early_stopping = EarlyStopping(patience=10, verbose=True)
+    num_epochs = 50  # or any other number of epochs
     for epoch in range(num_epochs):
-        model.train()
-        train_loss = 0.0
-
-        for seq_x, seq_y, seq_x_mark, seq_y_mark in train_loader:
-            inputs = seq_x
-            
-            optimizer.zero_grad()
-            outputs = model(inputs)  # Model must be adjusted to handle input shape [batch, seq_len, 1]
-           
-            # Calculate loss
-            loss = criterion(outputs, seq_y)
-            loss.backward()
-            optimizer.step()
-
-            train_loss += loss.item() * bs
-          
-
-        train_loss /= len(train_loader.dataset)
-        train_losses.append(train_loss)
-
-        # Validation phase
-        model.eval()
-
-        val_loss = 0.0
-        with torch.no_grad():
-            for seq_x, seq_y, seq_x_mark, seq_y_mark in val_loader:
-                inputs = seq_x
-                outputs = model(inputs)  # Model must be adjusted to handle input shape [batch, seq_len, 1]
-                # Calculate loss
-                loss = criterion(outputs ,seq_y)
-                val_loss += loss.item() * bs
-
-        val_loss /= len(val_loader.dataset)
-        val_losses.append(val_loss)
-
-        if (epoch + 1) % 10 == 0:
-            print(f'Epoch [{epoch+1}/{num_epochs}], Train Loss: {train_loss:.4f}, Val Loss: {val_loss:.4f}')
-
-        if val_loss < best_val_loss:
-            best_val_loss = val_loss
-            patience_counter = 0
-            torch.save(model.state_dict(), best_model_path)
-            #print(f"New best model saved at {best_model_path}")
-        else:
-            patience_counter += 1
-
-        if patience_counter >= patience:
-            print("Early stopping triggered")
+        train_loss = train(model, train_loader, optimizer, criterion, device)
+        val_loss = validate(model, val_loader, criterion, device)
+        print(f'Epoch {epoch+1}, Train Loss: {train_loss:.4f}, Val Loss: {val_loss:.4f}')
+        
+        # Call early stopping
+        early_stopping(val_loss)
+        if early_stopping.early_stop:
+            print("Early stopping")
             break
-
-    end_time = time.time()
-    total_time = end_time - start_time
-    print(f'Total Model Running Time: {total_time:.2f} seconds')
-    best_model = Model(input_channels=1, seq_length=seq_len, pred_length = pred_, mlp_hidden_size=mlp_hidden, 
-    output_channels=1, decompose_layers=decompose_layer, dropout=dropout_rate, dilation=dilat, 
-    mode=mt, wave=wt, kernel_size=k_size, 
-    num_encoder_layers=num_encoder_size, nhead=8, 
-    dropout_=dropout_enabled,
-    skip_=True, pos_encoder_type_ = pos_encoder_type)
-    best_model.load_state_dict(torch.load(best_model_path))
-    # Evaluation on test data
-    best_model.eval()
-    test_loss = 0.0
-
-    with torch.no_grad():
-        for seq_x, seq_y, seq_x_mark, seq_y_mark in test_loader:
-                inputs = seq_x
-                outputs = model(inputs)  # Model must be adjusted to handle input shape [batch, seq_len, 1]
-                # Calculate loss
-                loss = criterion(outputs ,seq_y)
-                test_loss += loss.item() * bs
-
-    test_loss /= len(test_loader.dataset)
-    print(f'The {count}th model done.')
-    count += 1
-    print(f'Test Loss for configuration Neu Channel Ind: li={i}, num_encoder_size={num_encoder_size}, skip_enabled={skip_enabled}, '
-      f'pos_encoder_type={pos_encoder_type}, batch_size={bs}, decompose_layer={decompose_layer}, '
-      f'kernel_size={k_size}, stride_size={s_size}, mlp_hidden={mlp_hidden}: {test_loss:.4f}')
-
-
-# %%
-
-
-
+        
+    test_loss = test(model, test_loader, criterion, device)
+    print(f'Test Loss: {test_loss:.4f}')
