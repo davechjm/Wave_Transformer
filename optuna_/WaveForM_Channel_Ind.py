@@ -898,6 +898,7 @@ def test(model, test_loader, criterion, device):
         for seq_x, seq_y, seq_x_mark, seq_y_mark in test_loader:
             input_x, seq_y = seq_x.to(device), seq_y.to(device)
             outputs = model(input_x)
+            outputs = outputs.to(device)
             loss = criterion(outputs, seq_y)
             total_loss += loss.item() * input_x.size(0)
     return total_loss / len(test_loader.dataset)
@@ -910,6 +911,7 @@ def train(model, train_loader, optimizer, criterion, device):
         input_x, seq_y = seq_x.to(device), seq_y.to(device)
         optimizer.zero_grad()
         outputs = model(input_x)
+        outputs = outputs.to(device)
         loss = criterion(outputs, seq_y)
         loss.backward()
         optimizer.step()
@@ -923,6 +925,7 @@ def validate(model, val_loader, criterion, device):
         for seq_x, seq_y, seq_x_mark, seq_y_mark in val_loader:
             input_x, seq_y = seq_x.to(device), seq_y.to(device)
             outputs = model(input_x)
+            outputs = outputs.to(device)
             loss = criterion(outputs, seq_y)
             total_loss += loss.item() * input_x.size(0)
     return total_loss / len(val_loader.dataset)
