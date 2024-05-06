@@ -1,0 +1,22 @@
+/var/spool/slurm/d/job641143/slurm_script: line 9: cd: too many arguments
+Traceback (most recent call last):
+  File "WaveForM_Channel_Ind.py", line 1060, in <module>
+    test_loss = test(model, test_loader, criterion, device)
+  File "WaveForM_Channel_Ind.py", line 900, in test
+    outputs = model(input_x)
+  File "/home/choi/conda/anaconda3/envs/pytorchenv/lib/python3.8/site-packages/torch/nn/modules/module.py", line 1511, in _wrapped_call_impl
+    return self._call_impl(*args, **kwargs)
+  File "/home/choi/conda/anaconda3/envs/pytorchenv/lib/python3.8/site-packages/torch/nn/modules/module.py", line 1520, in _call_impl
+    return forward_call(*args, **kwargs)
+  File "WaveForM_Channel_Ind.py", line 881, in forward
+    pred = self.backbone_modules[str(idx)](group_data)
+  File "/home/choi/conda/anaconda3/envs/pytorchenv/lib/python3.8/site-packages/torch/nn/modules/module.py", line 1511, in _wrapped_call_impl
+    return self._call_impl(*args, **kwargs)
+  File "/home/choi/conda/anaconda3/envs/pytorchenv/lib/python3.8/site-packages/torch/nn/modules/module.py", line 1520, in _call_impl
+    return forward_call(*args, **kwargs)
+  File "WaveForM_Channel_Ind.py", line 761, in forward
+    coefs_new = self.model(coefs)
+  File "WaveForM_Channel_Ind.py", line 748, in model
+    new_coefs.append(new_coef.squeeze().permute(0,2,1))
+RuntimeError: permute(sparse_coo): number of dimensions in the tensor input does not match the length of the desired ordering of dimensions i.e. input.dim() = 2 is not equal to len(dims) = 3
+srun: error: gpu-100: task 0: Exited with exit code 1

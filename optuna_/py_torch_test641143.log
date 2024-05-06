@@ -1,0 +1,26 @@
+PyTorch version: 2.2.2+cu118
+Epoch 1, Train Loss: 0.4111, Val Loss: 0.3052
+Validation loss decreased (inf --> 0.305213).  Saving model ...
+Epoch 2, Train Loss: 0.2773, Val Loss: 0.3016
+Validation loss decreased (0.305213 --> 0.301582).  Saving model ...
+Epoch 3, Train Loss: 0.2798, Val Loss: 0.3110
+EarlyStopping counter: 1 out of 10
+Epoch 4, Train Loss: 0.2833, Val Loss: 0.3105
+EarlyStopping counter: 2 out of 10
+Epoch 5, Train Loss: 0.2857, Val Loss: 0.3145
+EarlyStopping counter: 3 out of 10
+Epoch 6, Train Loss: 0.2872, Val Loss: 0.3170
+EarlyStopping counter: 4 out of 10
+Epoch 7, Train Loss: 0.2885, Val Loss: 0.3159
+EarlyStopping counter: 5 out of 10
+Epoch 8, Train Loss: 0.2902, Val Loss: 0.3211
+EarlyStopping counter: 6 out of 10
+Epoch 9, Train Loss: 0.2917, Val Loss: 0.3227
+EarlyStopping counter: 7 out of 10
+Epoch 10, Train Loss: 0.2936, Val Loss: 0.3219
+EarlyStopping counter: 8 out of 10
+Epoch 11, Train Loss: 0.2952, Val Loss: 0.3239
+EarlyStopping counter: 9 out of 10
+Epoch 12, Train Loss: 0.2972, Val Loss: 0.3273
+EarlyStopping counter: 10 out of 10
+Early stopping
